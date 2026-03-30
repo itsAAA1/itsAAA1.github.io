@@ -7,7 +7,11 @@
 <meta name="description" content="VoltZilla (VZLA) - عملة ميم قوية على شبكة Solana. انضم للمجتمع وكن جزءاً من الثورة الرقمية.">
 <meta property="og:title" content="VoltZilla ⚡ VZLA Token on Solana">
 <meta property="og:description" content="The most electrifying meme token on Solana. Power. Speed. Community.">
-<meta property="og:image" content="https://raw.githubusercontent.com/itsAAA1/VoltZilla/main/assets/og-image.png">
+<meta property="og:image" content="https://itsaaa1.github.io/logo.png">
+<meta property="og:url" content="https://itsaaa1.github.io">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@VoltZilla_VZLA">
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -15,6 +19,7 @@
     --yellow: #FFD700;
     --electric: #00FFFF;
     --purple: #9945FF;
+    --green: #00FF88;
     --dark: #0a0a0f;
     --dark2: #111120;
     --card: #1a1a2e;
@@ -34,24 +39,27 @@
     background: rgba(10,10,15,0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255,215,0,0.2);
-    padding: 15px 30px;
+    padding: 12px 30px;
     display: flex; align-items:center; justify-content:space-between;
   }
   .nav-logo {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem; font-weight:900;
+    font-size: 1.4rem; font-weight:900;
     background: linear-gradient(135deg, var(--yellow), var(--electric));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display:flex; align-items:center; gap:8px;
   }
-  .nav-links { display:flex; gap:25px; list-style:none; }
-  .nav-links a { color:#ccc; text-decoration:none; font-size:0.95rem; transition:color 0.3s; }
+  .nav-logo img { width:32px; height:32px; border-radius:50%; }
+  .nav-links { display:flex; gap:20px; list-style:none; }
+  .nav-links a { color:#ccc; text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
   .nav-links a:hover { color:var(--yellow); }
   .nav-btn {
     background: linear-gradient(135deg, var(--yellow), #FFA500);
-    color:#000; border:none; padding:10px 25px;
+    color:#000; border:none; padding:10px 22px;
     border-radius:25px; font-weight:700; cursor:pointer;
-    font-family:'Tajawal',sans-serif; font-size:0.95rem;
+    font-family:'Tajawal',sans-serif; font-size:0.9rem;
     transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration:none; display:inline-block;
   }
   .nav-btn:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(255,215,0,0.5); }
 
@@ -90,13 +98,23 @@
   }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
 
+  .hero-logo {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    display: block;
+    border: 3px solid rgba(255,215,0,0.4);
+    box-shadow: 0 0 40px rgba(255,215,0,0.3), 0 0 80px rgba(153,69,255,0.2);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+
   .hero h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight:900; line-height:1;
     background: linear-gradient(135deg, var(--yellow) 0%, #FFA500 50%, var(--electric) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: none;
     margin-bottom:15px;
     animation: glow 3s ease-in-out infinite;
   }
@@ -136,6 +154,17 @@
     transition: all 0.3s; text-decoration:none; display:inline-block;
   }
   .btn-secondary:hover { background:rgba(0,255,255,0.1); transform:translateY(-3px); }
+
+  /* ===== LIVE PRICE BAR ===== */
+  .price-bar {
+    background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(153,69,255,0.1));
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 12px 20px;
+    text-align:center;
+    font-family:'Orbitron',sans-serif;
+    font-size:0.9rem;
+  }
+  .price-bar span { color:var(--green); font-weight:700; }
 
   /* ===== TICKER ===== */
   .ticker {
@@ -182,6 +211,7 @@
     max-width:1100px; margin:0 auto;
     display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
   }
+  @media(max-width:768px){ .about{grid-template-columns:1fr;} }
   .about-text h2 {
     font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:900;
     background: linear-gradient(135deg, var(--yellow), var(--electric));
@@ -191,13 +221,13 @@
   .about-text p { color:#aaa; line-height:1.8; font-size:1.05rem; margin-bottom:15px; }
   .about-visual {
     display:flex; align-items:center; justify-content:center;
-    position:relative;
   }
-  .lightning-icon {
-    font-size:10rem; animation:float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(255,215,0,0.6));
+  .about-logo {
+    width:250px; height:250px; border-radius:50%;
+    border:4px solid rgba(255,215,0,0.3);
+    box-shadow: 0 0 60px rgba(255,215,0,0.2), 0 0 120px rgba(153,69,255,0.1);
+    animation: float 3s ease-in-out infinite;
   }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
 
   /* ===== TOKENOMICS ===== */
   .tokenomics {
@@ -270,70 +300,82 @@
     font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.2rem;
     margin:0 auto 15px; color:#000;
   }
-  .step-card h3 { margin-bottom:10px; font-size:1.1rem; }
+  .step-card h3 { margin-bottom:10px; color:var(--electric); }
   .step-card p { color:#888; font-size:0.9rem; line-height:1.6; }
-
-  /* ===== COMMUNITY ===== */
-  .community { padding:100px 20px; text-align:center; }
-  .social-grid {
-    max-width:700px; margin:40px auto 0;
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-    gap:20px;
-  }
-  .social-card {
-    background:var(--card); border-radius:20px; padding:25px;
-    text-decoration:none; color:#fff;
-    border:1px solid rgba(255,255,255,0.1);
-    transition:all 0.3s; display:flex; flex-direction:column;
-    align-items:center; gap:10px;
-  }
-  .social-card:hover { transform:translateY(-5px); }
-  .social-card.twitter:hover { border-color:#1DA1F2; box-shadow:0 10px 30px rgba(29,161,242,0.2); }
-  .social-card.telegram:hover { border-color:#0088cc; box-shadow:0 10px 30px rgba(0,136,204,0.2); }
-  .social-card.discord:hover { border-color:#5865F2; box-shadow:0 10px 30px rgba(88,101,242,0.2); }
-  .social-card.dex:hover { border-color:var(--yellow); box-shadow:0 10px 30px rgba(255,215,0,0.2); }
-  .social-icon { font-size:2.5rem; }
-  .social-name { font-weight:700; }
 
   /* ===== CONTRACT ===== */
   .contract-section {
-    padding:60px 20px;
-    background:linear-gradient(135deg, rgba(153,69,255,0.1), rgba(255,215,0,0.05));
-    text-align:center;
+    padding:60px 20px; text-align:center;
+    background: linear-gradient(135deg, rgba(153,69,255,0.1), rgba(255,215,0,0.05));
+    border-top:1px solid rgba(255,215,0,0.1);
+    border-bottom:1px solid rgba(255,215,0,0.1);
   }
   .contract-box {
+    display:inline-flex; align-items:center; gap:15px;
     background:var(--card); border:1px solid rgba(255,215,0,0.3);
-    border-radius:15px; padding:20px 30px; display:inline-flex;
-    align-items:center; gap:15px; max-width:100%;
+    border-radius:15px; padding:15px 25px; margin-top:20px;
     flex-wrap:wrap; justify-content:center;
   }
-  .contract-label { color:var(--yellow); font-weight:700; white-space:nowrap; }
-  .contract-addr {
-    font-family:monospace; color:var(--electric); font-size:0.85rem;
-    word-break:break-all;
-  }
+  .contract-label { color:var(--yellow); font-weight:700; font-family:'Orbitron',sans-serif; font-size:0.9rem; }
+  .contract-addr { font-family:monospace; font-size:0.85rem; color:#ccc; word-break:break-all; }
   .copy-btn {
-    background:rgba(255,215,0,0.2); border:1px solid rgba(255,215,0,0.4);
-    color:var(--yellow); padding:8px 15px; border-radius:10px;
-    cursor:pointer; font-size:0.85rem; transition:all 0.2s;
-    white-space:nowrap;
+    background:linear-gradient(135deg, var(--yellow), #FFA500);
+    color:#000; border:none; padding:8px 18px;
+    border-radius:10px; cursor:pointer; font-weight:700;
+    font-family:'Tajawal',sans-serif; transition:all 0.2s;
   }
-  .copy-btn:hover { background:rgba(255,215,0,0.3); }
+  .copy-btn:hover { transform:scale(1.05); }
+
+  /* ===== EXCHANGES ===== */
+  .exchanges { padding:80px 20px; background:var(--dark2); }
+  .exchanges-grid {
+    max-width:900px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:20px;
+  }
+  .exchange-card {
+    background:var(--card); border:1px solid rgba(255,215,0,0.15);
+    border-radius:15px; padding:25px; text-align:center;
+    text-decoration:none; color:#fff; transition:all 0.3s;
+  }
+  .exchange-card:hover { border-color:var(--yellow); transform:translateY(-5px); box-shadow:0 10px 30px rgba(255,215,0,0.1); }
+  .exchange-icon { font-size:2.5rem; margin-bottom:10px; }
+  .exchange-name { font-weight:700; color:var(--yellow); margin-bottom:5px; }
+  .exchange-desc { color:#888; font-size:0.8rem; }
+
+  /* ===== COMMUNITY ===== */
+  .community { padding:100px 20px; }
+  .social-grid {
+    max-width:900px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:20px;
+  }
+  .social-card {
+    border-radius:20px; padding:30px; text-align:center;
+    text-decoration:none; color:#fff; transition:all 0.3s;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .social-card:hover { transform:translateY(-8px); box-shadow:0 15px 40px rgba(0,0,0,0.3); }
+  .twitter { background:linear-gradient(135deg, rgba(29,161,242,0.2), rgba(29,161,242,0.05)); border-color:rgba(29,161,242,0.3); }
+  .telegram { background:linear-gradient(135deg, rgba(0,136,204,0.2), rgba(0,136,204,0.05)); border-color:rgba(0,136,204,0.3); }
+  .discord { background:linear-gradient(135deg, rgba(114,137,218,0.2), rgba(114,137,218,0.05)); border-color:rgba(114,137,218,0.3); }
+  .dex { background:linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05)); border-color:rgba(255,215,0,0.3); }
+  .pumpfun { background:linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,255,136,0.05)); border-color:rgba(0,255,136,0.3); }
+  .social-icon { font-size:2.5rem; margin-bottom:10px; }
+  .social-name { font-weight:700; font-size:1.1rem; margin-bottom:5px; }
 
   /* ===== FOOTER ===== */
   footer {
-    background:var(--dark); border-top:1px solid rgba(255,255,255,0.05);
-    padding:40px 20px; text-align:center;
+    padding:50px 20px; text-align:center;
+    background:var(--dark2);
+    border-top:1px solid rgba(255,215,0,0.1);
+    color:#666; font-size:0.9rem; line-height:1.8;
   }
-  footer p { color:#555; font-size:0.85rem; line-height:1.8; }
-  footer a { color:var(--yellow); text-decoration:none; }
 
   /* ===== RESPONSIVE ===== */
-  @media(max-width:768px) {
-    .about { grid-template-columns:1fr; text-align:center; }
+  @media(max-width:600px) {
     .nav-links { display:none; }
-    .lightning-icon { font-size:6rem; }
-    .about-text h2 { font-size:1.8rem; }
+    .hero-logo { width:120px; height:120px; }
   }
 </style>
 </head>
@@ -341,127 +383,120 @@
 
 <!-- NAVBAR -->
 <nav>
-  <div class="nav-logo">⚡ VZLA</div>
+  <div class="nav-logo">
+    <img src="logo.png" alt="VoltZilla Logo">
+    VoltZilla
+  </div>
   <ul class="nav-links">
     <li><a href="#about">عن المشروع</a></li>
-    <li><a href="#tokenomics">التوكنوميكس</a></li>
+    <li><a href="#tokenomics">التوكنومكس</a></li>
     <li><a href="#roadmap">خارطة الطريق</a></li>
     <li><a href="#buy">كيف تشتري</a></li>
     <li><a href="#community">المجتمع</a></li>
   </ul>
-  <button class="nav-btn" onclick="window.open('https://raydium.io/swap/?inputMint=sol&outputMint=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump','_blank')">تداول الآن ⚡</button>
+  <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="nav-btn">اشتري الآن ⚡</a>
 </nav>
+
+<!-- LIVE PRICE BAR -->
+<div class="price-bar">
+  ⚡ VZLA السعر المباشر: <span id="live-price">جاري التحميل...</span> &nbsp;|&nbsp; 
+  العقد: <span style="color:#aaa; font-size:0.8rem;">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-badge">🔥 مبني على Solana — السرعة والقوة</div>
+    <div class="hero-badge">🔥 متاح الآن على Pump.fun | Solana Network</div>
+    <img src="logo.png" alt="VoltZilla" class="hero-logo">
     <h1>VoltZilla</h1>
-    <div class="hero-symbol">$VZLA</div>
-    <p>وحش الطاقة الرقمي الذي لا يُهزم ⚡<br>عملة ميم قوية على شبكة Solana — المجتمع، السرعة، والقوة في توكن واحد</p>
+    <div class="hero-symbol">⚡ $VZLA ⚡</div>
+    <p>وحش الطاقة الرقمي على Solana — أسرع، أقوى، أكثر كهرباءً. انضم لثورة الميم الحقيقية وكن جزءاً من المجتمع الذي يصنع التاريخ.</p>
     <div class="hero-btns">
-      <a href="https://raydium.io/swap/?inputMint=sol&outputMint=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">🚀 اشتري VZLA الآن</a>
-      <a href="#about" class="btn-secondary">اكتشف المشروع</a>
+      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">🚀 اشتري على Pump.fun</a>
+      <a href="#about" class="btn-secondary">اكتشف المزيد ⚡</a>
     </div>
   </div>
 </section>
 
-<!-- LIVE PRICE BAR -->
-<div id="price-bar" style="background:linear-gradient(90deg,#0a0a0f,#111120,#0a0a0f);border-bottom:1px solid rgba(255,215,0,0.3);padding:10px 20px;text-align:center;font-family:'Orbitron',sans-serif;font-size:0.85rem;">
-  <span style="color:#888;">VZLA/SOL:</span>
-  <span id="live-price" style="color:#FFD700;margin:0 15px;">جاري التحميل...</span>
-  <span style="color:#888;">|</span>
-  <span style="color:#00FFFF;margin:0 15px;">CA: JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
-  <button onclick="navigator.clipboard.writeText('JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(()=>{this.textContent='✅';setTimeout(()=>this.textContent='📋 نسخ CA',2000})" style="background:rgba(255,215,0,0.2);border:1px solid rgba(255,215,0,0.4);color:#FFD700;padding:4px 10px;border-radius:8px;cursor:pointer;font-size:0.75rem;">📋 نسخ CA</button>
-</div>
-
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">⚡ VZLA TOKEN</span>
-    <span class="ticker-item">🔥 SOLANA NETWORK</span>
-    <span class="ticker-item">💎 HOLD VZLA</span>
-    <span class="ticker-item">🚀 TO THE MOON</span>
-    <span class="ticker-item">⚡ COMMUNITY POWER</span>
-    <span class="ticker-item">🌩️ LIGHTNING FAST</span>
-    <span class="ticker-item">💪 UNSTOPPABLE</span>
-    <span class="ticker-item">⚡ VZLA TOKEN</span>
-    <span class="ticker-item">🔥 SOLANA NETWORK</span>
-    <span class="ticker-item">💎 HOLD VZLA</span>
-    <span class="ticker-item">🚀 TO THE MOON</span>
-    <span class="ticker-item">⚡ COMMUNITY POWER</span>
-    <span class="ticker-item">🌩️ LIGHTNING FAST</span>
-    <span class="ticker-item">💪 UNSTOPPABLE</span>
+    <span class="ticker-item">⚡ VoltZilla (VZLA)</span>
+    <span class="ticker-item">🔥 Solana Meme Token</span>
+    <span class="ticker-item">⚡ Community Driven</span>
+    <span class="ticker-item">🚀 To The Moon</span>
+    <span class="ticker-item">💎 Diamond Hands</span>
+    <span class="ticker-item">⚡ VoltZilla (VZLA)</span>
+    <span class="ticker-item">🔥 Solana Meme Token</span>
+    <span class="ticker-item">⚡ Community Driven</span>
+    <span class="ticker-item">🚀 To The Moon</span>
+    <span class="ticker-item">💎 Diamond Hands</span>
   </div>
 </div>
 
 <!-- STATS -->
-<section class="stats">
+<section class="stats" id="stats">
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-number">1B</div>
-      <div class="stat-label">إجمالي العرض (VZLA)</div>
+      <div class="stat-label">إجمالي العرض</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">Solana</div>
-      <div class="stat-label">شبكة البلوكشين</div>
+      <div class="stat-number" id="mc-stat">$4.9K+</div>
+      <div class="stat-label">القيمة السوقية</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">0%</div>
-      <div class="stat-label">ضريبة البيع/الشراء</div>
+      <div class="stat-label">ضريبة المعاملات</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">∞</div>
-      <div class="stat-label">إمكانية النمو</div>
+      <div class="stat-number">🔥</div>
+      <div class="stat-label">السيولة محروقة</div>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-text">
-    <h2>ما هو VoltZilla؟</h2>
-    <p>
-      <strong>VoltZilla (VZLA)</strong> هو توكن ميم مبني على شبكة <strong>Solana</strong> عالية السرعة، يجمع بين طاقة البرق وقوة البلوكشين.
-    </p>
-    <p>
-      ليس مجرد عملة — بل هو <strong>حركة</strong>، <strong>مجتمع</strong>، و<strong>فرصة</strong>. مستوحى من قوة الكهرباء وسرعة الصاعقة، VoltZilla يمثل الجيل القادم من عملات الميم.
-    </p>
-    <p>
-      مع شبكة Solana، كل معاملة تتم في <strong>أقل من ثانية</strong> بتكلفة أقل من سنت واحد — سرعة لا مثيل لها.
-    </p>
-  </div>
-  <div class="about-visual">
-    <div class="lightning-icon">⚡</div>
+<section id="about">
+  <div class="about">
+    <div class="about-text">
+      <h2>ما هو VoltZilla؟</h2>
+      <p>VoltZilla (VZLA) هو توكن ميم مجتمعي قوي مبني على شبكة Solana — أسرع بلوكتشين في العالم. يجمع VoltZilla بين طاقة الكهرباء وروح الوحش الرقمي ليخلق تجربة تداول لا مثيل لها.</p>
+      <p>أُطلق في مارس 2026 عبر منصة Pump.fun، ويهدف VoltZilla إلى بناء مجتمع ضخم من المؤمنين بقوة الطاقة الرقمية على Solana.</p>
+      <p>العرض الكلي: <strong style="color:var(--yellow)">1,000,000,000 VZLA</strong> — بدون ضرائب، بدون تعقيد، فقط قوة خالصة.</p>
+    </div>
+    <div class="about-visual">
+      <img src="logo.png" alt="VoltZilla Monster" class="about-logo">
+    </div>
   </div>
 </section>
 
 <!-- TOKENOMICS -->
 <section class="tokenomics" id="tokenomics">
   <div class="section-title">
-    <h2>التوكنوميكس</h2>
-    <p>توزيع عادل وشفاف — 1,000,000,000 VZLA إجمالاً</p>
+    <h2>التوكنومكس</h2>
+    <p>توزيع شفاف وعادل — لا مخفي، لا مفاجآت</p>
   </div>
   <div class="token-grid">
     <div class="token-card">
-      <div class="token-pct">80%</div>
-      <div class="token-name">البيع العام</div>
-      <div class="token-amount">800,000,000 VZLA</div>
+      <div class="token-pct">100%</div>
+      <div class="token-name">Pump.fun Bonding Curve</div>
+      <div class="token-amount">1,000,000,000 VZLA</div>
     </div>
     <div class="token-card">
-      <div class="token-pct">10%</div>
-      <div class="token-name">مجمع السيولة</div>
-      <div class="token-amount">100,000,000 VZLA</div>
+      <div class="token-pct">0%</div>
+      <div class="token-name">ضريبة الشراء</div>
+      <div class="token-amount">مجاني تماماً</div>
     </div>
     <div class="token-card">
-      <div class="token-pct">5%</div>
-      <div class="token-name">مكافآت المجتمع</div>
-      <div class="token-amount">50,000,000 VZLA</div>
+      <div class="token-pct">0%</div>
+      <div class="token-name">ضريبة البيع</div>
+      <div class="token-amount">مجاني تماماً</div>
     </div>
     <div class="token-card">
-      <div class="token-pct">5%</div>
-      <div class="token-name">الفريق (مقفل)</div>
-      <div class="token-amount">50,000,000 VZLA</div>
+      <div class="token-pct">🔥</div>
+      <div class="token-name">السيولة</div>
+      <div class="token-amount">محروقة عند اكتمال Pump.fun</div>
     </div>
   </div>
 </section>
@@ -470,34 +505,34 @@
 <section class="roadmap" id="roadmap">
   <div class="section-title">
     <h2>خارطة الطريق</h2>
-    <p>رحلتنا نحو القمة</p>
+    <p>رحلة VoltZilla نحو القمة</p>
   </div>
   <div class="roadmap-item">
     <div class="roadmap-dot dot-done">✓</div>
     <div class="roadmap-content">
-      <h3>المرحلة الأولى — الإطلاق ⚡</h3>
-      <p>إنشاء التوكن على Solana، إطلاق المجتمع على Discord و Telegram، بناء الموقع الرسمي.</p>
+      <h3>المرحلة 1 — الإطلاق ✅</h3>
+      <p>إطلاق التوكن على Pump.fun، إنشاء الموقع الرسمي، بناء المجتمع الأول، تقديم طلبات الإدراج على CoinGecko و CoinMarketCap.</p>
     </div>
   </div>
   <div class="roadmap-item">
-    <div class="roadmap-dot dot-active">🔥</div>
+    <div class="roadmap-dot dot-active">⚡</div>
     <div class="roadmap-content">
-      <h3>المرحلة الثانية — النمو 🚀</h3>
-      <p>الإدراج على DexScreener، التسويق المكثف، الوصول لـ 1,000 حامل، الإدراج على CoinGecko.</p>
+      <h3>المرحلة 2 — النمو 🔥</h3>
+      <p>الوصول إلى Raydium عبر اكتمال Bonding Curve، الإدراج على DexScreener، بناء مجتمع 1000+ عضو، حملات تسويقية مكثفة.</p>
     </div>
   </div>
   <div class="roadmap-item">
     <div class="roadmap-dot dot-future">3</div>
     <div class="roadmap-content">
-      <h3>المرحلة الثالثة — الهيمنة 👑</h3>
-      <p>الإدراج على CoinMarketCap، شراكات استراتيجية، الوصول لـ 10,000 حامل، NFT Collection.</p>
+      <h3>المرحلة 3 — الانتشار</h3>
+      <p>الإدراج الرسمي على CoinGecko و CoinMarketCap، شراكات مع مؤثرين، حملات إعلانية على Twitter وTelegram.</p>
     </div>
   </div>
   <div class="roadmap-item">
     <div class="roadmap-dot dot-future">4</div>
     <div class="roadmap-content">
-      <h3>المرحلة الرابعة — الإمبراطورية 🌍</h3>
-      <p>الإدراج على منصات CEX، نظام مكافآت للحاملين، 100,000 حامل، التوسع العالمي.</p>
+      <h3>المرحلة 4 — القمر 🌙</h3>
+      <p>الإدراج على منصات CEX، تطوير NFT Collection، بناء نظام بيئي كامل حول VoltZilla.</p>
     </div>
   </div>
 </section>
@@ -512,7 +547,7 @@
     <div class="step-card">
       <div class="step-num">1</div>
       <h3>حمّل Phantom</h3>
-      <p>حمّل محفظة Phantom من phantom.app وأنشئ محفظة Solana جديدة</p>
+      <p>حمّل محفظة <a href="https://phantom.app" target="_blank" style="color:var(--electric)">Phantom</a> وأنشئ محفظة Solana جديدة</p>
     </div>
     <div class="step-card">
       <div class="step-num">2</div>
@@ -521,13 +556,13 @@
     </div>
     <div class="step-card">
       <div class="step-num">3</div>
-      <h3>افتح Raydium</h3>
-      <p>اذهب لـ raydium.io أو استخدم Jupiter وابحث عن VZLA</p>
+      <h3>افتح Pump.fun</h3>
+      <p>اذهب لـ <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" style="color:var(--electric)">pump.fun</a> وابحث عن VZLA</p>
     </div>
     <div class="step-card">
       <div class="step-num">4</div>
-      <h3>تبادل SOL بـ VZLA</h3>
-      <p>أدخل عنوان التوكن، حدد الكمية، وأكد المعاملة — مبروك!</p>
+      <h3>اشتري VZLA</h3>
+      <p>حدد الكمية، وأكد المعاملة — مبروك أنت الآن جزء من VoltZilla!</p>
     </div>
   </div>
 </section>
@@ -541,6 +576,46 @@
     <button class="copy-btn" onclick="copyContract()">نسخ 📋</button>
   </div>
   <p style="color:#666; margin-top:15px; font-size:0.85rem;">⚠️ تحقق دائماً من العنوان الرسمي عبر قنواتنا الرسمية فقط</p>
+</section>
+
+<!-- EXCHANGES -->
+<section class="exchanges" id="exchanges">
+  <div class="section-title">
+    <h2>أين تتداول VZLA؟</h2>
+    <p>منصات التداول الرسمية</p>
+  </div>
+  <div class="exchanges-grid">
+    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">🔥</div>
+      <div class="exchange-name">Pump.fun</div>
+      <div class="exchange-desc">منصة الإطلاق الرسمية</div>
+    </a>
+    <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">⚡</div>
+      <div class="exchange-name">Raydium</div>
+      <div class="exchange-desc">قريباً بعد اكتمال Bonding Curve</div>
+    </a>
+    <a href="https://jup.ag/swap/SOL-JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">🪐</div>
+      <div class="exchange-name">Jupiter</div>
+      <div class="exchange-desc">أفضل سعر على Solana</div>
+    </a>
+    <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">📊</div>
+      <div class="exchange-name">DexScreener</div>
+      <div class="exchange-desc">تتبع السعر والحجم</div>
+    </a>
+    <a href="https://birdeye.so/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">🦅</div>
+      <div class="exchange-name">Birdeye</div>
+      <div class="exchange-desc">تحليل متقدم</div>
+    </a>
+    <a href="https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card">
+      <div class="exchange-icon">🔍</div>
+      <div class="exchange-name">Solscan</div>
+      <div class="exchange-desc">مستكشف البلوكتشين</div>
+    </a>
+  </div>
 </section>
 
 <!-- COMMUNITY -->
@@ -560,10 +635,10 @@
       <div class="social-name">Telegram</div>
       <div style="color:#888; font-size:0.85rem;">قناة رسمية</div>
     </a>
-    <a href="https://discord.gg/voltzilla" target="_blank" class="social-card discord">
-      <div class="social-icon">🎮</div>
-      <div class="social-name">Discord</div>
-      <div style="color:#888; font-size:0.85rem;">سيرفر VoltZilla</div>
+    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="social-card pumpfun">
+      <div class="social-icon">🔥</div>
+      <div class="social-name">Pump.fun</div>
+      <div style="color:#888; font-size:0.85rem;">اشتري الآن</div>
     </a>
     <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="social-card dex">
       <div class="social-icon">📊</div>
@@ -576,8 +651,14 @@
 <!-- FOOTER -->
 <footer>
   <p style="font-family:'Orbitron',sans-serif; font-size:1.2rem; margin-bottom:15px; background:linear-gradient(135deg,var(--yellow),var(--electric)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">⚡ VoltZilla — الطاقة لا تنتهي ⚡</p>
-  <p>© 2025 VoltZilla (VZLA). جميع الحقوق محفوظة.</p>
-  <p style="margin-top:10px;">⚠️ <strong>إخلاء مسؤولية:</strong> هذا التوكن هو توكن ميم للترفيه. لا يُعدّ استثماراً مالياً. تداول المشفرات ينطوي على مخاطر عالية.</p>
+  <p>© 2026 VoltZilla (VZLA). جميع الحقوق محفوظة.</p>
+  <p style="margin-top:10px;">
+    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" style="color:var(--yellow); margin:0 10px;">Pump.fun</a>
+    <a href="https://twitter.com/VoltZilla_VZLA" target="_blank" style="color:var(--electric); margin:0 10px;">Twitter</a>
+    <a href="https://t.me/VoltZilla_VZLA" target="_blank" style="color:var(--electric); margin:0 10px;">Telegram</a>
+    <a href="https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" style="color:#888; margin:0 10px;">Solscan</a>
+  </p>
+  <p style="margin-top:15px; font-size:0.8rem;">⚠️ <strong>إخلاء مسؤولية:</strong> هذا التوكن هو توكن ميم للترفيه. لا يُعدّ استثماراً مالياً. تداول المشفرات ينطوي على مخاطر عالية.</p>
 </footer>
 
 <script>
@@ -603,12 +684,23 @@ async function fetchPrice() {
       const arrow = change >= 0 ? '▲' : '▼';
       document.getElementById('live-price').innerHTML = 
         `$${price.toFixed(8)} <span style="color:${color}">${arrow} ${Math.abs(change).toFixed(2)}%</span>`;
-      // Update stats
-      if(p.marketCap) document.querySelector('.stat-number:last-child').textContent = '$'+Math.round(p.marketCap).toLocaleString();
+      if(p.marketCap) {
+        document.getElementById('mc-stat').textContent = '$'+Math.round(p.marketCap).toLocaleString();
+      }
     } else {
-      document.getElementById('live-price').textContent = 'السيولة قريباً 🔥';
+      // Fetch from Pump.fun API
+      const r2 = await fetch('https://frontend-api.pump.fun/coins/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump');
+      if(r2.ok) {
+        const d2 = await r2.json();
+        if(d2.usd_market_cap) {
+          document.getElementById('mc-stat').textContent = '$'+Math.round(d2.usd_market_cap).toLocaleString();
+        }
+      }
+      document.getElementById('live-price').innerHTML = '<a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" style="color:#00ff88">🔥 متاح على Pump.fun</a>';
     }
-  } catch(e) { document.getElementById('live-price').textContent = 'السيولة قريباً 🔥'; }
+  } catch(e) { 
+    document.getElementById('live-price').innerHTML = '<a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" style="color:#00ff88">🔥 اشتري على Pump.fun</a>';
+  }
 }
 fetchPrice();
 setInterval(fetchPrice, 30000);
@@ -621,14 +713,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Animate stats on scroll
+// Animate on scroll
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting) e.target.style.opacity = '1', e.target.style.transform = 'translateY(0)';
+    if(e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
   });
 }, {threshold: 0.1});
 
-document.querySelectorAll('.stat-card, .token-card, .step-card').forEach(el => {
+document.querySelectorAll('.stat-card, .token-card, .step-card, .exchange-card, .social-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'all 0.6s ease';
