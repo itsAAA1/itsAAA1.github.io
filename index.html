@@ -4,930 +4,311 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VoltZilla ⚡ VZLA — وحش الطاقة الرقمي على Solana</title>
-<meta name="description" content="VoltZilla (VZLA) — عملة ميم قوية على Solana. انضم للمجتمع وكن جزءاً من الثورة الرقمية. اشتري الآن على Pump.fun">
-<meta property="og:title" content="VoltZilla ⚡ VZLA — Solana's Most Electrifying Meme Token">
-<meta property="og:description" content="The most electrifying meme token on Solana. Power. Speed. Community. 🚀">
+<meta name="description" content="VoltZilla (VZLA) - عملة ميم قوية على شبكة Solana. انضم للمجتمع وكن جزءاً من الثورة الرقمية.">
+<meta property="og:title" content="VoltZilla ⚡ VZLA Token on Solana">
+<meta property="og:description" content="The most electrifying meme token on Solana. Power. Speed. Community.">
 <meta property="og:image" content="https://itsaaa1.github.io/logo.png">
 <meta property="og:url" content="https://itsaaa1.github.io">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@VoltZilla_VZLA">
+<meta name="twitter:site" content="@VoltZillaSOL">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --yellow: #FFD700;
-  --electric: #00FFFF;
-  --purple: #9945FF;
-  --green: #00FF88;
-  --orange: #FF6B00;
-  --dark: #050510;
-  --dark2: #0a0a1a;
-  --card: #0f0f25;
-  --card2: #141430;
-  --border: rgba(255,215,0,0.15);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--dark);
-  color: #fff;
-  font-family: 'Tajawal', sans-serif;
-  overflow-x: hidden;
-}
-
-/* ===== PARTICLES BG ===== */
-#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
-
-/* ===== NAVBAR ===== */
-nav {
-  position: fixed; top:0; width:100%; z-index:1000;
-  background: rgba(5,5,16,0.92);
-  backdrop-filter: blur(30px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 40px;
-  display: flex; align-items:center; justify-content:space-between;
-  transition: all 0.3s;
-}
-nav.scrolled { padding: 10px 40px; background: rgba(5,5,16,0.98); }
-.nav-logo {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem; font-weight:900;
-  background: linear-gradient(135deg, var(--yellow), var(--electric));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  display:flex; align-items:center; gap:10px;
-}
-.nav-logo img { width:36px; height:36px; border-radius:50%; border:2px solid var(--yellow); }
-.nav-links { display:flex; gap:25px; list-style:none; }
-.nav-links a { 
-  color:#aaa; text-decoration:none; font-size:0.95rem; 
-  transition:all 0.3s; position:relative; padding-bottom:4px;
-}
-.nav-links a::after {
-  content:''; position:absolute; bottom:0; right:0;
-  width:0; height:2px; background:var(--yellow);
-  transition:width 0.3s;
-}
-.nav-links a:hover { color:var(--yellow); }
-.nav-links a:hover::after { width:100%; }
-.nav-btn {
-  background: linear-gradient(135deg, var(--yellow), var(--orange));
-  color:#000; border:none; padding:11px 28px;
-  border-radius:30px; font-weight:900; cursor:pointer;
-  font-family:'Tajawal',sans-serif; font-size:0.95rem;
-  text-decoration:none; transition:all 0.3s;
-  box-shadow: 0 0 20px rgba(255,215,0,0.3);
-}
-.nav-btn:hover { transform:scale(1.05); box-shadow:0 0 35px rgba(255,215,0,0.5); }
-
-/* ===== PRICE BAR ===== */
-.price-bar {
-  position:fixed; top:65px; width:100%; z-index:999;
-  background: linear-gradient(90deg, rgba(255,215,0,0.08), rgba(0,255,255,0.08));
-  border-bottom:1px solid var(--border);
-  padding:8px 20px; text-align:center;
-  font-size:0.85rem; color:#aaa;
-  overflow:hidden;
-}
-.price-bar span { color:var(--yellow); font-weight:700; }
-.price-live { color:var(--green) !important; }
-
-/* ===== TICKER ===== */
-.ticker {
-  background: rgba(255,215,0,0.05);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  overflow:hidden; padding:12px 0;
-  margin-top:100px;
-}
-.ticker-inner {
-  display:flex; gap:60px; white-space:nowrap;
-  animation: ticker 25s linear infinite;
-}
-.ticker-item { color:var(--yellow); font-weight:700; font-size:0.9rem; letter-spacing:2px; }
-.ticker-item::before { content:"⚡ "; }
-@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-/* ===== HERO ===== */
-.hero {
-  min-height:100vh; display:flex; align-items:center; justify-content:center;
-  text-align:center; padding:130px 20px 80px;
-  position:relative; z-index:1;
-  background: radial-gradient(ellipse at center top, rgba(153,69,255,0.15) 0%, transparent 60%),
-              radial-gradient(ellipse at center bottom, rgba(255,215,0,0.08) 0%, transparent 60%);
-}
-.hero-content { max-width:900px; margin:0 auto; }
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3);
-  border-radius:30px; padding:8px 20px; margin-bottom:30px;
-  font-size:0.85rem; color:var(--yellow); font-weight:700;
-  animation: pulse-badge 2s infinite;
-}
-@keyframes pulse-badge { 0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,0.3)} 50%{box-shadow:0 0 0 10px rgba(255,215,0,0)} }
-.hero-logo {
-  width:180px; height:180px; border-radius:50%;
-  border:4px solid var(--yellow);
-  box-shadow: 0 0 60px rgba(255,215,0,0.4), 0 0 120px rgba(255,215,0,0.1);
-  margin-bottom:30px;
-  animation: float 4s ease-in-out infinite;
-}
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
-.hero h1 {
-  font-family:'Orbitron',sans-serif; font-size:clamp(3rem,8vw,6rem);
-  font-weight:900; line-height:1;
-  background: linear-gradient(135deg, var(--yellow), var(--electric), var(--purple));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:10px;
-  text-shadow: none;
-  filter: drop-shadow(0 0 30px rgba(255,215,0,0.3));
-}
-.hero-symbol {
-  font-family:'Orbitron',sans-serif; font-size:1.5rem;
-  color:var(--electric); margin-bottom:25px; letter-spacing:5px;
-}
-.hero-desc {
-  font-size:1.2rem; color:#bbb; line-height:1.8; margin-bottom:40px;
-  max-width:650px; margin-left:auto; margin-right:auto;
-}
-.hero-btns { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; }
-.btn-primary {
-  background:linear-gradient(135deg, var(--yellow), var(--orange));
-  color:#000; padding:16px 40px; border-radius:35px;
-  font-weight:900; text-decoration:none; font-size:1.1rem;
-  transition:all 0.3s; box-shadow:0 0 30px rgba(255,215,0,0.3);
-  display:inline-flex; align-items:center; gap:8px;
-}
-.btn-primary:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 0 50px rgba(255,215,0,0.5); }
-.btn-secondary {
-  background:transparent; color:var(--electric);
-  border:2px solid var(--electric); padding:16px 40px;
-  border-radius:35px; font-weight:700; text-decoration:none;
-  font-size:1.1rem; transition:all 0.3s;
-}
-.btn-secondary:hover { background:rgba(0,255,255,0.1); transform:translateY(-3px); }
-.hero-mcap {
-  margin-top:40px; display:flex; gap:30px; justify-content:center; flex-wrap:wrap;
-}
-.mcap-item {
-  background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  border-radius:15px; padding:15px 25px; text-align:center;
-}
-.mcap-val { font-family:'Orbitron',sans-serif; font-size:1.4rem; color:var(--yellow); font-weight:900; }
-.mcap-lbl { color:#666; font-size:0.8rem; margin-top:4px; }
-
-/* ===== STATS ===== */
-.stats { padding:80px 20px; position:relative; z-index:1; }
-.stats-grid {
-  max-width:1100px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-  gap:20px;
-}
-.stat-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:30px; text-align:center;
-  transition:all 0.3s; position:relative; overflow:hidden;
-}
-.stat-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg, var(--yellow), var(--electric));
-}
-.stat-card:hover { transform:translateY(-5px); border-color:var(--yellow); box-shadow:0 10px 40px rgba(255,215,0,0.1); }
-.stat-number { font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:var(--yellow); margin-bottom:8px; }
-.stat-label { color:#777; font-size:0.9rem; }
-
-/* ===== WHY VZLA ===== */
-.why-vzla { padding:100px 20px; position:relative; z-index:1; }
-.section-header { text-align:center; margin-bottom:60px; }
-.section-header h2 {
-  font-family:'Orbitron',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem);
-  font-weight:900; margin-bottom:15px;
-  background:linear-gradient(135deg, var(--yellow), var(--electric));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.section-header p { color:#777; font-size:1.1rem; }
-.why-grid {
-  max-width:1100px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-  gap:25px;
-}
-.why-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:25px; padding:35px; transition:all 0.3s;
-  position:relative; overflow:hidden;
-}
-.why-card::after {
-  content:''; position:absolute; bottom:0; right:0;
-  width:100px; height:100px; border-radius:50%;
-  background:radial-gradient(circle, rgba(255,215,0,0.05), transparent);
-  transition:all 0.5s;
-}
-.why-card:hover { border-color:var(--yellow); transform:translateY(-8px); box-shadow:0 20px 50px rgba(255,215,0,0.08); }
-.why-card:hover::after { width:200px; height:200px; }
-.why-icon { font-size:3rem; margin-bottom:20px; }
-.why-card h3 { font-size:1.3rem; color:var(--yellow); margin-bottom:12px; font-weight:700; }
-.why-card p { color:#888; line-height:1.7; font-size:0.95rem; }
-
-/* ===== BONDING CURVE ===== */
-.bonding { padding:100px 20px; background:var(--dark2); position:relative; z-index:1; }
-.bonding-inner { max-width:900px; margin:0 auto; }
-.bonding-bar-wrap {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:40px; margin-top:40px;
-}
-.bonding-label { display:flex; justify-content:space-between; margin-bottom:15px; }
-.bonding-label span { color:#888; font-size:0.9rem; }
-.bonding-label strong { color:var(--yellow); font-family:'Orbitron',sans-serif; }
-.progress-track {
-  background:rgba(255,255,255,0.05); border-radius:50px; height:30px;
-  overflow:hidden; position:relative; margin-bottom:20px;
-}
-.progress-fill {
-  height:100%; width:1%;
-  background:linear-gradient(90deg, var(--yellow), var(--orange), var(--green));
-  border-radius:50px; position:relative;
-  animation: glow-bar 2s infinite;
-  transition:width 1s ease;
-}
-@keyframes glow-bar { 0%,100%{box-shadow:0 0 10px rgba(255,215,0,0.5)} 50%{box-shadow:0 0 25px rgba(255,215,0,0.8)} }
-.progress-fill::after {
-  content:'⚡'; position:absolute; right:-5px; top:50%;
-  transform:translateY(-50%); font-size:1.2rem;
-}
-.bonding-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:25px; }
-.b-stat { text-align:center; }
-.b-stat-val { font-family:'Orbitron',sans-serif; font-size:1.3rem; color:var(--electric); font-weight:700; }
-.b-stat-lbl { color:#666; font-size:0.8rem; margin-top:5px; }
-.graduation-box {
-  background:linear-gradient(135deg, rgba(0,255,136,0.08), rgba(0,255,255,0.05));
-  border:1px solid rgba(0,255,136,0.2); border-radius:15px;
-  padding:25px; margin-top:25px; text-align:center;
-}
-.graduation-box h4 { color:var(--green); font-size:1.1rem; margin-bottom:10px; }
-.graduation-box p { color:#888; font-size:0.9rem; line-height:1.6; }
-
-/* ===== TOKENOMICS ===== */
-.tokenomics { padding:100px 20px; position:relative; z-index:1; }
-.token-grid {
-  max-width:1000px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-  gap:20px;
-}
-.token-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:30px; text-align:center;
-  transition:all 0.3s;
-}
-.token-card:hover { border-color:var(--purple); transform:scale(1.03); }
-.token-pct { font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:900; color:var(--purple); margin-bottom:10px; }
-.token-name { color:var(--yellow); font-weight:700; margin-bottom:8px; }
-.token-amount { color:#666; font-size:0.85rem; }
-
-/* ===== HOW TO BUY ===== */
-.how-to-buy { padding:100px 20px; background:var(--dark2); position:relative; z-index:1; }
-.steps-grid {
-  max-width:1000px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-  gap:25px;
-}
-.step-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:35px 25px; text-align:center;
-  transition:all 0.3s; position:relative;
-}
-.step-card:hover { border-color:var(--electric); transform:translateY(-8px); }
-.step-num {
-  width:55px; height:55px; border-radius:50%;
-  background:linear-gradient(135deg, var(--yellow), var(--orange));
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:900;
-  margin:0 auto 20px; color:#000;
-  box-shadow:0 0 20px rgba(255,215,0,0.3);
-}
-.step-card h3 { color:var(--electric); margin-bottom:12px; font-size:1.1rem; }
-.step-card p { color:#888; font-size:0.9rem; line-height:1.7; }
-.step-card a { color:var(--electric); }
-
-/* ===== ROADMAP ===== */
-.roadmap { padding:100px 20px; position:relative; z-index:1; }
-.roadmap-container { max-width:800px; margin:0 auto; position:relative; }
-.roadmap-container::before {
-  content:''; position:absolute; right:25px; top:0; bottom:0;
-  width:2px; background:linear-gradient(to bottom, var(--yellow), var(--purple), transparent);
-}
-.roadmap-item { display:flex; gap:30px; margin-bottom:40px; align-items:flex-start; }
-.roadmap-dot {
-  width:52px; height:52px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.1rem; font-weight:900; position:relative; z-index:1;
-}
-.dot-done { background:linear-gradient(135deg, var(--green), #00cc66); color:#000; box-shadow:0 0 20px rgba(0,255,136,0.4); }
-.dot-active { background:linear-gradient(135deg, var(--yellow), var(--orange)); color:#000; box-shadow:0 0 25px rgba(255,215,0,0.5); animation:pulse-dot 1.5s infinite; }
-@keyframes pulse-dot { 0%,100%{box-shadow:0 0 20px rgba(255,215,0,0.4)} 50%{box-shadow:0 0 40px rgba(255,215,0,0.8)} }
-.dot-future { background:var(--card); border:2px solid var(--border); color:#666; }
-.roadmap-content {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:25px; flex:1; transition:all 0.3s;
-}
-.roadmap-content:hover { border-color:var(--yellow); }
-.roadmap-content h3 { color:var(--yellow); margin-bottom:10px; font-size:1.1rem; }
-.roadmap-content p { color:#888; font-size:0.9rem; line-height:1.7; }
-
-/* ===== CONTRACT ===== */
-.contract-section {
-  padding:80px 20px; text-align:center; position:relative; z-index:1;
-  background:linear-gradient(135deg, rgba(153,69,255,0.05), rgba(255,215,0,0.03));
-  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-}
-.contract-box {
-  display:inline-flex; align-items:center; gap:15px;
-  background:var(--card); border:1px solid rgba(255,215,0,0.3);
-  border-radius:15px; padding:18px 30px; margin-top:25px;
-  flex-wrap:wrap; justify-content:center;
-  box-shadow:0 0 30px rgba(255,215,0,0.05);
-}
-.contract-label { color:var(--yellow); font-weight:700; font-family:'Orbitron',sans-serif; font-size:0.9rem; }
-.contract-addr { font-family:monospace; font-size:0.85rem; color:#ccc; word-break:break-all; }
-.copy-btn {
-  background:linear-gradient(135deg, var(--yellow), var(--orange));
-  color:#000; border:none; padding:10px 22px;
-  border-radius:12px; cursor:pointer; font-weight:900;
-  font-family:'Tajawal',sans-serif; transition:all 0.3s;
-}
-.copy-btn:hover { transform:scale(1.05); box-shadow:0 0 15px rgba(255,215,0,0.4); }
-
-/* ===== EXCHANGES ===== */
-.exchanges { padding:100px 20px; background:var(--dark2); position:relative; z-index:1; }
-.exchanges-grid {
-  max-width:1000px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
-  gap:20px;
-}
-.exchange-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:20px; padding:28px; text-align:center;
-  text-decoration:none; color:#fff; transition:all 0.3s;
-}
-.exchange-card:hover { border-color:var(--yellow); transform:translateY(-8px); box-shadow:0 15px 40px rgba(255,215,0,0.1); }
-.exchange-icon { font-size:2.5rem; margin-bottom:12px; }
-.exchange-name { font-weight:700; color:var(--yellow); margin-bottom:6px; }
-.exchange-desc { color:#666; font-size:0.8rem; }
-
-/* ===== COMMUNITY ===== */
-.community { padding:100px 20px; position:relative; z-index:1; }
-.social-grid {
-  max-width:900px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
-  gap:20px;
-}
-.social-card {
-  border-radius:25px; padding:35px; text-align:center;
-  text-decoration:none; color:#fff; transition:all 0.3s;
-  border:1px solid rgba(255,255,255,0.08);
-}
-.social-card:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
-.twitter { background:linear-gradient(135deg, rgba(29,161,242,0.15), rgba(29,161,242,0.03)); border-color:rgba(29,161,242,0.25); }
-.telegram { background:linear-gradient(135deg, rgba(0,136,204,0.15), rgba(0,136,204,0.03)); border-color:rgba(0,136,204,0.25); }
-.pumpfun { background:linear-gradient(135deg, rgba(0,255,136,0.15), rgba(0,255,136,0.03)); border-color:rgba(0,255,136,0.25); }
-.dex { background:linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.03)); border-color:rgba(255,215,0,0.25); }
-.social-icon { font-size:3rem; margin-bottom:15px; }
-.social-name { font-weight:900; font-size:1.2rem; margin-bottom:6px; }
-.social-sub { color:#666; font-size:0.85rem; }
-
-/* ===== TELEGRAM BOT ===== */
-.bot-section {
-  padding:100px 20px; position:relative; z-index:1;
-  background:linear-gradient(135deg, rgba(0,136,204,0.05), rgba(153,69,255,0.05));
-  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-}
-.bot-inner { max-width:800px; margin:0 auto; text-align:center; }
-.bot-card {
-  background:var(--card); border:1px solid rgba(0,136,204,0.3);
-  border-radius:25px; padding:50px; margin-top:40px;
-  box-shadow:0 0 50px rgba(0,136,204,0.1);
-}
-.bot-icon { font-size:4rem; margin-bottom:20px; }
-.bot-card h3 { font-size:1.8rem; color:var(--electric); margin-bottom:15px; font-family:'Orbitron',sans-serif; }
-.bot-card p { color:#888; line-height:1.8; margin-bottom:30px; font-size:1rem; }
-.bot-features { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-bottom:35px; }
-.bot-feat {
-  background:rgba(0,255,255,0.08); border:1px solid rgba(0,255,255,0.2);
-  border-radius:30px; padding:8px 20px; font-size:0.85rem; color:var(--electric);
-}
-.btn-telegram {
-  background:linear-gradient(135deg, #0088cc, #005fa3);
-  color:#fff; padding:16px 45px; border-radius:35px;
-  font-weight:900; text-decoration:none; font-size:1.1rem;
-  transition:all 0.3s; display:inline-flex; align-items:center; gap:10px;
-  box-shadow:0 0 30px rgba(0,136,204,0.3);
-}
-.btn-telegram:hover { transform:translateY(-3px); box-shadow:0 0 50px rgba(0,136,204,0.5); }
-
-/* ===== FOOTER ===== */
-footer {
-  padding:60px 20px; text-align:center;
-  background:var(--dark2); position:relative; z-index:1;
-  border-top:1px solid var(--border);
-}
-.footer-logo {
-  font-family:'Orbitron',sans-serif; font-size:1.8rem; font-weight:900;
-  background:linear-gradient(135deg, var(--yellow), var(--electric));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:20px;
-}
-.footer-links { display:flex; gap:25px; justify-content:center; flex-wrap:wrap; margin-bottom:25px; }
-.footer-links a { color:#666; text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
-.footer-links a:hover { color:var(--yellow); }
-.footer-disclaimer { color:#444; font-size:0.8rem; max-width:700px; margin:20px auto 0; line-height:1.7; }
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px) {
-  nav { padding:12px 20px; }
-  .nav-links { display:none; }
-  .hero-logo { width:130px; height:130px; }
-  .bonding-stats { grid-template-columns:1fr; }
-  .roadmap-container::before { display:none; }
-}
-
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
+:root{--yellow:#FFD700;--electric:#00FFFF;--purple:#9945FF;--green:#00FF88;--dark:#050510;--dark2:#0a0a1a;--card:#111130;--border:rgba(255,215,0,0.15);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#fff;font-family:'Tajawal',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 20%,rgba(153,69,255,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(0,255,255,0.06) 0%,transparent 50%);pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,5,16,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 30px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,var(--yellow),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{width:36px;height:36px;border-radius:50%;}
+.nav-links{display:flex;gap:25px;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.9rem;font-weight:600;transition:color 0.3s;}
+.nav-links a:hover{color:var(--yellow);}
+.nav-btn{background:linear-gradient(135deg,var(--yellow),#FFA500);color:#000!important;padding:8px 20px;border-radius:25px;font-weight:900!important;}
+.ticker{position:fixed;top:65px;width:100%;z-index:999;background:rgba(0,0,0,0.85);border-bottom:1px solid rgba(255,215,0,0.1);padding:6px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:60px;animation:ticker 30s linear infinite;white-space:nowrap;}
+.ticker-item{font-size:0.8rem;font-family:'Orbitron',sans-serif;color:var(--yellow);display:flex;align-items:center;gap:8px;}
+.ticker-item span{color:var(--green);}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:130px 20px 80px;position:relative;z-index:1;}
+.hero-content{max-width:900px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(153,69,255,0.15);border:1px solid rgba(153,69,255,0.4);padding:6px 18px;border-radius:25px;font-size:0.8rem;color:#c084fc;margin-bottom:25px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.hero-badge::before{content:'●';color:var(--green);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.05;margin-bottom:20px;}
+.hero h1 .volt{background:linear-gradient(135deg,var(--yellow),#FFA500,var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;}
+.hero h1 .zilla{color:#fff;display:block;}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,0.7);margin-bottom:15px;line-height:1.7;}
+.hero-contract{display:inline-flex;align-items:center;gap:10px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);padding:10px 20px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:0.65rem;color:var(--yellow);margin:20px 0 35px;cursor:pointer;transition:background 0.3s;word-break:break-all;text-align:center;}
+.hero-contract:hover{background:rgba(255,215,0,0.15);}
+.hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;}
+.btn-primary{background:linear-gradient(135deg,var(--yellow),#FFA500);color:#000;font-weight:900;padding:14px 35px;border-radius:50px;text-decoration:none;font-size:1rem;transition:transform 0.2s,box-shadow 0.3s;display:flex;align-items:center;gap:8px;border:none;cursor:pointer;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(255,215,0,0.4);}
+.btn-secondary{background:rgba(255,255,255,0.05);color:#fff;font-weight:700;padding:14px 35px;border-radius:50px;text-decoration:none;font-size:1rem;border:1px solid rgba(255,255,255,0.15);transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);border-color:var(--yellow);}
+.btn-telegram{background:linear-gradient(135deg,#229ED9,#0088CC);color:#fff;font-weight:900;padding:14px 35px;border-radius:50px;text-decoration:none;font-size:1rem;transition:transform 0.2s,box-shadow 0.3s;display:flex;align-items:center;gap:8px;}
+.btn-telegram:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(34,158,217,0.4);}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:900px;margin:0 auto 80px;}
+.stat-item{background:var(--card);padding:25px 20px;text-align:center;}
+.stat-value{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--yellow);margin-bottom:5px;}
+.stat-label{font-size:0.8rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;}
+section{padding:80px 20px;position:relative;z-index:1;}
+.container{max-width:1100px;margin:0 auto;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:15px;}
+.section-title h2 span{background:linear-gradient(135deg,var(--yellow),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.section-title p{color:rgba(255,255,255,0.6);font-size:1.05rem;max-width:600px;margin:0 auto;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.about-text h3{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:var(--yellow);margin-bottom:20px;}
+.about-text p{color:rgba(255,255,255,0.75);line-height:1.9;margin-bottom:15px;font-size:1.05rem;}
+.about-img{display:flex;justify-content:center;align-items:center;}
+.logo-glow{width:280px;height:280px;border-radius:50%;border:3px solid rgba(255,215,0,0.3);box-shadow:0 0 60px rgba(255,215,0,0.2),0 0 120px rgba(153,69,255,0.15);animation:float 4s ease-in-out infinite;object-fit:cover;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.features-bg{background:rgba(255,255,255,0.02);}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:35px 25px;text-align:center;transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;}
+.feature-card:hover{transform:translateY(-8px);border-color:rgba(255,215,0,0.4);box-shadow:0 20px 50px rgba(255,215,0,0.1);}
+.feature-icon{font-size:3rem;margin-bottom:20px;display:block;}
+.feature-card h3{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:var(--yellow);margin-bottom:12px;}
+.feature-card p{color:rgba(255,255,255,0.65);line-height:1.7;font-size:0.95rem;}
+.tokenomics-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.token-chart{display:flex;flex-direction:column;gap:15px;}
+.token-bar-label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;}
+.token-bar-label span:first-child{color:rgba(255,255,255,0.8);font-weight:600;}
+.token-bar-label span:last-child{color:var(--yellow);font-weight:900;font-family:'Orbitron',sans-serif;}
+.token-bar-bg{background:rgba(255,255,255,0.05);border-radius:10px;height:12px;overflow:hidden;}
+.token-bar-fill{height:100%;border-radius:10px;}
+.token-info{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.token-info-card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:20px;}
+.token-info-card .label{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;}
+.token-info-card .value{font-family:'Orbitron',sans-serif;font-weight:700;color:var(--electric);word-break:break-all;font-size:0.85rem;}
+.roadmap-bg{background:rgba(255,255,255,0.02);}
+.roadmap-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.roadmap-phase{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 20px;text-align:center;}
+.roadmap-phase.active{border-color:var(--yellow);box-shadow:0 0 30px rgba(255,215,0,0.15);}
+.phase-num{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.1rem;margin:0 auto 20px;}
+.phase-num.done{background:var(--green);color:#000;}
+.phase-num.active{background:var(--yellow);color:#000;animation:pulseBorder 2s infinite;}
+.phase-num.soon{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);}
+@keyframes pulseBorder{0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,0.4)}50%{box-shadow:0 0 0 15px rgba(255,215,0,0)}}
+.roadmap-phase h3{font-family:'Orbitron',sans-serif;font-size:0.9rem;font-weight:700;color:var(--yellow);margin-bottom:15px;}
+.roadmap-phase ul{list-style:none;text-align:right;}
+.roadmap-phase ul li{color:rgba(255,255,255,0.7);font-size:0.85rem;margin-bottom:8px;padding-right:15px;position:relative;}
+.roadmap-phase ul li::before{content:'⚡';position:absolute;right:0;font-size:0.7rem;}
+.phase-status{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:700;margin-top:15px;text-transform:uppercase;letter-spacing:1px;}
+.status-done{background:rgba(0,255,136,0.15);color:var(--green);border:1px solid rgba(0,255,136,0.3);}
+.status-active{background:rgba(255,215,0,0.15);color:var(--yellow);border:1px solid rgba(255,215,0,0.3);}
+.status-soon{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);}
+.buy-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.buy-step{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 20px;text-align:center;transition:transform 0.3s;}
+.buy-step:hover{transform:translateY(-5px);}
+.step-num{width:45px;height:45px;background:linear-gradient(135deg,var(--yellow),#FFA500);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2rem;color:#000;margin:0 auto 20px;}
+.buy-step h3{font-size:1rem;font-weight:700;color:var(--yellow);margin-bottom:10px;}
+.buy-step p{color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.6;}
+.community-bg{background:rgba(255,255,255,0.02);}
+.community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;}
+.community-card{border-radius:20px;padding:40px 30px;text-align:center;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;display:block;}
+.community-card:hover{transform:translateY(-8px);}
+.community-card.twitter{background:linear-gradient(135deg,rgba(0,0,0,0.6),rgba(29,161,242,0.1));border:1px solid rgba(29,161,242,0.3);}
+.community-card.twitter:hover{box-shadow:0 20px 50px rgba(29,161,242,0.2);}
+.community-card.telegram{background:linear-gradient(135deg,rgba(0,0,0,0.6),rgba(34,158,217,0.1));border:1px solid rgba(34,158,217,0.3);}
+.community-card.telegram:hover{box-shadow:0 20px 50px rgba(34,158,217,0.2);}
+.community-card.pump{background:linear-gradient(135deg,rgba(0,0,0,0.6),rgba(153,69,255,0.1));border:1px solid rgba(153,69,255,0.3);}
+.community-card.pump:hover{box-shadow:0 20px 50px rgba(153,69,255,0.2);}
+.community-icon{font-size:3.5rem;margin-bottom:20px;display:block;}
+.community-card h3{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:900;margin-bottom:10px;color:#fff;}
+.community-card p{color:rgba(255,255,255,0.6);font-size:0.9rem;}
+.listings-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.listing-badge{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:20px 30px;text-align:center;min-width:150px;transition:all 0.3s;}
+.listing-badge:hover{border-color:var(--yellow);transform:scale(1.05);}
+.listing-badge .name{font-family:'Orbitron',sans-serif;font-size:0.9rem;font-weight:700;color:var(--yellow);margin-bottom:5px;}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px;}
+.status-live{background:var(--green);box-shadow:0 0 8px var(--green);}
+.status-pending{background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation:blink 2s infinite;}
+footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50px 20px 30px;text-align:center;position:relative;z-index:1;}
+.footer-logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--yellow),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:15px;}
+.footer-links{display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-bottom:25px;}
+.footer-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.9rem;transition:color 0.3s;}
+.footer-links a:hover{color:var(--yellow);}
+.footer-disclaimer{color:rgba(255,255,255,0.3);font-size:0.8rem;max-width:700px;margin:0 auto;line-height:1.7;}
+.footer-copy{color:rgba(255,255,255,0.4);font-size:0.85rem;margin-top:20px;}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:12px 25px;border-radius:30px;font-weight:700;font-size:0.9rem;opacity:0;transition:opacity 0.3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;}
+@media(max-width:900px){.nav-links{display:none;}.about-grid,.tokenomics-grid{grid-template-columns:1fr;}.features-grid,.roadmap-timeline,.buy-steps{grid-template-columns:1fr 1fr;}.community-grid{grid-template-columns:1fr;}.stats-bar{grid-template-columns:1fr 1fr;}.token-info{grid-template-columns:1fr;}}
+@media(max-width:600px){.features-grid,.roadmap-timeline,.buy-steps{grid-template-columns:1fr;}.hero h1{font-size:2.2rem;}.hero-btns{flex-direction:column;align-items:center;}}
 </style>
 </head>
 <body>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-logo">
-    <img src="logo.png" alt="VoltZilla">
-    VoltZilla
+<div class="toast" id="toast">&#x2705; تم نسخ العنوان!</div>
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="VoltZilla">VZLA</a>
+  <div class="nav-links">
+    <a href="#about">عن التوكن</a>
+    <a href="#tokenomics">التوكنوميكس</a>
+    <a href="#roadmap">خارطة الطريق</a>
+    <a href="#buy">كيف تشتري</a>
+    <a href="whitepaper.html">الورقة البيضاء</a>
+    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="nav-btn">اشتري الآن &#x26A1;</a>
   </div>
-  <ul class="nav-links">
-    <li><a href="#about">عن المشروع</a></li>
-    <li><a href="#bonding">Bonding Curve</a></li>
-    <li><a href="#tokenomics">التوكنومكس</a></li>
-    <li><a href="#roadmap">خارطة الطريق</a></li>
-    <li><a href="#buy">كيف تشتري</a></li>
-    <li><a href="#community">المجتمع</a></li>
-  </ul>
-  <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="nav-btn">⚡ اشتري الآن</a>
 </nav>
-
-<!-- PRICE BAR -->
-<div class="price-bar">
-  ⚡ VZLA: <span class="price-live" id="live-price">$0.00000492</span>
-  &nbsp;|&nbsp; Market Cap: <span id="live-mc">$4.9K</span>
-  &nbsp;|&nbsp; Solana Network
-  &nbsp;|&nbsp; <span style="color:#aaa; font-size:0.78rem;">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
-</div>
-
-<!-- TICKER -->
-<div class="ticker" style="margin-top:100px;">
+<div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">VoltZilla (VZLA)</span>
-    <span class="ticker-item">Solana Meme Token</span>
-    <span class="ticker-item">Community Driven</span>
-    <span class="ticker-item">To The Moon</span>
-    <span class="ticker-item">Diamond Hands</span>
-    <span class="ticker-item">Pump.fun</span>
-    <span class="ticker-item">VoltZilla (VZLA)</span>
-    <span class="ticker-item">Solana Meme Token</span>
-    <span class="ticker-item">Community Driven</span>
-    <span class="ticker-item">To The Moon</span>
-    <span class="ticker-item">Diamond Hands</span>
-    <span class="ticker-item">Pump.fun</span>
+    <div class="ticker-item">&#x26A1; VZLA/SOL <span>LIVE</span></div>
+    <div class="ticker-item">&#x1F525; Pump.fun LIVE NOW</div>
+    <div class="ticker-item">&#x26A1; VoltZilla <span>TO THE MOON &#x1F680;</span></div>
+    <div class="ticker-item">&#x1F48E; Diamond Hands Only</div>
+    <div class="ticker-item">&#x26A1; VZLA <span>HOLD STRONG</span></div>
+    <div class="ticker-item">&#x1F30A; Solana Speed</div>
+    <div class="ticker-item">&#x26A1; VZLA/SOL <span>LIVE</span></div>
+    <div class="ticker-item">&#x1F525; Pump.fun LIVE NOW</div>
+    <div class="ticker-item">&#x26A1; VoltZilla <span>TO THE MOON &#x1F680;</span></div>
+    <div class="ticker-item">&#x1F48E; Diamond Hands Only</div>
+    <div class="ticker-item">&#x26A1; VZLA <span>HOLD STRONG</span></div>
+    <div class="ticker-item">&#x1F30A; Solana Speed</div>
   </div>
 </div>
-
-<!-- HERO -->
-<section class="hero" style="margin-top:-100px;">
+<section class="hero">
   <div class="hero-content">
-    <div class="hero-badge">🔥 متاح الآن على Pump.fun | شبكة Solana</div>
-    <img src="logo.png" alt="VoltZilla" class="hero-logo">
-    <h1>VoltZilla</h1>
-    <div class="hero-symbol">⚡ $VZLA ⚡</div>
-    <p class="hero-desc">وحش الطاقة الرقمي على Solana — أسرع، أقوى، أكثر كهرباءً. انضم لثورة الميم الحقيقية وكن جزءاً من المجتمع الذي يصنع التاريخ.</p>
+    <div class="hero-badge">مباشر على Solana — Pump.fun</div>
+    <h1><span class="volt">VOLT</span><span class="zilla">ZILLA &#x26A1;</span></h1>
+    <p class="hero-sub">وحش الطاقة الرقمي يصعق السوق على شبكة Solana<br>السرعة البرق، المجتمع الجبار، والمستقبل الكهربائي</p>
+    <div class="hero-contract" onclick="copyContract()">
+      <span>&#x1F4CB;</span>
+      <span>JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
+    </div>
     <div class="hero-btns">
-      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">🚀 اشتري على Pump.fun</a>
-      <a href="#bonding" class="btn-secondary">📊 Bonding Curve ⚡</a>
+      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">&#x26A1; اشتري على Pump.fun</a>
+      <a href="https://t.me/XVX_Xbot" target="_blank" class="btn-telegram">&#x1F4F1; بوت Telegram</a>
+      <a href="whitepaper.html" class="btn-secondary">&#x1F4C4; الورقة البيضاء</a>
     </div>
-    <div class="hero-mcap">
-      <div class="mcap-item">
-        <div class="mcap-val" id="hero-price">$0.00000492</div>
-        <div class="mcap-lbl">السعر الحالي</div>
+    <div class="stats-bar fade-in">
+      <div class="stat-item"><div class="stat-value" id="mcap">$2.3K+</div><div class="stat-label">Market Cap</div></div>
+      <div class="stat-item"><div class="stat-value">1B</div><div class="stat-label">Total Supply</div></div>
+      <div class="stat-item"><div class="stat-value">0%</div><div class="stat-label">Tax</div></div>
+      <div class="stat-item"><div class="stat-value">SOL</div><div class="stat-label">Blockchain</div></div>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <h3>&#x26A1; ما هو VoltZilla؟</h3>
+        <p>VoltZilla (VZLA) هو توكن ميم كهربائي يعمل على شبكة Solana — أسرع بلوكتشين في العالم. ولد من رحم الطاقة الرقمية ليصعق الأسواق ويغير قواعد اللعبة.</p>
+        <p>بدون ضرائب، بدون سلطة مركزية، بدون حدود. فقط مجتمع قوي يؤمن بقوة الكهرباء الرقمية ويسعى لتحقيق مكاسب خارقة.</p>
+        <p>مبني على مبادئ الشفافية الكاملة والتوزيع العادل. كل توكن في يد المجتمع، والمستقبل يكتبه الحاملون.</p>
       </div>
-      <div class="mcap-item">
-        <div class="mcap-val">$4.9K</div>
-        <div class="mcap-lbl">Market Cap</div>
+      <div class="about-img"><img src="logo.png" alt="VoltZilla Logo" class="logo-glow"></div>
+    </div>
+  </div>
+</section>
+<section class="features-bg">
+  <div class="container">
+    <div class="section-title fade-in"><h2>لماذا <span>VoltZilla</span>؟</h2><p>مزايا تجعلنا مختلفين عن كل توكن آخر</p></div>
+    <div class="features-grid">
+      <div class="feature-card fade-in"><span class="feature-icon">&#x26A1;</span><h3>سرعة البرق</h3><p>يعمل على Solana — أسرع بلوكتشين في الكون. معاملات فورية بتكلفة شبه صفرية.</p></div>
+      <div class="feature-card fade-in"><span class="feature-icon">&#x1F525;</span><h3>صفر ضرائب</h3><p>لا ضريبة على الشراء ولا على البيع. كل ما تشتريه يبقى لك بالكامل.</p></div>
+      <div class="feature-card fade-in"><span class="feature-icon">&#x1F48E;</span><h3>مجتمع ماسي</h3><p>مجتمع من الحاملين الحقيقيين الذين يؤمنون بالمشروع ويبنون المستقبل معاً.</p></div>
+      <div class="feature-card fade-in"><span class="feature-icon">&#x1F6E1;&#xFE0F;</span><h3>شفافية كاملة</h3><p>عقد ذكي مفتوح المصدر، توزيع عادل، ولا سلطة مركزية تتحكم في المشروع.</p></div>
+      <div class="feature-card fade-in"><span class="feature-icon">&#x1F680;</span><h3>نمو متسارع</h3><p>خارطة طريق واضحة مع أهداف قابلة للتحقق وتوسع مستمر في المنصات والتبادلات.</p></div>
+      <div class="feature-card fade-in"><span class="feature-icon">&#x1F916;</span><h3>وكيل ذكاء اصطناعي</h3><p>نظام AI متكامل يدير التسويق والمراقبة والتحليل على مدار الساعة.</p></div>
+    </div>
+  </div>
+</section>
+<section id="tokenomics">
+  <div class="container">
+    <div class="section-title fade-in"><h2><span>التوكنوميكس</span></h2><p>توزيع عادل وشفاف لضمان نمو صحي ومستدام</p></div>
+    <div class="tokenomics-grid fade-in">
+      <div class="token-chart">
+        <div><div class="token-bar-label"><span>&#x1F30A; السيولة العامة</span><span>80%</span></div><div class="token-bar-bg"><div class="token-bar-fill" style="width:80%;background:linear-gradient(90deg,#00FF88,#00FFCC);"></div></div></div>
+        <div><div class="token-bar-label"><span>&#x1F525; حرق التوكنات</span><span>10%</span></div><div class="token-bar-bg"><div class="token-bar-fill" style="width:10%;background:linear-gradient(90deg,#FF4444,#FF8800);"></div></div></div>
+        <div><div class="token-bar-label"><span>&#x1F3AF; التسويق والتطوير</span><span>7%</span></div><div class="token-bar-bg"><div class="token-bar-fill" style="width:7%;background:linear-gradient(90deg,#9945FF,#00FFFF);"></div></div></div>
+        <div><div class="token-bar-label"><span>&#x1F381; مكافآت المجتمع</span><span>3%</span></div><div class="token-bar-bg"><div class="token-bar-fill" style="width:3%;background:linear-gradient(90deg,#FFD700,#FFA500);"></div></div></div>
       </div>
-      <div class="mcap-item">
-        <div class="mcap-val">1B</div>
-        <div class="mcap-lbl">إجمالي العرض</div>
-      </div>
-      <div class="mcap-item">
-        <div class="mcap-val">0%</div>
-        <div class="mcap-lbl">ضريبة المعاملات</div>
+      <div class="token-info">
+        <div class="token-info-card"><div class="label">الاسم</div><div class="value" style="font-size:1.1rem;color:var(--yellow);">VoltZilla</div></div>
+        <div class="token-info-card"><div class="label">الرمز</div><div class="value" style="font-size:1.3rem;color:var(--yellow);">VZLA</div></div>
+        <div class="token-info-card"><div class="label">إجمالي العرض</div><div class="value">1,000,000,000</div></div>
+        <div class="token-info-card"><div class="label">الضريبة</div><div class="value" style="color:var(--green);">0% / 0%</div></div>
+        <div class="token-info-card" style="grid-column:1/-1;"><div class="label">عنوان العقد</div><div class="value">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</div></div>
+        <div class="token-info-card"><div class="label">البلوكتشين</div><div class="value" style="color:var(--purple);">Solana (SOL)</div></div>
+        <div class="token-info-card"><div class="label">المنصة</div><div class="value" style="color:var(--electric);">Pump.fun</div></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- STATS -->
-<section class="stats" id="stats">
-  <div class="stats-grid">
-    <div class="stat-card reveal">
-      <div class="stat-number">1B</div>
-      <div class="stat-label">إجمالي العرض</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">$4.9K</div>
-      <div class="stat-label">القيمة السوقية</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">0%</div>
-      <div class="stat-label">ضريبة الشراء والبيع</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">🔥</div>
-      <div class="stat-label">السيولة محروقة</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">SOL</div>
-      <div class="stat-label">شبكة Solana</div>
+<section id="roadmap" class="roadmap-bg">
+  <div class="container">
+    <div class="section-title fade-in"><h2>خارطة <span>الطريق</span></h2><p>رحلتنا نحو القمة — خطوة بخطوة</p></div>
+    <div class="roadmap-timeline fade-in">
+      <div class="roadmap-phase"><div class="phase-num done">1</div><h3>الإطلاق</h3><ul><li>إنشاء التوكن على Pump.fun</li><li>الموقع الرسمي</li><li>الورقة البيضاء</li><li>بوت Telegram</li><li>حساب Twitter/X</li></ul><span class="phase-status status-done">&#x2705; مكتمل</span></div>
+      <div class="roadmap-phase active"><div class="phase-num active">2</div><h3>التوسع</h3><ul><li>تسجيل CoinGecko</li><li>تسجيل CoinMarketCap</li><li>DEXTools & DEXScreener</li><li>حملات التسويق</li><li>بناء المجتمع</li></ul><span class="phase-status status-active">&#x1F525; جاري</span></div>
+      <div class="roadmap-phase"><div class="phase-num soon">3</div><h3>النمو</h3><ul><li>الإدراج في DEX كبرى</li><li>شراكات استراتيجية</li><li>Market Cap $100K</li><li>10,000 حامل</li><li>NFT Collection</li></ul><span class="phase-status status-soon">&#x23F3; قريباً</span></div>
+      <div class="roadmap-phase"><div class="phase-num soon">4</div><h3>الهيمنة</h3><ul><li>CEX Listings</li><li>Market Cap $1M+</li><li>VoltZilla DAO</li><li>Staking Platform</li><li>Global Domination</li></ul><span class="phase-status status-soon">&#x1F680; المستقبل</span></div>
     </div>
   </div>
 </section>
-
-<!-- WHY VZLA -->
-<section class="why-vzla" id="about">
-  <div class="section-header reveal">
-    <h2>لماذا VoltZilla؟</h2>
-    <p>ليس مجرد توكن — هو ثورة كهربائية على Solana</p>
-  </div>
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">⚡</div>
-      <h3>سرعة Solana</h3>
-      <p>مبني على أسرع بلوكتشين في العالم — معاملات فورية بأقل من $0.001 رسوم. لا انتظار، لا تعقيد.</p>
+<section id="buy">
+  <div class="container">
+    <div class="section-title fade-in"><h2>كيف <span>تشتري</span> VZLA؟</h2><p>4 خطوات بسيطة للانضمام لثورة VoltZilla</p></div>
+    <div class="buy-steps fade-in">
+      <div class="buy-step"><div class="step-num">1</div><h3>محفظة Phantom</h3><p>حمّل محفظة Phantom من phantom.app وأنشئ محفظة Solana جديدة</p></div>
+      <div class="buy-step"><div class="step-num">2</div><h3>احصل على SOL</h3><p>اشترِ SOL من أي بورصة (Binance, Coinbase) وأرسله لمحفظتك</p></div>
+      <div class="buy-step"><div class="step-num">3</div><h3>افتح Pump.fun</h3><p>اذهب إلى pump.fun وابحث عن VZLA أو الصق عنوان العقد</p></div>
+      <div class="buy-step"><div class="step-num">4</div><h3>اشترِ VZLA &#x26A1;</h3><p>اختر الكمية، اضغط Buy، وأكّد المعاملة في Phantom. مرحباً بك!</p></div>
     </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🔥</div>
-      <h3>Pump.fun الأصيل</h3>
-      <p>أُطلق عبر Pump.fun — المنصة الأكثر شفافية وعدالة لإطلاق التوكنات. Bonding Curve يضمن السعر العادل.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">💎</div>
-      <h3>مجتمع الماس</h3>
-      <p>أيدي ماسية حقيقية — مجتمع مؤمن بالقوة الكهربائية لـ VoltZilla. نبني معاً، نصعد معاً.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🚀</div>
-      <h3>إمكانية 100x</h3>
-      <p>Market Cap $4.9K فقط — يحتاج 7x للتخرج لـ Raydium، و20x للوصول لـ $100K. الفرصة الآن.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🔒</div>
-      <h3>شفافية كاملة</h3>
-      <p>لا مطور يملك توكنات. 100% في Bonding Curve. السيولة تُحرق تلقائياً عند التخرج. آمن تماماً.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🤖</div>
-      <h3>وكيل ذكي</h3>
-      <p>VoltZilla مدعوم بنظام ذكاء اصطناعي متكامل — يراقب السوق ويرسل تنبيهات فورية عبر Telegram.</p>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary" style="display:inline-flex;">&#x26A1; اشتري VZLA الآن على Pump.fun</a>
     </div>
   </div>
 </section>
-
-<!-- BONDING CURVE -->
-<section class="bonding" id="bonding">
-  <div class="bonding-inner">
-    <div class="section-header reveal">
-      <h2>Bonding Curve</h2>
-      <p>تتبع تقدم VoltZilla نحو Raydium</p>
-    </div>
-    <div class="bonding-bar-wrap reveal">
-      <div class="bonding-label">
-        <span>التقدم الحالي</span>
-        <strong id="bonding-pct">1.0%</strong>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-bar" style="width:1%"></div>
-      </div>
-      <div class="bonding-stats">
-        <div class="b-stat">
-          <div class="b-stat-val">$4,900</div>
-          <div class="b-stat-lbl">Market Cap الحالي</div>
-        </div>
-        <div class="b-stat">
-          <div class="b-stat-val">$34,574</div>
-          <div class="b-stat-lbl">هدف التخرج</div>
-        </div>
-        <div class="b-stat">
-          <div class="b-stat-val">$29,674</div>
-          <div class="b-stat-lbl">المتبقي للتخرج</div>
-        </div>
-      </div>
-      <div class="graduation-box">
-        <h4>🎓 ماذا يعني التخرج؟</h4>
-        <p>عندما يصل Market Cap لـ $34,574 — تتخرج VZLA تلقائياً إلى <strong style="color:var(--electric)">Raydium</strong>، أكبر DEX على Solana. السيولة تُحرق تلقائياً، والتداول يصبح حراً بالكامل. هذا يعني <strong style="color:var(--yellow)">7x</strong> من السعر الحالي فقط!</p>
-      </div>
+<section style="padding:60px 20px;">
+  <div class="container">
+    <div class="section-title fade-in"><h2>الإدراج في <span>المنصات</span></h2></div>
+    <div class="listings-grid fade-in">
+      <div class="listing-badge"><div class="name">Pump.fun <span class="status-dot status-live"></span></div><div style="font-size:0.8rem;color:var(--green);">مباشر</div></div>
+      <div class="listing-badge"><div class="name">DEXScreener <span class="status-dot status-live"></span></div><div style="font-size:0.8rem;color:var(--green);">مباشر</div></div>
+      <div class="listing-badge"><div class="name">CoinGecko <span class="status-dot status-pending"></span></div><div style="font-size:0.8rem;color:var(--yellow);">قيد المراجعة</div></div>
+      <div class="listing-badge"><div class="name">CoinMarketCap <span class="status-dot status-pending"></span></div><div style="font-size:0.8rem;color:var(--yellow);">قيد المراجعة</div></div>
+      <div class="listing-badge"><div class="name">DEXTools <span class="status-dot status-pending"></span></div><div style="font-size:0.8rem;color:var(--yellow);">قريباً</div></div>
+      <div class="listing-badge"><div class="name">Jupiter <span class="status-dot status-pending"></span></div><div style="font-size:0.8rem;color:var(--yellow);">قريباً</div></div>
     </div>
   </div>
 </section>
-
-<!-- TOKENOMICS -->
-<section class="tokenomics" id="tokenomics">
-  <div class="section-header reveal">
-    <h2>التوكنومكس</h2>
-    <p>توزيع شفاف وعادل — لا مخفي، لا مفاجآت</p>
-  </div>
-  <div class="token-grid">
-    <div class="token-card reveal">
-      <div class="token-pct">100%</div>
-      <div class="token-name">Pump.fun Bonding Curve</div>
-      <div class="token-amount">1,000,000,000 VZLA</div>
-    </div>
-    <div class="token-card reveal">
-      <div class="token-pct">0%</div>
-      <div class="token-name">ضريبة الشراء</div>
-      <div class="token-amount">مجاني تماماً</div>
-    </div>
-    <div class="token-card reveal">
-      <div class="token-pct">0%</div>
-      <div class="token-name">ضريبة البيع</div>
-      <div class="token-amount">مجاني تماماً</div>
-    </div>
-    <div class="token-card reveal">
-      <div class="token-pct">🔥</div>
-      <div class="token-name">السيولة</div>
-      <div class="token-amount">محروقة عند اكتمال Bonding Curve</div>
+<section class="community-bg">
+  <div class="container">
+    <div class="section-title fade-in"><h2>انضم للـ<span>مجتمع</span></h2><p>كن جزءاً من أقوى مجتمع ميم على Solana</p></div>
+    <div class="community-grid fade-in">
+      <a href="https://x.com/VoltZillaSOL" target="_blank" class="community-card twitter"><span class="community-icon">&#x1D54F;</span><h3>Twitter / X</h3><p>تابعنا للأخبار والتحديثات اللحظية</p></a>
+      <a href="https://t.me/XVX_Xbot" target="_blank" class="community-card telegram"><span class="community-icon">&#x2708;&#xFE0F;</span><h3>Telegram Bot</h3><p>بوت ذكي للأسعار والتنبيهات الفورية</p></a>
+      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="community-card pump"><span class="community-icon">&#x1F680;</span><h3>Pump.fun</h3><p>اشترِ وتداول VZLA مباشرة</p></a>
     </div>
   </div>
 </section>
-
-<!-- HOW TO BUY -->
-<section class="how-to-buy" id="buy">
-  <div class="section-header reveal">
-    <h2>كيف تشتري VZLA؟</h2>
-    <p>4 خطوات بسيطة للانضمام لعائلة VoltZilla</p>
-  </div>
-  <div class="steps-grid">
-    <div class="step-card reveal">
-      <div class="step-num">1</div>
-      <h3>حمّل Phantom</h3>
-      <p>حمّل محفظة <a href="https://phantom.app" target="_blank">Phantom</a> وأنشئ محفظة Solana جديدة</p>
-    </div>
-    <div class="step-card reveal">
-      <div class="step-num">2</div>
-      <h3>اشتري SOL</h3>
-      <p>اشتري Solana (SOL) من أي منصة تداول وحوّلها لمحفظتك</p>
-    </div>
-    <div class="step-card reveal">
-      <div class="step-num">3</div>
-      <h3>افتح Pump.fun</h3>
-      <p>اذهب لـ <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank">pump.fun</a> وابحث عن VZLA</p>
-    </div>
-    <div class="step-card reveal">
-      <div class="step-num">4</div>
-      <h3>اشتري VZLA ⚡</h3>
-      <p>حدد الكمية، وأكد المعاملة — مبروك أنت الآن جزء من VoltZilla!</p>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top:50px;" class="reveal">
-    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary" style="font-size:1.2rem; padding:18px 50px;">
-      🚀 اشتري VZLA الآن
-    </a>
-  </div>
-</section>
-
-<!-- ROADMAP -->
-<section class="roadmap" id="roadmap">
-  <div class="section-header reveal">
-    <h2>خارطة الطريق</h2>
-    <p>رحلة VoltZilla نحو القمة</p>
-  </div>
-  <div class="roadmap-container">
-    <div class="roadmap-item reveal">
-      <div class="roadmap-dot dot-done">✓</div>
-      <div class="roadmap-content">
-        <h3>المرحلة 1 — الإطلاق ✅</h3>
-        <p>إطلاق التوكن على Pump.fun، إنشاء الموقع الرسمي، بناء المجتمع الأول، تقديم طلبات الإدراج على CoinGecko و CoinMarketCap.</p>
-      </div>
-    </div>
-    <div class="roadmap-item reveal">
-      <div class="roadmap-dot dot-active">⚡</div>
-      <div class="roadmap-content">
-        <h3>المرحلة 2 — النمو 🔥 (الآن)</h3>
-        <p>الوصول إلى Raydium عبر اكتمال Bonding Curve ($34,574)، الإدراج على DexScreener، بناء مجتمع 1000+ عضو، حملات تسويقية مكثفة على Twitter وTelegram.</p>
-      </div>
-    </div>
-    <div class="roadmap-item reveal">
-      <div class="roadmap-dot dot-future">3</div>
-      <div class="roadmap-content">
-        <h3>المرحلة 3 — الانتشار</h3>
-        <p>الإدراج الرسمي على CoinGecko و CoinMarketCap، شراكات مع مؤثرين كبار، حملات إعلانية ضخمة، الوصول لـ $100K Market Cap.</p>
-      </div>
-    </div>
-    <div class="roadmap-item reveal">
-      <div class="roadmap-dot dot-future">4</div>
-      <div class="roadmap-content">
-        <h3>المرحلة 4 — القمر 🌙</h3>
-        <p>الإدراج على منصات CEX كبرى، تطوير NFT Collection، بناء نظام بيئي كامل حول VoltZilla، الوصول لـ $1M Market Cap.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRACT -->
-<section class="contract-section reveal">
-  <h2 style="font-family:'Orbitron',sans-serif; font-size:2rem; background:linear-gradient(135deg,var(--yellow),var(--electric)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">عنوان العقد الرسمي</h2>
-  <p style="color:#666; margin-top:10px;">تحقق دائماً من هذا العنوان قبل الشراء</p>
-  <div class="contract-box">
-    <span class="contract-label">VZLA:</span>
-    <span class="contract-addr" id="contractAddr">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
-    <button class="copy-btn" onclick="copyContract()">نسخ 📋</button>
-  </div>
-  <p style="color:#555; margin-top:15px; font-size:0.85rem;">⚠️ تحقق دائماً من العنوان الرسمي عبر قنواتنا الرسمية فقط</p>
-</section>
-
-<!-- EXCHANGES -->
-<section class="exchanges" id="exchanges">
-  <div class="section-header reveal">
-    <h2>أين تتداول VZLA؟</h2>
-    <p>منصات التداول الرسمية</p>
-  </div>
-  <div class="exchanges-grid">
-    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">🔥</div>
-      <div class="exchange-name">Pump.fun</div>
-      <div class="exchange-desc">منصة الإطلاق الرسمية</div>
-    </a>
-    <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">⚡</div>
-      <div class="exchange-name">Raydium</div>
-      <div class="exchange-desc">قريباً — بعد اكتمال Bonding Curve</div>
-    </a>
-    <a href="https://jup.ag/swap/SOL-JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">🪐</div>
-      <div class="exchange-name">Jupiter</div>
-      <div class="exchange-desc">أفضل سعر على Solana</div>
-    </a>
-    <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">📊</div>
-      <div class="exchange-name">DexScreener</div>
-      <div class="exchange-desc">تتبع السعر والحجم</div>
-    </a>
-    <a href="https://birdeye.so/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">🦅</div>
-      <div class="exchange-name">Birdeye</div>
-      <div class="exchange-desc">تحليل متقدم</div>
-    </a>
-    <a href="https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="exchange-card reveal">
-      <div class="exchange-icon">🔍</div>
-      <div class="exchange-name">Solscan</div>
-      <div class="exchange-desc">مستكشف البلوكتشين</div>
-    </a>
-  </div>
-</section>
-
-<!-- TELEGRAM BOT -->
-<section class="bot-section" id="bot">
-  <div class="bot-inner">
-    <div class="section-header reveal">
-      <h2>بوت التنبيهات الذكي</h2>
-      <p>تابع VZLA لحظة بلحظة عبر Telegram</p>
-    </div>
-    <div class="bot-card reveal">
-      <div class="bot-icon">🤖</div>
-      <h3>@XProfitAlertBot</h3>
-      <p>بوت ذكي يراقب السوق 24/7 ويرسل لك تنبيهات فورية عند تغيرات السعر، حجم التداول، وتحديثات Bonding Curve.</p>
-      <div class="bot-features">
-        <span class="bot-feat">⚡ تنبيهات فورية</span>
-        <span class="bot-feat">📊 تحليل السوق</span>
-        <span class="bot-feat">🔥 تحديثات Bonding Curve</span>
-        <span class="bot-feat">💎 إشارات الشراء</span>
-      </div>
-      <a href="https://t.me/XProfitAlertBot" target="_blank" class="btn-telegram">
-        ✈️ تابع البوت على Telegram
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY -->
-<section class="community" id="community">
-  <div class="section-header reveal">
-    <h2>انضم للمجتمع</h2>
-    <p>كن جزءاً من أقوى مجتمع على Solana</p>
-  </div>
-  <div class="social-grid">
-    <a href="https://twitter.com/VoltZilla_VZLA" target="_blank" class="social-card twitter reveal">
-      <div class="social-icon">🐦</div>
-      <div class="social-name">Twitter / X</div>
-      <div class="social-sub">@VoltZilla_VZLA</div>
-    </a>
-    <a href="https://t.me/VoltZilla_VZLA" target="_blank" class="social-card telegram reveal">
-      <div class="social-icon">✈️</div>
-      <div class="social-name">Telegram</div>
-      <div class="social-sub">قناة رسمية</div>
-    </a>
-    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="social-card pumpfun reveal">
-      <div class="social-icon">🔥</div>
-      <div class="social-name">Pump.fun</div>
-      <div class="social-sub">اشتري الآن</div>
-    </a>
-    <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="social-card dex reveal">
-      <div class="social-icon">📊</div>
-      <div class="social-name">DexScreener</div>
-      <div class="social-sub">تتبع السعر</div>
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">⚡ VoltZilla ⚡</div>
+  <div class="footer-logo">&#x26A1; VoltZilla</div>
   <div class="footer-links">
+    <a href="#about">عن التوكن</a>
+    <a href="#tokenomics">التوكنوميكس</a>
+    <a href="#roadmap">خارطة الطريق</a>
+    <a href="whitepaper.html">الورقة البيضاء</a>
     <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank">Pump.fun</a>
-    <a href="https://twitter.com/VoltZilla_VZLA" target="_blank">Twitter</a>
-    <a href="https://t.me/VoltZilla_VZLA" target="_blank">Telegram</a>
-    <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank">DexScreener</a>
-    <a href="https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank">Solscan</a>
-    <a href="whitepaper.html">Whitepaper</a>
+    <a href="https://x.com/VoltZillaSOL" target="_blank">Twitter</a>
+    <a href="https://t.me/XVX_Xbot" target="_blank">Telegram</a>
   </div>
-  <p style="color:#555; font-size:0.9rem;">© 2026 VoltZilla (VZLA). جميع الحقوق محفوظة.</p>
-  <p class="footer-disclaimer">⚠️ <strong>إخلاء مسؤولية:</strong> VoltZilla هو توكن ميم للترفيه والمجتمع. لا يُعدّ استثماراً مالياً. تداول العملات المشفرة ينطوي على مخاطر عالية. تداول بمسؤولية.</p>
+  <p class="footer-disclaimer">تحذير: VoltZilla (VZLA) هو توكن ميم للترفيه والمجتمع فقط. لا يمثل استثماراً أو ضماناً مالياً. تداول العملات المشفرة ينطوي على مخاطر عالية. استثمر فقط ما يمكنك تحمل خسارته.</p>
+  <p class="footer-copy">&#xA9; 2025 VoltZilla (VZLA) — Built on Solana &#x26A1;</p>
 </footer>
-
 <script>
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if(window.scrollY > 50) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-});
-
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) { e.target.classList.add('visible'); }
-  });
-}, { threshold: 0.1 });
-reveals.forEach(r => observer.observe(r));
-
-// Copy contract
-function copyContract() {
-  const addr = document.getElementById('contractAddr').textContent;
-  navigator.clipboard.writeText(addr).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = '✅ تم النسخ!';
-    btn.style.background = 'linear-gradient(135deg, #00FF88, #00cc66)';
-    setTimeout(() => {
-      btn.textContent = 'نسخ 📋';
-      btn.style.background = '';
-    }, 2500);
-  });
-}
-
-// Live price from DexScreener
-async function fetchPrice() {
-  try {
-    const r = await fetch('https://api.dexscreener.com/latest/dex/tokens/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump');
-    const d = await r.json();
-    if(d.pairs && d.pairs.length > 0) {
-      const p = d.pairs[0];
-      const price = parseFloat(p.priceUsd || 0);
-      const mc = p.fdv || p.marketCap || 0;
-      if(price > 0) {
-        const priceStr = price < 0.001 ? price.toFixed(8) : price.toFixed(6);
-        document.getElementById('live-price').textContent = '$' + priceStr;
-        document.getElementById('hero-price').textContent = '$' + priceStr;
-        if(mc > 0) {
-          const mcStr = mc >= 1000000 ? (mc/1000000).toFixed(2)+'M' : mc >= 1000 ? (mc/1000).toFixed(1)+'K' : mc.toFixed(0);
-          document.getElementById('live-mc').textContent = '$' + mcStr;
-        }
-      }
-    }
-  } catch(e) {}
-}
-fetchPrice();
-setInterval(fetchPrice, 30000);
-
-// Animated bonding curve progress
-function animateBonding() {
-  const bar = document.getElementById('progress-bar');
-  const pct = document.getElementById('bonding-pct');
-  let current = 0;
-  const target = 1.0;
-  const interval = setInterval(() => {
-    current += 0.05;
-    if(current >= target) { current = target; clearInterval(interval); }
-    bar.style.width = current + '%';
-    pct.textContent = current.toFixed(1) + '%';
-  }, 30);
-}
-setTimeout(animateBonding, 1000);
+function copyContract(){navigator.clipboard.writeText('JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(function(){var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);});}
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+function fetchPrice(){fetch('https://api.dexscreener.com/latest/dex/tokens/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(function(r){return r.json();}).then(function(d){if(d.pairs&&d.pairs.length>0){var p=d.pairs[0];var mc=p.fdv?'$'+fmt(p.fdv):'$2.3K+';document.getElementById('mcap').textContent=mc;}}).catch(function(){});}
+function fmt(n){if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toFixed(2);}
+fetchPrice();setInterval(fetchPrice,30000);
 </script>
 </body>
 </html>
