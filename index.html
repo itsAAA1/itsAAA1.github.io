@@ -349,7 +349,7 @@
     <li><a href="#buy">كيف تشتري</a></li>
     <li><a href="#community">المجتمع</a></li>
   </ul>
-  <button class="nav-btn" onclick="window.open('https://dexscreener.com/solana','_blank')">تداول الآن ⚡</button>
+  <button class="nav-btn" onclick="window.open('https://raydium.io/swap/?inputMint=sol&outputMint=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump','_blank')">تداول الآن ⚡</button>
 </nav>
 
 <!-- HERO -->
@@ -360,11 +360,20 @@
     <div class="hero-symbol">$VZLA</div>
     <p>وحش الطاقة الرقمي الذي لا يُهزم ⚡<br>عملة ميم قوية على شبكة Solana — المجتمع، السرعة، والقوة في توكن واحد</p>
     <div class="hero-btns">
-      <a href="https://dexscreener.com/solana" target="_blank" class="btn-primary">🚀 اشتري VZLA الآن</a>
+      <a href="https://raydium.io/swap/?inputMint=sol&outputMint=JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">🚀 اشتري VZLA الآن</a>
       <a href="#about" class="btn-secondary">اكتشف المشروع</a>
     </div>
   </div>
 </section>
+
+<!-- LIVE PRICE BAR -->
+<div id="price-bar" style="background:linear-gradient(90deg,#0a0a0f,#111120,#0a0a0f);border-bottom:1px solid rgba(255,215,0,0.3);padding:10px 20px;text-align:center;font-family:'Orbitron',sans-serif;font-size:0.85rem;">
+  <span style="color:#888;">VZLA/SOL:</span>
+  <span id="live-price" style="color:#FFD700;margin:0 15px;">جاري التحميل...</span>
+  <span style="color:#888;">|</span>
+  <span style="color:#00FFFF;margin:0 15px;">CA: JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
+  <button onclick="navigator.clipboard.writeText('JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(()=>{this.textContent='✅';setTimeout(()=>this.textContent='📋 نسخ CA',2000})" style="background:rgba(255,215,0,0.2);border:1px solid rgba(255,215,0,0.4);color:#FFD700;padding:4px 10px;border-radius:8px;cursor:pointer;font-size:0.75rem;">📋 نسخ CA</button>
+</div>
 
 <!-- TICKER -->
 <div class="ticker">
@@ -528,7 +537,7 @@
   <h2 style="font-family:'Orbitron',sans-serif; margin-bottom:20px; background:linear-gradient(135deg,var(--yellow),var(--electric)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">عنوان العقد الرسمي</h2>
   <div class="contract-box">
     <span class="contract-label">VZLA:</span>
-    <span class="contract-addr" id="contractAddr">تحقق من المجتمع الرسمي للعنوان</span>
+    <span class="contract-addr" id="contractAddr">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
     <button class="copy-btn" onclick="copyContract()">نسخ 📋</button>
   </div>
   <p style="color:#666; margin-top:15px; font-size:0.85rem;">⚠️ تحقق دائماً من العنوان الرسمي عبر قنواتنا الرسمية فقط</p>
@@ -556,7 +565,7 @@
       <div class="social-name">Discord</div>
       <div style="color:#888; font-size:0.85rem;">سيرفر VoltZilla</div>
     </a>
-    <a href="https://dexscreener.com/solana" target="_blank" class="social-card dex">
+    <a href="https://dexscreener.com/solana/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="social-card dex">
       <div class="social-icon">📊</div>
       <div class="social-name">DexScreener</div>
       <div style="color:#888; font-size:0.85rem;">تتبع السعر</div>
@@ -580,6 +589,29 @@ function copyContract() {
     setTimeout(() => btn.textContent = 'نسخ 📋', 2000);
   });
 }
+
+// Live Price from DexScreener
+async function fetchPrice() {
+  try {
+    const r = await fetch('https://api.dexscreener.com/latest/dex/tokens/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump');
+    const d = await r.json();
+    if(d.pairs && d.pairs.length > 0) {
+      const p = d.pairs[0];
+      const price = parseFloat(p.priceUsd);
+      const change = parseFloat(p.priceChange?.h24 || 0);
+      const color = change >= 0 ? '#00ff88' : '#ff4444';
+      const arrow = change >= 0 ? '▲' : '▼';
+      document.getElementById('live-price').innerHTML = 
+        `$${price.toFixed(8)} <span style="color:${color}">${arrow} ${Math.abs(change).toFixed(2)}%</span>`;
+      // Update stats
+      if(p.marketCap) document.querySelector('.stat-number:last-child').textContent = '$'+Math.round(p.marketCap).toLocaleString();
+    } else {
+      document.getElementById('live-price').textContent = 'السيولة قريباً 🔥';
+    }
+  } catch(e) { document.getElementById('live-price').textContent = 'السيولة قريباً 🔥'; }
+}
+fetchPrice();
+setInterval(fetchPrice, 30000);
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
