@@ -142,6 +142,7 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
 </style>
 </head>
 <body>
+<section id="verification" role="status" style="position:relative;z-index:10;background:#151c2c;border-bottom:2px solid #c99d2f;color:#fff2c1;text-align:center;padding:16px 22px;font-size:1rem;line-height:1.8">⚠️ تنويه مهم: هوية عنوان VoltZilla الرسمي وتاريخ إطلاقه وتوزيعه لا تزال قيد المطابقة مع سجلات Solana. العنوان الذي نُشر سابقًا لا يُعتمد للشراء أو التحويل. حساب X الذي أكده صاحب المشروع: <a href="https://x.com/voltzillasol1" rel="noopener noreferrer" target="_blank" style="color:#8ad6ff">@voltzillasol1</a>.</section>
 <div class="toast" id="toast">&#x2705; تم نسخ العنوان!</div>
 <nav>
   <a href="#" class="nav-logo"><img src="logo.png" alt="VoltZilla">VZLA</a>
@@ -151,13 +152,13 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
     <a href="#roadmap">خارطة الطريق</a>
     <a href="#buy">كيف تشتري</a>
     <a href="whitepaper.html">الورقة البيضاء</a>
-    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="nav-btn">اشتري الآن &#x26A1;</a>
+    <a href="#verification" target="_blank" class="nav-btn">تحقق من هوية العملة أولاً</a>
   </div>
 </nav>
 <div class="ticker">
   <div class="ticker-inner">
-    <div class="ticker-item">&#x26A1; VZLA/SOL <span>LIVE</span></div>
-    <div class="ticker-item">&#x1F525; Pump.fun LIVE NOW</div>
+    <div class="ticker-item">&#x26A1; VZLA/SOL <span>UNVERIFIED</span></div>
+    <div class="ticker-item">&#x1F525; Token verification pending</div>
     <div class="ticker-item">&#x26A1; VoltZilla <span>TO THE MOON &#x1F680;</span></div>
     <div class="ticker-item">&#x1F48E; Diamond Hands Only</div>
     <div class="ticker-item">&#x26A1; VZLA <span>HOLD STRONG</span></div>
@@ -175,13 +176,13 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
     <div class="hero-badge">مباشر على Solana — Pump.fun</div>
     <h1><span class="volt">VOLT</span><span class="zilla">ZILLA &#x26A1;</span></h1>
     <p class="hero-sub">وحش الطاقة الرقمي يصعق السوق على شبكة Solana<br>السرعة البرق، المجتمع الجبار، والمستقبل الكهربائي</p>
-    <div class="hero-contract" onclick="copyContract()">
+    <div class="hero-contract">
       <span>&#x1F4CB;</span>
-      <span>JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</span>
+      <span>عنوان التوكن المنشور سابقًا قيد المراجعة</span>
     </div>
     <div class="hero-btns">
-      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary">&#x26A1; اشتري على Pump.fun</a>
-      <a href="https://t.me/XVX_Xbot" target="_blank" class="btn-telegram">&#x1F4F1; بوت Telegram</a>
+      <a href="#verification" target="_blank" class="btn-primary">تحقق من هوية العملة أولاً</a>
+      
       <a href="whitepaper.html" class="btn-secondary">&#x1F4C4; الورقة البيضاء</a>
     </div>
     <div class="stats-bar fade-in">
@@ -233,7 +234,7 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
         <div class="token-info-card"><div class="label">الرمز</div><div class="value" style="font-size:1.3rem;color:var(--yellow);">VZLA</div></div>
         <div class="token-info-card"><div class="label">إجمالي العرض</div><div class="value">1,000,000,000</div></div>
         <div class="token-info-card"><div class="label">الضريبة</div><div class="value" style="color:var(--green);">0% / 0%</div></div>
-        <div class="token-info-card" style="grid-column:1/-1;"><div class="label">عنوان العقد</div><div class="value">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</div></div>
+        <div class="token-info-card" style="grid-column:1/-1;"><div class="label">عنوان سابق غير موثق</div><div class="value">غير معتمد للتداول</div></div>
         <div class="token-info-card"><div class="label">البلوكتشين</div><div class="value" style="color:var(--purple);">Solana (SOL)</div></div>
         <div class="token-info-card"><div class="label">المنصة</div><div class="value" style="color:var(--electric);">Pump.fun</div></div>
       </div>
@@ -261,7 +262,7 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
       <div class="buy-step"><div class="step-num">4</div><h3>اشترِ VZLA &#x26A1;</h3><p>اختر الكمية، اضغط Buy، وأكّد المعاملة في Phantom. مرحباً بك!</p></div>
     </div>
     <div style="text-align:center;margin-top:40px;">
-      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="btn-primary" style="display:inline-flex;">&#x26A1; اشتري VZLA الآن على Pump.fun</a>
+      <a href="#verification" target="_blank" class="btn-primary" style="display:inline-flex;">تحقق من هوية العملة أولاً</a>
     </div>
   </div>
 </section>
@@ -282,9 +283,9 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
   <div class="container">
     <div class="section-title fade-in"><h2>انضم للـ<span>مجتمع</span></h2><p>كن جزءاً من أقوى مجتمع ميم على Solana</p></div>
     <div class="community-grid fade-in">
-      <a href="https://x.com/VoltZillaSOL" target="_blank" class="community-card twitter"><span class="community-icon">&#x1D54F;</span><h3>Twitter / X</h3><p>تابعنا للأخبار والتحديثات اللحظية</p></a>
-      <a href="https://t.me/XVX_Xbot" target="_blank" class="community-card telegram"><span class="community-icon">&#x2708;&#xFE0F;</span><h3>Telegram Bot</h3><p>بوت ذكي للأسعار والتنبيهات الفورية</p></a>
-      <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" class="community-card pump"><span class="community-icon">&#x1F680;</span><h3>Pump.fun</h3><p>اشترِ وتداول VZLA مباشرة</p></a>
+      <a href="https://x.com/voltzillasol1" target="_blank" class="community-card twitter"><span class="community-icon">&#x1D54F;</span><h3>Twitter / X</h3><p>تابعنا للأخبار والتحديثات اللحظية</p></a>
+      
+      <a href="#verification" target="_blank" class="community-card pump"><span class="community-icon">&#x1F680;</span><h3>Pump.fun</h3><p>اشترِ وتداول VZLA مباشرة</p></a>
     </div>
   </div>
 </section>
@@ -295,18 +296,17 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
     <a href="#tokenomics">التوكنوميكس</a>
     <a href="#roadmap">خارطة الطريق</a>
     <a href="whitepaper.html">الورقة البيضاء</a>
-    <a href="https://pump.fun/coin/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank">Pump.fun</a>
-    <a href="https://x.com/VoltZillaSOL" target="_blank">Twitter</a>
-    <a href="https://t.me/XVX_Xbot" target="_blank">Telegram</a>
+    <a href="#verification" target="_blank">Pump.fun</a>
+    <a href="https://x.com/voltzillasol1" target="_blank">Twitter</a>
+    
   </div>
   <p class="footer-disclaimer">تحذير: VoltZilla (VZLA) هو توكن ميم للترفيه والمجتمع فقط. لا يمثل استثماراً أو ضماناً مالياً. تداول العملات المشفرة ينطوي على مخاطر عالية. استثمر فقط ما يمكنك تحمل خسارته.</p>
   <p class="footer-copy">&#xA9; 2025 VoltZilla (VZLA) — Built on Solana &#x26A1;</p>
 </footer>
 <script>
-function copyContract(){navigator.clipboard.writeText('JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(function(){var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);});}
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+function copyContract(){ return false; } var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
-function fetchPrice(){fetch('https://api.dexscreener.com/latest/dex/tokens/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump').then(function(r){return r.json();}).then(function(d){if(d.pairs&&d.pairs.length>0){var p=d.pairs[0];var mc=p.fdv?'$'+fmt(p.fdv):'$2.3K+';document.getElementById('mcap').textContent=mc;}}).catch(function(){});}
+function fetchPrice(){fetch('https://api.dexscreener.com/latest/dex/tokens/INVALID_PENDING_VERIFICATION').then(function(r){return r.json();}).then(function(d){if(d.pairs&&d.pairs.length>0){var p=d.pairs[0];var mc=p.fdv?'$'+fmt(p.fdv):'$2.3K+';document.getElementById('mcap').textContent=mc;}}).catch(function(){});}
 function fmt(n){if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toFixed(2);}
 fetchPrice();setInterval(fetchPrice,30000);
 </script>
