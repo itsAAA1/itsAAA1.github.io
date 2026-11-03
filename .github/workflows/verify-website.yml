@@ -1,0 +1,33 @@
+name: VoltZilla static site validation
+on:
+  pull_request:
+    paths: ['index.html', 'whitepaper.html', '.github/workflows/verify-website.yml']
+  push:
+    branches: [main]
+jobs:
+  static-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public claims, official profile and markup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'a': self.links.append(dict(attrs).get('href', ''))
+          for name in ('index.html', 'whitepaper.html'):
+              text = Path(name).read_text(encoding='utf-8')
+              p = Parser()
+              p.feed(text)
+              assert text.count('<a ') == text.count('</a>'), (name, 'Unbalanced links')
+              assert 'https://x.com/voltzillasol1' in text, (name, 'Missing owner-confirmed X')
+              assert not any('pump.fun/coin/' in u for u in p.links), (name, 'Unverified purchase link')
+              assert not any('t.me/XVX_Xbot' in u for u in p.links), (name, 'Unverified Telegram')
+              assert 'قيد التحقق' in text or 'قيد المراجعة' in text, (name, 'Missing verification notice')
+              print(name, 'OK', len(p.links), 'links')
+          PY
