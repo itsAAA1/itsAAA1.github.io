@@ -28,6 +28,12 @@ FORBIDDEN_TEXT = [
     "اضغط Buy",
     "كيف تشتري",
     "اشترِ SOL من أي بورصة",
+    "✅ المرحلة 1",
+    "إطلاق التوكن على Pump.fun",
+    "أبريل 2026",
+    "مايو 2026",
+    "65,000 TPS",
+    "HOLD STRONG",
 ]
 FORBIDDEN_REGEX = [
     (r"ضريبة (?:الشراء|البيع|المعاملات)</td><td>\s*0\s*%", "zero-tax table value"),
@@ -36,8 +42,8 @@ FORBIDDEN_REGEX = [
     (r"إجمالي العرض</td><td>\s*[\d,]{6,}", "unverified supply figure"),
 ]
 REQUIRED_TEXT = {
-    "index.html": ["قيد التحقق", "غير معتمد", "لا تشترِ", "@voltzillasol1"],
-    "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع"],
+    "index.html": ["قيد التحقق", "غير معتمد", "لا تشترِ", "@voltzillasol1", "لم يُقدَّم بعد", "بعد اعتماد العنوان"],
+    "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -76,6 +82,14 @@ def main():
                     errors.append(f"{name}: unexpected X link {href}")
                 if "pump.fun" in href:
                     errors.append(f"{name}: purchase/launch-platform link {href}")
+        if name == "index.html":
+            for old in ("&#x1F525; جاري", 'class="phase-num done"', 'class="roadmap-phase active"'):
+                if old in text:
+                    errors.append(f"{name}: outdated status {old}")
+            for platform in ("CoinGecko", "CoinMarketCap"):
+                pattern = rf'{platform} <span[^>]*></span></div><div[^>]*>لم يُقدَّم بعد</div>'
+                if not re.search(pattern, text):
+                    errors.append(f"{name}: unverified listing status for {platform}")
         for s in FORBIDDEN_TEXT:
             if s in text:
                 errors.append(f"{name}: forbidden unsupported text: {s!r}")
