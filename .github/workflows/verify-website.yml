@@ -6,7 +6,10 @@ on:
     paths:
       - index.html
       - whitepaper.html
-      - tests/check_content.py
+      - tests/**
+      - favicon.svg
+      - sitemap.xml
+      - robots.txt
       - .github/workflows/verify-website.yml
 jobs:
   static-content:
@@ -16,4 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check official claims, links and markup
-        run: python3 tests/check_content.py
+        run: |
+          python3 tests/check_content.py
+          python3 -m unittest discover -s tests -p "test_*.py" -v
