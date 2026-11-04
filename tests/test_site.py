@@ -109,6 +109,10 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('name="robots" content="noindex, follow"', paper)
         self.assertIn('class="table-scroll"', paper)
         self.assertEqual(paper.count('class="table-scroll"'), 2)
+        self.assertEqual(paper.count('data-label="'), paper.count("<td"), "Every data cell must have a mobile label")
+        self.assertIn('.table-scroll{overflow:visible}', paper)
+        self.assertIn('.wp-table td::before{content:attr(data-label)', paper)
+        self.assertIn('.wp-table tr{display:block', paper)
         self.assertNotIn("TO THE MOON", homepage)
 
     def test_sitemap_and_robots(self):

@@ -64,6 +64,17 @@
   .wp-header img { object-fit:cover; }
   @media(max-width:600px) { .wp-header{padding:40px 16px}.wp-header h1{font-size:clamp(1.6rem,7vw,2.5rem)}.wp-container{padding:32px 15px}.wp-section{margin-bottom:36px}.wp-section h2{font-size:1.4rem}.wp-table th,.wp-table td{padding:8px;font-size:.82rem} }
   @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important} }
+
+  /* At narrow widths, present data as legible labelled cards instead of clipped wide tables. */
+  @media(max-width:600px){
+    .table-scroll{overflow:visible}
+    .wp-table,.wp-table tbody{display:block;width:100%;min-width:0}
+    .wp-table tr{display:block;width:100%;margin:0 0 14px;border:1px solid rgba(255,215,0,.25);border-radius:12px;background:#171727;overflow:hidden}
+    .wp-table tr:first-child{position:absolute;clip-path:inset(50%);width:1px;height:1px;margin:-1px;overflow:hidden;white-space:nowrap}
+    .wp-table td{display:grid;grid-template-columns:minmax(90px,34%) minmax(0,1fr);align-items:start;gap:10px;width:100%;min-width:0;padding:12px;text-align:start;border:0;border-bottom:1px solid rgba(255,255,255,.1);overflow-wrap:anywhere;font-size:.9rem}
+    .wp-table td::before{content:attr(data-label);color:var(--yellow);font-weight:800;line-height:1.5}
+    .wp-table td:last-child{border-bottom:0}
+  }
 </style>
 </head>
 <body>
@@ -92,16 +103,16 @@
     <h2>2. معلومات التوكن</h2>
     <div class="table-scroll"><table class="wp-table">
       <tr><th>البند</th><th>التفاصيل</th></tr>
-      <tr><td>اسم التوكن</td><td>VoltZilla</td></tr>
-      <tr><td>الرمز</td><td>VZLA</td></tr>
-      <tr><td>الشبكة</td><td>Solana (SOL)</td></tr>
-      <tr><td>عنوان منشور سابقًا — لم تثبت صلته بمالك المشروع</td><td style="font-family:monospace; font-size:0.85rem;">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</td></tr>
-      <tr><td>إجمالي العرض</td><td>قيد التحقق</td></tr>
-      <tr><td>ضريبة الشراء</td><td>قيد التحقق</td></tr>
-      <tr><td>ضريبة البيع</td><td>قيد التحقق</td></tr>
-      <tr><td>منصة الإطلاق</td><td>غير مؤكدة</td></tr>
-      <tr><td>تاريخ مدوّن في المسودة (ليس تاريخ إنشاء العقد)</td><td>29 مارس 2026 — تاريخ في مسودة تاريخية، وليس إطلاقًا موثقًا</td></tr>
-      <tr><td>الموقع الرسمي</td><td>https://itsaaa1.github.io</td></tr>
+      <tr><td data-label="البند">اسم التوكن</td><td data-label="التفاصيل">VoltZilla</td></tr>
+      <tr><td data-label="البند">الرمز</td><td data-label="التفاصيل">VZLA</td></tr>
+      <tr><td data-label="البند">الشبكة</td><td data-label="التفاصيل">Solana (SOL)</td></tr>
+      <tr><td data-label="البند">عنوان منشور سابقًا — لم تثبت صلته بمالك المشروع</td><td data-label="التفاصيل" style="font-family:monospace; font-size:0.85rem;">JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</td></tr>
+      <tr><td data-label="البند">إجمالي العرض</td><td data-label="التفاصيل">قيد التحقق</td></tr>
+      <tr><td data-label="البند">ضريبة الشراء</td><td data-label="التفاصيل">قيد التحقق</td></tr>
+      <tr><td data-label="البند">ضريبة البيع</td><td data-label="التفاصيل">قيد التحقق</td></tr>
+      <tr><td data-label="البند">منصة الإطلاق</td><td data-label="التفاصيل">غير مؤكدة</td></tr>
+      <tr><td data-label="البند">تاريخ مدوّن في المسودة (ليس تاريخ إنشاء العقد)</td><td data-label="التفاصيل">29 مارس 2026 — تاريخ في مسودة تاريخية، وليس إطلاقًا موثقًا</td></tr>
+      <tr><td data-label="البند">الموقع الرسمي</td><td data-label="التفاصيل">https://itsaaa1.github.io</td></tr>
     </table></div>
   </div>
 
@@ -110,9 +121,9 @@
     <p>بحسب مسودة سابقة غير معتمدة، كان توكنومكس VoltZilla مصممًا على منحنى الترابط في Pump.fun.</p>
     <div class="table-scroll"><table class="wp-table">
       <tr><th>التوزيع</th><th>النسبة</th><th>الكمية</th><th>الهدف</th></tr>
-      <tr><td>Bonding Curve (Pump.fun)</td><td>غير معتمد</td><td>قيد التحقق</td><td>مسودة غير مؤكدة</td></tr>
-      <tr><td>ضريبة المعاملات</td><td>قيد التحقق</td><td>—</td><td>غير معتمدة</td></tr>
-      <tr><td>السيولة</td><td>غير مثبتة؛ يلزم سجل قفل أو حرق أصلي</td><td>—</td><td>عند اكتمال Bonding Curve</td></tr>
+      <tr><td data-label="التوزيع">Bonding Curve (Pump.fun)</td><td data-label="النسبة">غير معتمد</td><td data-label="الكمية">قيد التحقق</td><td data-label="الهدف">مسودة غير مؤكدة</td></tr>
+      <tr><td data-label="التوزيع">ضريبة المعاملات</td><td data-label="النسبة">قيد التحقق</td><td data-label="الكمية">—</td><td data-label="الهدف">غير معتمدة</td></tr>
+      <tr><td data-label="التوزيع">السيولة</td><td data-label="النسبة">غير مثبتة؛ يلزم سجل قفل أو حرق أصلي</td><td data-label="الكمية">—</td><td data-label="الهدف">عند اكتمال Bonding Curve</td></tr>
     </table></div>
     <div class="wp-highlight">
       <p><strong>ملاحظة:</strong> وصف منحنى الترابط ورد في مسودة قديمة فقط. لا يوجد إثبات لإطلاق VoltZilla عبر Pump.fun أو إضافة سيولة أو قفلها أو حرقها؛ يلزم فحص سجلات المعاملات الأصلية قبل اعتماد أي وصف.</p>
