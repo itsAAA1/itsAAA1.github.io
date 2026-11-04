@@ -3,35 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050510">
+<meta property="og:locale" content="ar_SA">
+<link rel="canonical" href="https://itsaaa1.github.io/">
 <title>VoltZilla ⚡ VZLA — وحش الطاقة الرقمي على Solana</title>
 <meta name="description" content="VoltZilla (VZLA) - مشروع ميم على Solana؛ العنوان والتوزيع والإدراجات غير معتمدة حتى التوثيق.">
 <meta property="og:title" content="VoltZilla ⚡ VZLA Token on Solana">
-<meta property="og:description" content="The most electrifying meme token on Solana. Power. Speed. Community.">
+<meta property="og:description" content="VoltZilla (VZLA) — مشروع ميم على Solana؛ عنوان التوكن والإدراجات والتوزيع لم تُعتمد بعد.">
 <meta property="og:image" content="https://itsaaa1.github.io/logo.png">
+<meta property="og:image:alt" content="VoltZilla logo">
 <meta property="og:url" content="https://itsaaa1.github.io">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@voltzillasol1">
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--yellow:#FFD700;--electric:#00FFFF;--purple:#9945FF;--green:#00FF88;--dark:#050510;--dark2:#0a0a1a;--card:#111130;--border:rgba(255,215,0,0.15);}
-*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;scroll-padding-top:85px;}
 body{background:var(--dark);color:#fff;font-family:'Tajawal',sans-serif;overflow-x:hidden;}
 body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 20%,rgba(153,69,255,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(0,255,255,0.06) 0%,transparent 50%);pointer-events:none;z-index:0;}
-nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,5,16,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 30px;display:flex;align-items:center;justify-content:space-between;}
+nav{position:sticky;top:0;width:100%;z-index:1000;background:rgba(5,5,16,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 30px;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,var(--yellow),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-logo img{width:36px;height:36px;border-radius:50%;}
 .nav-links{display:flex;gap:25px;align-items:center;}
 .nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.9rem;font-weight:600;transition:color 0.3s;}
 .nav-links a:hover{color:var(--yellow);}
 .nav-btn{background:linear-gradient(135deg,var(--yellow),#FFA500);color:#000!important;padding:8px 20px;border-radius:25px;font-weight:900!important;}
-.ticker{position:fixed;top:65px;width:100%;z-index:999;background:rgba(0,0,0,0.85);border-bottom:1px solid rgba(255,215,0,0.1);padding:6px 0;overflow:hidden;}
+.ticker{position:relative;top:auto;width:100%;z-index:999;background:rgba(0,0,0,0.85);border-bottom:1px solid rgba(255,215,0,0.1);padding:6px 0;overflow:hidden;}
 .ticker-inner{display:flex;gap:60px;animation:ticker 30s linear infinite;white-space:nowrap;}
 .ticker-item{font-size:0.8rem;font-family:'Orbitron',sans-serif;color:var(--yellow);display:flex;align-items:center;gap:8px;}
 .ticker-item span{color:var(--green);}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:130px 20px 80px;position:relative;z-index:1;}
+.hero{min-height:calc(100svh - 92px);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px 60px;position:relative;z-index:1;}
 .hero-content{max-width:900px;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(153,69,255,0.15);border:1px solid rgba(153,69,255,0.4);padding:6px 18px;border-radius:25px;font-size:0.8rem;color:#c084fc;margin-bottom:25px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
 .hero-badge::before{content:'●';color:var(--green);animation:blink 2s infinite;}
@@ -40,7 +46,7 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,5,16,0.95);ba
 .hero h1 .volt{background:linear-gradient(135deg,var(--yellow),#FFA500,var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;}
 .hero h1 .zilla{color:#fff;display:block;}
 .hero-sub{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,0.7);margin-bottom:15px;line-height:1.7;}
-.hero-contract{display:inline-flex;align-items:center;gap:10px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);padding:10px 20px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:0.65rem;color:var(--yellow);margin:20px 0 35px;cursor:pointer;transition:background 0.3s;word-break:break-all;text-align:center;}
+.hero-contract{display:inline-flex;align-items:center;gap:10px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);padding:10px 20px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:0.65rem;color:var(--yellow);margin:20px 0 35px;transition:background 0.3s;word-break:break-all;text-align:center;}
 .hero-contract:hover{background:rgba(255,215,0,0.15);}
 .hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;}
 .btn-primary{background:linear-gradient(135deg,var(--yellow),#FFA500);color:#000;font-weight:900;padding:14px 35px;border-radius:50px;text-decoration:none;font-size:1rem;transition:transform 0.2s,box-shadow 0.3s;display:flex;align-items:center;gap:8px;border:none;cursor:pointer;}
@@ -106,7 +112,7 @@ section{padding:80px 20px;position:relative;z-index:1;}
 .buy-step h3{font-size:1rem;font-weight:700;color:var(--yellow);margin-bottom:10px;}
 .buy-step p{color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.6;}
 .community-bg{background:rgba(255,255,255,0.02);}
-.community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;}
+.community-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:25px;}
 .community-card{border-radius:20px;padding:40px 30px;text-align:center;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;display:block;}
 .community-card:hover{transform:translateY(-8px);}
 .community-card.twitter{background:linear-gradient(135deg,rgba(0,0,0,0.6),rgba(29,161,242,0.1));border:1px solid rgba(29,161,242,0.3);}
@@ -123,7 +129,7 @@ section{padding:80px 20px;position:relative;z-index:1;}
 .listing-badge .name{font-family:'Orbitron',sans-serif;font-size:0.9rem;font-weight:700;color:var(--yellow);margin-bottom:5px;}
 .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px;}
 .status-live{background:var(--green);box-shadow:0 0 8px var(--green);}
-.status-pending{background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation:blink 2s infinite;}
+.status-pending{background:#9ba9bf;box-shadow:none;animation:none;}
 footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50px 20px 30px;text-align:center;position:relative;z-index:1;}
 .footer-logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--yellow),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:15px;}
 .footer-links{display:flex;gap:25px;justify-content:center;flex-wrap:wrap;margin-bottom:25px;}
@@ -131,19 +137,34 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
 .footer-links a:hover{color:var(--yellow);}
 .footer-disclaimer{color:rgba(255,255,255,0.3);font-size:0.8rem;max-width:700px;margin:0 auto;line-height:1.7;}
 .footer-copy{color:rgba(255,255,255,0.4);font-size:0.85rem;margin-top:20px;}
-.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in{opacity:1;transform:none;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:12px 25px;border-radius:30px;font-weight:700;font-size:0.9rem;opacity:0;transition:opacity 0.3s;z-index:9999;pointer-events:none;}
 .toast.show{opacity:1;}
 @media(max-width:900px){.nav-links{display:none;}.about-grid,.tokenomics-grid{grid-template-columns:1fr;}.features-grid,.roadmap-timeline,.buy-steps{grid-template-columns:1fr 1fr;}.community-grid{grid-template-columns:1fr;}.stats-bar{grid-template-columns:1fr 1fr;}.token-info{grid-template-columns:1fr;}}
 @media(max-width:600px){.features-grid,.roadmap-timeline,.buy-steps{grid-template-columns:1fr;}.hero h1{font-size:2.2rem;}.hero-btns{flex-direction:column;align-items:center;}}
+
+/* Always-available navigation and keyboard accessibility */
+.skip-link{position:absolute;top:-90px;right:12px;z-index:1200;padding:12px 18px;background:var(--yellow);color:#050510;border-radius:9px;font-weight:900;text-decoration:none}
+.skip-link:focus{top:8px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--electric);outline-offset:4px}
+.mobile-nav{display:none;position:relative;z-index:1002}
+.mobile-nav summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;color:#050510;background:var(--yellow);border-radius:9px;font-weight:900}
+.mobile-nav summary::-webkit-details-marker{display:none}
+.mobile-nav-panel{position:absolute;top:calc(100% + 8px);left:0;width:min(85vw,330px);max-height:75vh;overflow-y:auto;background:#12152b;border:1px solid rgba(255,215,0,.45);box-shadow:0 14px 36px rgba(0,0,0,.6);border-radius:12px;padding:8px;display:grid;gap:4px}
+.mobile-nav-panel a{display:block;color:#fff;text-decoration:none;padding:13px 12px;border-radius:8px;font-size:1rem;font-weight:700}
+.mobile-nav-panel a:hover,.mobile-nav-panel a:focus-visible{background:rgba(255,215,0,.15);color:var(--yellow)}
+@media(max-width:900px){.mobile-nav{display:block}nav{padding:10px 16px}.nav-logo{font-size:1.25rem}}
+@media(max-width:600px){.hero{min-height:auto;padding:75px 16px 45px}.stats-bar{margin-bottom:25px}.stat-item{padding:16px 10px}.stat-value{font-size:1.2rem}.ticker-inner{animation:none;flex-wrap:wrap;justify-content:center;gap:8px 16px;white-space:normal}.ticker-item:nth-child(n+7){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
 <section id="verification" role="status" style="position:relative;z-index:10;background:#151c2c;border-bottom:2px solid #c99d2f;color:#fff2c1;text-align:center;padding:16px 22px;font-size:1rem;line-height:1.8">⚠️ تنويه مهم: هوية عنوان VoltZilla الرسمي وتاريخ إطلاقه وتوزيعه لا تزال قيد المطابقة مع سجلات Solana. العنوان الذي نُشر سابقًا لا يُعتمد للشراء أو التحويل. حساب X الذي أكده صاحب المشروع: <a href="https://x.com/voltzillasol1" rel="noopener noreferrer" target="_blank" style="color:#8ad6ff">@voltzillasol1</a>.</section>
 
-<nav>
-  <a href="#" class="nav-logo"><img src="logo.png" alt="VoltZilla">VZLA</a>
+<nav aria-label="التنقل الرئيسي">
+  <a href="#verification" class="nav-logo"><img src="logo.png" width="36" height="36" alt="VoltZilla">VZLA</a>
   <div class="nav-links">
     <a href="#about">عن التوكن</a>
     <a href="#tokenomics">التوكنوميكس</a>
@@ -152,7 +173,19 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
     <a href="whitepaper.html">الورقة البيضاء</a>
     <a href="#verification" class="nav-btn">تحقق من هوية العملة أولاً</a>
   </div>
+  <details class="mobile-nav">
+    <summary aria-label="فتح قائمة التنقل">☰ القائمة</summary>
+    <div class="mobile-nav-panel">
+      <a href="#about">عن التوكن</a>
+      <a href="#tokenomics">التوكنوميكس</a>
+      <a href="#roadmap">خارطة الطريق</a>
+      <a href="#buy">قبل أي شراء</a>
+      <a href="whitepaper.html">الورقة البيضاء</a>
+      <a href="#verification">التحقق من العنوان</a>
+    </div>
+  </details>
 </nav>
+<main id="main-content">
 <div class="ticker">
   <div class="ticker-inner">
     <div class="ticker-item">&#x26A1; VZLA/SOL <span>UNVERIFIED</span></div>
@@ -200,7 +233,7 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
         <p>مشروع توكن ميم مجتمعي قيد التوثيق. نسبة الضريبة وصلاحيات العقد وتوزيع التوكنات قيد التحقق ولم تُعتمد بعد، ولا توجد وعود بمكاسب أو أرباح.</p>
         <p>سننشر أي معلومة عن العقد أو التوزيع فقط بعد مطابقتها مع سجلات Solana. لا يوجد حاليًا توزيع معتمد، ولا يمكن تأكيد ملكية التوكنات.</p>
       </div>
-      <div class="about-img"><img src="logo.png" alt="VoltZilla Logo" class="logo-glow"></div>
+      <div class="about-img"><img src="logo.png" width="280" height="280" decoding="async" loading="lazy" alt="شعار VoltZilla" class="logo-glow"></div>
     </div>
   </div>
 </section>
@@ -281,12 +314,13 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
   <div class="container">
     <div class="section-title fade-in"><h2>انضم للـ<span>مجتمع</span></h2><p>تواصل معنا عبر حساب X المعتمد فقط</p></div>
     <div class="community-grid fade-in">
-      <a href="https://x.com/voltzillasol1" target="_blank" class="community-card twitter"><span class="community-icon">&#x1D54F;</span><h3>Twitter / X</h3><p>تابعنا للأخبار والتحديثات اللحظية</p></a>
+      <a href="https://x.com/voltzillasol1" target="_blank" class="community-card twitter" rel="noopener noreferrer"><span class="community-icon">&#x1D54F;</span><h3>Twitter / X</h3><p>تابعنا للأخبار والتحديثات اللحظية</p></a>
       
       <a href="#verification" class="community-card pump"><span class="community-icon">&#x1F680;</span><h3>التحقق من العنوان</h3><p>رابط التداول غير معتمد حتى إثبات هوية العقد</p></a>
     </div>
   </div>
 </section>
+</main>
 <footer>
   <div class="footer-logo">&#x26A1; VoltZilla</div>
   <div class="footer-links">
@@ -295,16 +329,20 @@ footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:50p
     <a href="#roadmap">خارطة الطريق</a>
     <a href="whitepaper.html">الورقة البيضاء</a>
     <a href="#verification">التحقق من العنوان</a>
-    <a href="https://x.com/voltzillasol1" target="_blank">Twitter</a>
+    <a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer">Twitter</a>
     
   </div>
   <p class="footer-disclaimer">تحذير: VoltZilla (VZLA) هو توكن ميم للترفيه والمجتمع فقط. لا يمثل استثماراً أو ضماناً مالياً. تداول العملات المشفرة ينطوي على مخاطر عالية. استثمر فقط ما يمكنك تحمل خسارته.</p>
-  <p class="footer-copy">&#xA9; 2025 VoltZilla (VZLA) — Built on Solana &#x26A1;</p>
+  <p class="footer-copy">&#xA9; 2025–2026 VoltZilla (VZLA) — Built on Solana &#x26A1;</p>
 </footer>
 <script>
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
-// Live price deliberately disabled until the official mint is verified.
+// Native details navigation works without JavaScript; this only closes it on selection.
+const mobileMenu = document.querySelector('.mobile-nav');
+if (mobileMenu) {
+  mobileMenu.addEventListener('click', event => {
+    if (event.target.closest('a')) mobileMenu.open = false;
+  });
+}
 </script>
 </body>
 </html>
