@@ -114,6 +114,11 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('.wp-table td::before{content:attr(data-label)', paper)
         self.assertIn('.wp-table tr{display:block', paper)
         self.assertNotIn("TO THE MOON", homepage)
+        self.assertIn("DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", homepage)
+        self.assertIn("DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", paper)
+        self.assertIn("صلاحية سك توكنات إضافية", homepage)
+        self.assertIn("سلطة سك مزيد من العملات: مفعّلة", paper)
+        self.assertIn("توكن مختلف بمعروض يقارب المليار", paper)
 
     def test_sitemap_and_robots(self):
         sitemap = ET.parse(ROOT / "sitemap.xml")
