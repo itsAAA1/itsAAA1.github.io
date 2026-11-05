@@ -129,6 +129,17 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn("Sitemap: https://itsaaa1.github.io/sitemap.xml", robots)
         self.assertNotIn("Disallow: /whitepaper.html", robots)
 
+    def test_standard_spl_fees_and_historic_mint(self):
+        homepage = self.pages["index.html"][0]
+        paper = self.pages["whitepaper.html"][0]
+        self.assertIn("رسوم النقل والتداول", homepage)
+        self.assertIn("لا توجد خاصية رسوم نقل مدمجة", homepage)
+        self.assertIn("لا توجد سلطة لتجميد حسابات الحاملين", paper)
+        self.assertIn("برنامج SPL القياسي لا يدعم فرض رسوم تحويل مدمجة", paper)
+        self.assertIn("27 أكتوبر 2024", paper)
+        self.assertNotIn("لا يوجد إثبات لإطلاق VoltZilla عبر Pump.fun", paper)
+        self.assertNotIn("ضريبة الشراء</td>", paper)
+
 
 if __name__ == "__main__":
     unittest.main()
