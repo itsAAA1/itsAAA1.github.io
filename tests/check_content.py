@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html")
+PAGES = ("index.html", "whitepaper.html", "status.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
 FORBIDDEN_SOCIAL = ("t.me/", "telegram.me/", "discord.gg/", "discord.com/invite", "twitter.com/", "instagram.com/", "youtube.com/", "facebook.com/")
 
@@ -44,6 +44,7 @@ FORBIDDEN_REGEX = [
 REQUIRED_TEXT = {
     "index.html": ["قيد التحقق", "غير معتمد", "لا تشترِ", "@voltzillasol1", "لم يُقدَّم بعد", "بعد اعتماد العنوان"],
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
+    "status.html": ["لم يتم اعتماد عنوان توكن رسمي نهائي", "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -100,7 +101,7 @@ def main():
             if s not in text:
                 errors.append(f"{name}: required text missing: {s!r}")
         if OLD_ADDRESS in text:
-            if name != "whitepaper.html" or "لم تثبت صلته بمالك المشروع" not in text:
+            if name not in ("whitepaper.html", "status.html") or "لم تثبت صلته بمالك المشروع" not in text:
                 errors.append(f"{name}: old address present without unverified label")
         print(f"{name}: {len(p.hrefs)} links checked")
     # The branding assets must remain in place.
