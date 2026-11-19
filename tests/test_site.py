@@ -8,7 +8,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html")
 
 
 class Document(HTMLParser):
@@ -127,6 +127,8 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn("https://itsaaa1.github.io/", urls)
         self.assertIn("https://itsaaa1.github.io/status.html", urls)
         self.assertIn("https://itsaaa1.github.io/whitepaper-current.html", urls)
+        for name in ("faq.html", "support.html", "legal.html"):
+            self.assertIn("https://itsaaa1.github.io/" + name, urls)
         self.assertNotIn("https://itsaaa1.github.io/whitepaper.html", urls)
         robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
         self.assertIn("Sitemap: https://itsaaa1.github.io/sitemap.xml", robots)
