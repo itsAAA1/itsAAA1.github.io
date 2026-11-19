@@ -8,7 +8,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "whitepaper.html")
+PAGES = ("index.html", "whitepaper.html", "status.html")
 
 
 class Document(HTMLParser):
@@ -124,10 +124,21 @@ class SiteIntegrity(unittest.TestCase):
         sitemap = ET.parse(ROOT / "sitemap.xml")
         urls = [n.text for n in sitemap.iter() if n.tag.endswith("loc")]
         self.assertIn("https://itsaaa1.github.io/", urls)
+        self.assertIn("https://itsaaa1.github.io/status.html", urls)
         self.assertNotIn("https://itsaaa1.github.io/whitepaper.html", urls)
         robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
         self.assertIn("Sitemap: https://itsaaa1.github.io/sitemap.xml", robots)
         self.assertNotIn("Disallow: /whitepaper.html", robots)
+
+    def test_separate_mint_status_page(self):
+        status = self.pages["status.html"][0]
+        self.assertIn("لم يتم اعتماد عنوان توكن رسمي نهائي", status)
+        self.assertIn("لا تشترِ", status)
+        self.assertIn("لم تثبت صلته بمالك المشروع", status)
+        self.assertIn("2026", status)
+        self.assertIn("https://solscan.io/token/DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", status)
+        self.assertIn("https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump", status)
+        self.assertIn("href=\"status.html\"", self.pages["index.html"][0])
 
     def test_standard_spl_fees_and_historic_mint(self):
         homepage = self.pages["index.html"][0]
