@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101025">
+<meta name="description" content="الورقة البيضاء التقنية المحدّثة لـ VoltZilla (VZLA) على Solana وPump.fun: هوية العقد، التوكنوميكس الفعلية، المخاطر وخطة التطوير.">
+<link rel="canonical" href="https://itsaaa1.github.io/whitepaper-current.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>VoltZilla (VZLA) — الورقة البيضاء المحدّثة | 2026</title>
+<style>
+:root{color-scheme:dark;--b:#09091a;--c:#18182e;--t:#f8f8ff;--m:#c9c9dc;--a:#ffd978;--l:#41415f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--b);color:var(--t);font:16px/1.9 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:#94edf3;text-underline-offset:3px}a:focus-visible{outline:2px solid var(--a);outline-offset:4px}
+.skip{position:absolute;top:-100px}.skip:focus{top:8px;right:12px;background:var(--a);color:#000;padding:6px}
+header,footer{padding:20px max(22px,calc((100vw - 920px)/2));background:var(--c);border-bottom:1px solid var(--l)}
+header a{display:inline-flex;gap:9px;align-items:center;text-decoration:none;font-weight:700}
+main{max-width:920px;margin:auto;padding:34px 20px 70px}h1{color:var(--a);font-size:clamp(1.65rem,5vw,2.8rem);line-height:1.35}h2{font-size:1.4rem;color:var(--a);margin-top:40px}h3{font-size:1.15rem}
+section{padding-bottom:20px;border-bottom:1px solid var(--l)}p{margin:13px 0}code{display:block;direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere;background:#24243d;border-radius:7px;padding:10px;font-size:.89rem}
+table{width:100%;border-collapse:collapse;font-size:.93rem}th,td{text-align:right;padding:12px;vertical-align:top;border-bottom:1px solid var(--l)}th{color:var(--a)}.table-scroll{overflow-x:auto}
+.notice{background:#2c2220;border-inline-start:5px solid var(--a);border-radius:10px;padding:16px}
+aside{margin-top:22px;background:var(--c);padding:20px;border-radius:12px}ul{padding-inline-start:25px}
+footer{border-top:1px solid var(--l);text-align:center;color:var(--m)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main-content">تخطي للمحتوى</a>
+<header><a href="index.html"><img src="logo.png" width="40" height="40" alt="شعار VoltZilla"> VoltZilla / VZLA</a> · <a href="status.html">حالة التحقق</a></header>
+<main id="main-content">
+<h1>VoltZilla (VZLA) — الورقة البيضاء التقنية المحدّثة</h1>
+<p><strong>الإصدار 1.0 — 20 نوفمبر 2026.</strong> تصف هذه النسخة الحقائق القابلة للتحقق ولا تنشئ التزامات تمويلية أو وعدًا بإدراج أو عائد. الأرقام مرتبطة بلحظة الفحص ولا تعكس بيانات السوق دائمًا.</p>
+<p class="notice"><strong>التمييز المهم:</strong> التوكن المرصود مرتبط بمحفظة منشئ المشروع على Pump.fun، لكن لا يوجد بعد توقيع حديث يثبت سيطرة الشخص على المفتاح. يوجد توكنان آخران يحملان VZLA لا يجوز الخلط بينهما وبين هذا العقد. لا تشترِ بالاعتماد على الاسم أو الشعار فقط.</p>
+<section id="overview"><h2>1. ملخص المشروع</h2>
+<p>VoltZilla (VZLA) توكن ميم/مجتمع على شبكة Solana، أُنشئ في Pump.fun يوم <strong>4 أبريل 2026</strong>. الاسم مستوحى من موضوع الكهرباء والطاقة؛ لا يمنح حامله أسهمًا أو أرباحًا مضمونة أو حقوق استرداد بعملة ثابتة. لا توجد خدمة مدفوعة أو آلية فائدة مضمونة مثبتة في المشروع.</p>
+</section>
+<section id="contract"><h2>2. الهوية والعقد</h2>
+<div class="table-scroll"><table>
+<thead><tr><th scope="col">المعلومة</th><th scope="col">القيمة المرصودة</th></tr></thead>
+<tbody>
+<tr><th scope="row">Mint address</th><td><code>GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump</code></td></tr>
+<tr><th scope="row">برنامج التوكن</th><td>Solana Token-2022 — <code>TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb</code></td></tr>
+<tr><th scope="row">الخانات العشرية</th><td>6</td></tr>
+<tr><th scope="row">معاملة الإنشاء</th><td><a href="https://solscan.io/tx/2frB6tsVzkEyPuteLX35fSbcKvq16fj3UbwD5pyQnhm3Mhgbutc3FGrB64tFacggnP1dkrC37EL26hsKZKQVC23U" target="_blank" rel="noopener noreferrer">التحقق من السجل الأصلي</a></td></tr>
+<tr><th scope="row">منشئ التوكن</th><td><code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code></td></tr>
+<tr><th scope="row">سلطة سك / تجميد</th><td>كلاهما ملغى/غير موجود وقت فحص 19 نوفمبر 2026</td></tr>
+<tr><th scope="row">المعروض المرصود</th><td>1,007,005,921.840554 VZLA (لقطة 19 نوفمبر، وليس تعهدًا بسقف ثابت تاريخيًا)</td></tr>
+</tbody></table></div>
+<p><a href="https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump" target="_blank" rel="noopener noreferrer">افتح صفحة Pump.fun الأصلية</a>؛ <a href="status.html">اعرف حالة التحقق والمخاطر الحالية</a>.</p></section>
+<section id="tokenomics"><h2>3. التوزيع الحقيقي بدل نسب غير منفذة</h2>
+<p>هذا التوكن أُنشئ على منحنى Pump.fun، وليس عن طريق توزيع ثابت مكوّن مسبقًا من 40% للمجتمع و30% للسيولة و20% للتطوير و10% للتسويق. هذه النسب ظهرت في مسودات قديمة <strong>ولا تمثل الواقع على السلسلة</strong>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>الحساب وقت الرصد</th><th>الوحدات</th><th>النسبة من المعروض المرصود</th></tr></thead><tbody>
+<tr><th scope="row">حساب منحنى Pump.fun</th><td>1,000,000,000</td><td>≈99.3043% (رصيد منصة/منحنى وليس حصة مملوكة لشخص)</td></tr>
+<tr><th scope="row">حساب محفظة المنشئ</th><td>7,005,921.840554</td><td>≈0.6957%</td></tr></tbody></table></div>
+<p>هذا وصف أرصدة عامة بتاريخ محدد، وليس تخصيصًا تعاقديًا دائمًا أو إثباتًا لقفل LP أو ضمانًا لثبات التوزيع. أي عمليات خزينة أو مكافآت مستقبلية تتطلب قرارات وعمليات منشورة قابلة للتتبع.</p></section>
+<section id="mechanics"><h2>4. آلية Pump.fun والسيولة</h2>
+<p>العملة موجودة على Pump.fun لكن <strong>منحنى الإطلاق لم يتخرج</strong> وقت الزيارة. أكدت صفحة المنصة نسبة تقدم 0%، وحجم تداول 24 ساعة بقيمة صفر دولار، ونحو 0.07 SOL في خانة سيولة الواجهة. هذه معلومات تتغير ولا تعني أن صفقات كبيرة قابلة للتنفيذ بالسعر نفسه.</p>
+<p>أظهرت المنصة ميزة Mayhem وخصائص شراء/حرق تلقائي، لكن انتهاء وضع Mayhem لا يساوي تخرج العملة من المنحنى. لم تُثبت صفقات شراء/حرق منفذة بتوزيعات أرباح للمستخدمين. لا ننسب وجود مجمع Raydium مستقل إلى هذا العقد من دون رابط pool ومعاملة إنشاء أصلية.</p></section>
+<section id="risk"><h2>5. المخاطر والأمان</h2>
+<ul><li>السيولة منخفضة جدًا، وانعدام حجم التداول اليومي يعني أن الخروج من المراكز قد يكون صعبًا.</li>
+<li>توكن ميم عالي التقلب، وسعر الواجهة النظري لا يضمن إمكانية الشراء أو البيع بالحجم المطلوب.</li>
+<li>توجد توكنات تحمل الاسم والرمز نفسيهما؛ يجب مطابقة عنوان العقد الكامل وبرنامجه قبل أي استخدام.</li>
+<li>بيانات حساب X المكتوبة على العقد تختلف عن حساب المشروع الذي ذكره المالك؛ هذا اختلاف يحتاج حسمًا.</li>
+<li>اختبارات GitHub والفحص الآلي ليست شهادة تدقيق أمني مستقلة أو موافقة نظامية.</li>
+<li>البرمجيات والمحافظ والتوقيع والتصيد واحتيال الروابط قد تسبب فقدانًا دائمًا للأصول.</li></ul></section>
+<section id="development"><h2>6. خارطة طريق عملية وغير مضمونة</h2>
+<p><strong>الموجود:</strong> عقد منشأ فعليًا، موقع مجاني على GitHub Pages، ملفات مشروع مفتوحة ومراقبة تقنية عامة، وثيقة تمييز العقود.</p>
+<p><strong>قيد الاستكمال:</strong> إثبات سيطرة صاحب المحفظة، توحيد الحسابات الاجتماعية، خطة مجتمع واتصال معتمدة، تحديث سجلات الإدراج ببيانات حقيقية، تقييم قانوني قبل أي طرح استثماري، والنظر في السيولة وفق تكلفتها ومخاطرها.</p>
+<p><strong>إدراجات CoinGecko وCoinMarketCap:</strong> ليست موافقات ولا وعودًا؛ الطلبات الرسمية تبقى خاضعة لقواعد كل منصة ولم تُقدَّم بعد حسب سجل المشروع.</p></section>
+<section id="legal"><h2>7. إخلاء المسؤولية والتنظيم</h2>
+<p>هذه ورقة تعريف فنية وليست نشرة طرح أوراق مالية أو ترخيصًا أو ضمانًا للعائد أو توصية استثمارية. لم يصدر تقييم نظامي مستقل من مكتب قانوني مرخّص، ولم تُنجز شهادة مراجعة أمنية مستقلة. لا يجوز وصف المشروع بأنه معتمد حكوميًا أو مدرج لدى جهة ليست لديه موافقة منها. قبل دعوة الجمهور للاستثمار يجب تحديد الوضع القانوني للجهة المصدرة والأنشطة والتسويق والالتزامات ذات الصلة في الاختصاصات المعنية.</p></section>
+<aside><strong>مصادر فنية:</strong> <a href="https://solana.com/docs/tokens" target="_blank" rel="noopener noreferrer">Solana Tokens</a> · <a href="https://pump.fun/docs/fees" target="_blank" rel="noopener noreferrer">Pump.fun Fees</a> · <a href="https://github.com/itsAAA1/VoltZilla/blob/main/docs/PUMPFUN_PRIMARY_AUDIT_2026-11-20.md" target="_blank" rel="noopener noreferrer">تقرير التدقيق ومصادر الأرقام</a> · <a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer">حساب X الذي ذكره صاحب المشروع</a>.</aside>
+</main>
+<footer>© 2026 VoltZilla — نسخة فنية بتاريخ 20 نوفمبر 2026 · <a href="whitepaper.html">الورقة البيضاء القديمة (للتاريخ فقط)</a></footer>
+</body></html>

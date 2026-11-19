@@ -6,6 +6,7 @@ on:
     paths:
       - index.html
       - whitepaper.html
+      - whitepaper-current.html
       - status.html
       - tests/**
       - favicon.svg
