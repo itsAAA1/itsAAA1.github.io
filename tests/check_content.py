@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
@@ -46,6 +46,9 @@ REQUIRED_TEXT = {
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
     "status.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
     "whitepaper-current.html": [PRIMARY_MINT, "Token-2022", "4 أبريل 2026", "مخاطر", "لم تُقدَّم بعد"],
+    "faq.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا توجد موافقة"],
+    "support.html": ["github.com/itsAAA1/VoltZilla/issues/new", "رسالة واضحة غير مالية"],
+    "legal.html": ["وزارة المالية", "2018", "2019", "لم يُنجز رأي قانوني مستقل"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -102,7 +105,7 @@ def main():
             if s not in text:
                 errors.append(f"{name}: required text missing: {s!r}")
         if OLD_ADDRESS in text:
-            if name not in ("whitepaper.html", "status.html") or "لم تثبت صلته بمالك المشروع" not in text:
+            if name not in ("whitepaper.html", "status.html", "faq.html") or "لم تثبت صلته بمالك المشروع" not in text:
                 errors.append(f"{name}: old address present without unverified label")
         print(f"{name}: {len(p.hrefs)} links checked")
     # The branding assets must remain in place.
