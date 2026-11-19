@@ -8,7 +8,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "whitepaper.html", "status.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html")
 
 
 class Document(HTMLParser):
@@ -114,9 +114,10 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('.wp-table td::before{content:attr(data-label)', paper)
         self.assertIn('.wp-table tr{display:block', paper)
         self.assertNotIn("TO THE MOON", homepage)
-        self.assertIn("DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", homepage)
+        self.assertIn("GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", homepage)
         self.assertIn("DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", paper)
         self.assertIn("صلاحية سك توكنات إضافية", homepage)
+        self.assertIn("غير موجودة (Token-2022)", homepage)
         self.assertIn("سلطة سك مزيد من العملات: مفعّلة", paper)
         self.assertIn("توكن مختلف بمعروض يقارب المليار", paper)
 
@@ -125,6 +126,7 @@ class SiteIntegrity(unittest.TestCase):
         urls = [n.text for n in sitemap.iter() if n.tag.endswith("loc")]
         self.assertIn("https://itsaaa1.github.io/", urls)
         self.assertIn("https://itsaaa1.github.io/status.html", urls)
+        self.assertIn("https://itsaaa1.github.io/whitepaper-current.html", urls)
         self.assertNotIn("https://itsaaa1.github.io/whitepaper.html", urls)
         robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
         self.assertIn("Sitemap: https://itsaaa1.github.io/sitemap.xml", robots)
@@ -132,19 +134,30 @@ class SiteIntegrity(unittest.TestCase):
 
     def test_separate_mint_status_page(self):
         status = self.pages["status.html"][0]
-        self.assertIn("لم يتم اعتماد عنوان توكن رسمي نهائي", status)
+        self.assertIn("عقد Pump.fun مرتبط بمحفظة منشئ المشروع", status)
         self.assertIn("لا تشترِ", status)
         self.assertIn("لم تثبت صلته بمالك المشروع", status)
         self.assertIn("2026", status)
+        self.assertIn("https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", status)
         self.assertIn("https://solscan.io/token/DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", status)
         self.assertIn("https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump", status)
         self.assertIn("href=\"status.html\"", self.pages["index.html"][0])
+
+    def test_current_whitepaper_and_creator_link(self):
+        paper = self.pages["whitepaper-current.html"][0]
+        self.assertIn("GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", paper)
+        self.assertIn("GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD", paper)
+        self.assertIn("Token-2022", paper)
+        self.assertIn("1,007,005,921.840554", paper)
+        self.assertIn("خطة", paper)
+        self.assertIn('rel="canonical" href="https://itsaaa1.github.io/whitepaper-current.html"', paper)
+        self.assertIn('href="whitepaper-current.html"', self.pages["index.html"][0])
 
     def test_standard_spl_fees_and_historic_mint(self):
         homepage = self.pages["index.html"][0]
         paper = self.pages["whitepaper.html"][0]
         self.assertIn("رسوم النقل والتداول", homepage)
-        self.assertIn("لا توجد خاصية رسوم نقل مدمجة", homepage)
+        self.assertIn("Token-2022", homepage)
         self.assertIn("لا توجد سلطة لتجميد حسابات الحاملين", paper)
         self.assertIn("برنامج SPL القياسي لا يدعم فرض رسوم تحويل مدمجة", paper)
         self.assertIn("27 أكتوبر 2024", paper)
