@@ -10,8 +10,10 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html", "status.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
+PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
+PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 FORBIDDEN_SOCIAL = ("t.me/", "telegram.me/", "discord.gg/", "discord.com/invite", "twitter.com/", "instagram.com/", "youtube.com/", "facebook.com/")
 
 # Unsupported assertions that must not reappear (token address/tax/distribution are unconfirmed).
@@ -30,7 +32,6 @@ FORBIDDEN_TEXT = [
     "اشترِ SOL من أي بورصة",
     "✅ المرحلة 1",
     "إطلاق التوكن على Pump.fun",
-    "أبريل 2026",
     "مايو 2026",
     "65,000 TPS",
     "HOLD STRONG",
@@ -38,13 +39,13 @@ FORBIDDEN_TEXT = [
 FORBIDDEN_REGEX = [
     (r"ضريبة (?:الشراء|البيع|المعاملات)</td><td>\s*0\s*%", "zero-tax table value"),
     (r'stat-number">\s*0\s*%', "zero-tax stat"),
-    (r"(?:https?://)?(?:www\.)?pump\.fun/coin/", "pump.fun coin link"),
     (r"إجمالي العرض</td><td>\s*[\d,]{6,}", "unverified supply figure"),
 ]
 REQUIRED_TEXT = {
-    "index.html": ["قيد التحقق", "غير معتمد", "لا تشترِ", "@voltzillasol1", "لم يُقدَّم بعد", "بعد اعتماد العنوان"],
+    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "لم يُقدَّم بعد"],
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
-    "status.html": ["لم يتم اعتماد عنوان توكن رسمي نهائي", "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
+    "status.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
+    "whitepaper-current.html": [PRIMARY_MINT, "Token-2022", "4 أبريل 2026", "مخاطر", "لم تُقدَّم بعد"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -81,8 +82,8 @@ def main():
                     errors.append(f"{name}: unconfirmed social link {href}")
                 if "x.com/" in href and href.rstrip("/") != OFFICIAL_X:
                     errors.append(f"{name}: unexpected X link {href}")
-                if "pump.fun" in href:
-                    errors.append(f"{name}: purchase/launch-platform link {href}")
+                if "pump.fun/coin/" in href and href.rstrip("/") != PUMPFUN_COIN:
+                    errors.append(f"{name}: unrelated Pump.fun token contract link {href}")
         if name == "index.html":
             for old in ("&#x1F525; جاري", 'class="phase-num done"', 'class="roadmap-phase active"'):
                 if old in text:
