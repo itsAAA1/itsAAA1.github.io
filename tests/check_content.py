@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html", "wallet-check.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
@@ -54,6 +54,7 @@ REQUIRED_TEXT = {
     "roadmap.html": ["المرحلة 1", "إثبات", "السيولة", "MVX مشروع مستقل"],
     "verify-wallet.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD", "crypto.subtle.verify"],
     "verify-spl-wallet.html": ["DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", "28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4", "crypto.subtle.verify"],
+    "wallet-check.html": ["GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD", "28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4", "accountChanged"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -102,6 +103,9 @@ def main():
                 errors.append(f"{name}: signing challenge must not have transfer or key export methods")
             if "crypto.randomUUID()" not in text or "crypto.subtle.verify" not in text or "provider.signMessage" not in text:
                 errors.append(f"{name}: secure fresh challenge / signature verification missing")
+        if name == "wallet-check.html":
+            if any(x in text for x in ("sendTransaction", "signTransaction", "signMessage(", "secretKey", "seedPhrase", "localStorage", "fetch(")):
+                errors.append("wallet-check.html: unexpected signing or private-data operation")
         if name == "wallet.html":
             if not all(x in text for x in ("getBalance", "getTokenAccountsByOwner", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")):
                 errors.append("wallet.html: public read-only balance verification missing")
