@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
@@ -49,6 +49,9 @@ REQUIRED_TEXT = {
     "faq.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا توجد موافقة"],
     "support.html": ["github.com/itsAAA1/VoltZilla/issues/new", "رسالة واضحة غير مالية"],
     "legal.html": ["وزارة المالية", "2018", "2019", "لم يُنجز رأي قانوني مستقل"],
+    "market.html": [PRIMARY_MINT, "DEX Screener", "حجم 24 ساعة", "غير مضمون الحداثة"],
+    "wallet.html": [PRIMARY_MINT, "getTokenAccountsByOwner", "0.395563648", "7,005,921.840554"],
+    "roadmap.html": ["المرحلة 1", "إثبات", "السيولة", "MVX مشروع مستقل"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.
 OLD_ADDRESS = "JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump"
@@ -87,6 +90,16 @@ def main():
                     errors.append(f"{name}: unexpected X link {href}")
                 if "pump.fun/coin/" in href and href.rstrip("/") != PUMPFUN_COIN:
                     errors.append(f"{name}: unrelated Pump.fun token contract link {href}")
+        if name == "market.html":
+            if 'p.baseToken.address===MINT' not in text or 'p.chainId==="solana"' not in text:
+                errors.append("market.html: price selection must match the exact mint and network")
+            if 'p.volume.h24!==null' not in text:
+                errors.append("market.html: missing-volume values must not silently display zero")
+        if name == "wallet.html":
+            if not all(x in text for x in ("getBalance", "getTokenAccountsByOwner", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")):
+                errors.append("wallet.html: public read-only balance verification missing")
+            if any(x in text for x in ("signTransaction", "sendTransaction", "secretKey", "seedPhrase", "mnemonic")):
+                errors.append("wallet.html: prohibited signing/key handling code detected")
         if name == "index.html":
             for old in ("&#x1F525; جاري", 'class="phase-num done"', 'class="roadmap-phase active"'):
                 if old in text:
