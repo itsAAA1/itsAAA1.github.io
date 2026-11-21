@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html", "proof.html")
-# X account the owner stated on 5 Nov 2026. Not proven official: @VoltZillaSOL is in the GDY metadata.
+# Official X account, confirmed by the owner on 21 Nov 2026. The old @VoltZillaSOL (named in the immutable GDY metadata) is closed.
 OWNER_STATED_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
@@ -47,7 +47,7 @@ FORBIDDEN_REGEX = [
     (r"إجمالي العرض</td><td>\s*[\d,]{6,}", "unverified supply figure"),
 ]
 REQUIRED_TEXT = {
-    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "@VoltZillaSOL", "لم يُحسم", "لم يُقدَّم بعد"],
+    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "@VoltZillaSOL", "حساب X الرسمي للمشروع", "لم يُقدَّم بعد"],
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
     "status.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
     "whitepaper-current.html": [PRIMARY_MINT, "Token-2022", "4 أبريل 2026", "مخاطر", "لم تُقدَّم بعد"],
