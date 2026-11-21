@@ -110,6 +110,12 @@ def main():
                 errors.append(f"{name}: account mismatch must display actual and expected Solana addresses")
             if "connectionResult?.publicKey || provider.publicKey" not in text:
                 errors.append(f"{name}: provider.connect() account return fallback missing")
+            if 'id="diagnose"' not in text or "diagnosticBtn.addEventListener" not in text or "signMessage(true)" not in text:
+                errors.append(f"{name}: mobile wallet diagnostic signing button must be wired")
+            if 'const matchesExpectedWallet = signer === expectedWallet;' not in text or 'if (!diagnosticOnly && !matchesExpectedWallet)' not in text:
+                errors.append(f"{name}: normal ownership proof must deny mismatched wallet while diagnostic can sign")
+            if '"Matches expected wallet: " + matchesExpectedWallet' not in text or 'copyBtn.disabled = true;' not in text:
+                errors.append(f"{name}: diagnostic signature must label mismatch and not expose publishable proof")
             if '<script src=' in text:
                 errors.append(f"{name}: do not load remote scripts into signing page")
         if name == "wallet.html":
