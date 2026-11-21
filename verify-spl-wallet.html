@@ -66,7 +66,8 @@ const phantomLink = document.getElementById("phantom-open");
 phantomLink.href = "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
 const solflareLink = document.getElementById("solflare-open");
 // Solflare official browse deeplink: https://solflare.com/ul/v1/browse/<url>?ref=<ref>
-solflareLink.href = "https://solflare.com/ul/v1/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
+const autosignUrl = window.location.origin + window.location.pathname + "?autosign=1";
+solflareLink.href = "https://solflare.com/ul/v1/browse/" + encodeURIComponent(autosignUrl) + "?ref=" + encodeURIComponent(window.location.origin);
 if ((window.phantom?.solana || window.solana)?.isPhantom || window.solflare?.isSolflare) { phantomLink.hidden = true; solflareLink.hidden = true; }
 function setStatus(message, state) { statusEl.textContent = message; statusEl.dataset.state = state || "info"; }
 function decodeBase58(text) {
@@ -143,6 +144,17 @@ async function signMessage(diagnosticOnly = false) {
 }
 signBtn.addEventListener("click", () => signMessage(false));
 diagnosticBtn.addEventListener("click", () => signMessage(true));
+// One-tap flow: when opened inside a wallet app with ?autosign=1, start the proof automatically.
+// It only requests a text-message signature; the wallet still asks the owner to approve.
+if (new URLSearchParams(window.location.search).get("autosign") === "1") {
+  let tries = 0;
+  const startWhenReady = () => {
+    const p = (window.solflare && window.solflare.isSolflare) ? window.solflare : (window.phantom?.solana || window.solana);
+    if (p && (p.isSolflare || p.isPhantom)) { setStatus("جاري طلب توقيع رسالة الإثبات من المحفظة… وافق داخل التطبيق.", "info"); signMessage(false); return; }
+    if (++tries < 20) setTimeout(startWhenReady, 250);
+  };
+  window.addEventListener("load", () => setTimeout(startWhenReady, 300));
+}
 copyBtn.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(proofEl.value); setStatus("نُسخ سجل التوقيع؛ يمكن نشره علنيًا دون مفاتيح سرية.", "ok"); }
   catch (_) { setStatus("النسخ الآلي لم يعمل؛ انسخ النص من الحقل مباشرة.", "error"); }
