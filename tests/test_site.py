@@ -4,6 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 import re
+import json
 import unittest
 import xml.etree.ElementTree as ET
 
@@ -111,6 +112,16 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('<a href="status.html" class="community-card twitter"', homepage)
         self.assertIn('<h3>حالة حساب X</h3>', homepage)
         self.assertNotIn('>X المبلّغ عنه (غير محسوم)</a>', homepage)
+
+    def test_published_ggsqp_proof_describes_offline_signing(self):
+        proof = (ROOT / "proof.html").read_text(encoding="utf-8")
+        record = json.loads((ROOT / "proofs/GGSqp-2026-11-21.json").read_text(encoding="utf-8"))
+        self.assertNotIn("وقّعها صاحب المحفظة من تطبيق المحفظة نفسه", proof)
+        self.assertNotIn('href="https://x.com/voltzillasol1"', proof)
+        self.assertIn("حالة حساب X", proof)
+        self.assertIn("GGSqp فأُنشئ محليًا", proof)
+        self.assertEqual(record["signing_method"], "offline-ed25519")
+        self.assertEqual(record["wallet"], "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")
 
     def test_metadata_and_historical_whitepaper(self):
         homepage = self.pages["index.html"][0]
