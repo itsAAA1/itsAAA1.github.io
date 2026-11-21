@@ -35,8 +35,9 @@ textarea{display:block;width:100%;min-height:160px;background:#0b1023;border:1px
 <code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code>
 <p class="muted"><strong>للآيفون:</strong> افتح الصفحة داخل تطبيق Phantom نفسه؛ الربط لا يعمل من Safari أو Chrome على الجوال. اضغط الرابط التالي ثم ارجع واضغط «ربط وتوقيع».</p>
 <p><a id="phantom-open" href="https://phantom.app/ul/browse/https%3A%2F%2Fitsaaa1.github.io%2Fverify-wallet.html?ref=https%3A%2F%2Fitsaaa1.github.io" rel="noopener noreferrer">📱 افتح صفحة الإثبات داخل تطبيق Phantom</a></p>
+<p><a id="solflare-open" href="https://solflare.com/ul/v1/browse/https%3A%2F%2Fitsaaa1.github.io%2Fverify-wallet.html?ref=https%3A%2F%2Fitsaaa1.github.io" rel="noopener noreferrer">📱 افتح صفحة الإثبات داخل تطبيق Solflare</a></p>
 <p class="muted">اختر حساب Solana الذي يطابق العنوان أعلاه حرفيًا. إذا كان مختلفًا، بدّل الحساب من قائمة Phantom داخل متصفح المحفظة.</p>
-<button id="sign" type="button">ربط Phantom وتوقيع رسالة إثبات</button>
+<button id="sign" type="button">ربط المحفظة (Phantom أو Solflare) وتوقيع رسالة إثبات</button>
 <p class="muted"><strong>إذا حسابك لا يطابق العنوان أعلاه:</strong> جرّب الزر التالي. سيختبر توقيع محفظتك الحالية فقط دون اعتبارها محفظة إصدار أو إنشاء VoltZilla. لا ينقل أموالًا ولا ينشر إثباتًا.</p>
 <button id="diagnose" type="button">اختبار توقيع الحساب الحالي (ليس إثبات ملكية VZLA)</button>
 <p id="status" role="status" aria-live="polite">لم يُوقّع شيء بعد. لا توجد معاملة معلّقة.</p>
@@ -62,7 +63,10 @@ const copyBtn = document.getElementById("copy");
 const phantomLink = document.getElementById("phantom-open");
 // Phantom's official Solana wallet-adapter mobile flow: open the same verified page inside Phantom.
 phantomLink.href = "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
-if ((window.phantom?.solana || window.solana)?.isPhantom) phantomLink.hidden = true;
+const solflareLink = document.getElementById("solflare-open");
+// Solflare official browse deeplink: https://solflare.com/ul/v1/browse/<url>?ref=<ref>
+solflareLink.href = "https://solflare.com/ul/v1/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
+if ((window.phantom?.solana || window.solana)?.isPhantom || window.solflare?.isSolflare) { phantomLink.hidden = true; solflareLink.hidden = true; }
 function setStatus(message, state) { statusEl.textContent = message; statusEl.dataset.state = state || "info"; }
 function decodeBase58(text) {
   const abc = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -81,9 +85,10 @@ function decodeBase58(text) {
 async function signMessage(diagnosticOnly = false) {
   proofEl.value = "";
   copyBtn.disabled = true;
-  const provider = window.phantom?.solana || window.solana;
-  if (!provider || !provider.isPhantom || typeof provider.signMessage !== "function") {
-    setStatus("Phantom غير متصل بهذا المتصفح. على الآيفون اضغط رابط «افتح صفحة الإثبات داخل تطبيق Phantom» أعلاه، ثم أعد محاولة التوقيع.", "error");
+  const provider = (window.solflare && window.solflare.isSolflare) ? window.solflare : (window.phantom?.solana || window.solana);
+  if (!provider || !(provider.isPhantom || provider.isSolflare) || typeof provider.signMessage !== "function") {
+    setStatus("المحفظة غير متصلة بهذا المتصفح. على الآيفون افتح الصفحة داخل تطبيق المحفظة اللي فيها العنوان (Phantom أو Solflare) من الروابط أعلاه، ثم أعد التوقيع.", "error");
+    solflareLink.hidden = false;
     phantomLink.hidden = false;
     return;
   }
@@ -113,7 +118,8 @@ async function signMessage(diagnosticOnly = false) {
       "Expires UTC: " + expires.toISOString()
     ].join("\n");
     const bytes = new TextEncoder().encode(challenge);
-    const signed = await provider.signMessage(bytes, "utf8");
+    const signedRaw = await provider.signMessage(bytes, "utf8");
+    const signed = { signature: signedRaw && signedRaw.signature ? signedRaw.signature : signedRaw };
     if (Date.now() > expires.getTime()) throw new Error("انتهت صلاحية التحدي؛ أعد توقيع رسالة جديدة.");
     const keyBytes = decodeBase58(signer);
     if (keyBytes.length !== 32) throw new Error("عنوان المحفظة ليس مفتاحًا عامًا صحيحًا.");
@@ -124,7 +130,7 @@ async function signMessage(diagnosticOnly = false) {
     if (diagnosticOnly) {
       proofEl.value = "";
       copyBtn.disabled = true;
-      setStatus("نجح اختبار توقيع Phantom والتحقق من الحساب: " + signer + "\nيطابق محفظة المشروع المطلوبة؟ " + (matchesExpectedWallet ? "نعم" : "لا") + "\nهذا اختبار تقني فقط؛ لم يُنشأ إثبات ملكية أو معاملة مالية.", "ok");
+      setStatus("نجح اختبار توقيع المحفظة والتحقق من الحساب: " + signer + "\nيطابق محفظة المشروع المطلوبة؟ " + (matchesExpectedWallet ? "نعم" : "لا") + "\nهذا اختبار تقني فقط؛ لم يُنشأ إثبات ملكية أو معاملة مالية.", "ok");
     } else {
       proofEl.value = challenge + "\nSignature (base64): " + signature64 + "\nVerified locally: true";
       copyBtn.disabled = false;
