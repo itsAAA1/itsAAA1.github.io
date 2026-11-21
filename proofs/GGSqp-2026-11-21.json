@@ -2,7 +2,7 @@
   "schema": "voltzilla-wallet-control-proof/1",
   "scheme": "solana-signMessage-ed25519-utf8",
   "wallet": "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",
-  "wallet_app": "Pump.fun mobile app wallet (logged in with wallet); private key exported by the owner from Pump.fun Settings and used only to sign this text at the owner's request",
+  "wallet_app": "Pump.fun-related creator wallet (per project records); no in-app signing confirmation was obtained for this proof",
   "roles": {
     "creator_of": "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",
     "pumpfun_creator_profile": "voltzilla_vzla"
@@ -38,5 +38,7 @@
     "selection of an official mint",
     "which X account is official",
     "legal identity of a person"
-  ]
+  ],
+  "signing_method": "offline-ed25519",
+  "signing_provenance": "Signature produced locally from a private key provided by the requester; no Pump.fun or Phantom confirmation dialog. This verifies public-key control for the signed message, not exclusive custody."
 }
