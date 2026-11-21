@@ -88,8 +88,9 @@ def main():
         p.feed(text)
         if p.opens != p.closes:
             errors.append(f"{name}: unbalanced <a> tags ({p.opens}/{p.closes})")
-        if OWNER_STATED_X not in p.hrefs:
-            errors.append(f"{name}: missing owner-confirmed X link")
+        # Proof verification must not promote an X profile whose official status is unresolved.
+        if name != "proof.html" and OWNER_STATED_X not in p.hrefs:
+            errors.append(f"{name}: missing owner-reported X link")
         for href in p.hrefs:
             if href.startswith("http"):
                 if any(s in href for s in FORBIDDEN_SOCIAL):
