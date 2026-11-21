@@ -102,6 +102,16 @@ def main():
                 errors.append(f"{name}: signing challenge must not have transfer or key export methods")
             if "crypto.randomUUID()" not in text or "crypto.subtle.verify" not in text or "provider.signMessage" not in text:
                 errors.append(f"{name}: secure fresh challenge / signature verification missing")
+            if 'id="phantom-open"' not in text or "https://phantom.app/ul/browse/" not in text:
+                errors.append(f"{name}: iPhone must offer a wallet-app deep link (not Safari signing)")
+            if "encodeURIComponent(window.location.href)" not in text or "encodeURIComponent(window.location.origin)" not in text:
+                errors.append(f"{name}: Phantom universal link must be generated for the same site and referrer origin")
+            if "الحساب المتصل: " not in text or "المحفظة المطلوبة: " not in text:
+                errors.append(f"{name}: account mismatch must display actual and expected Solana addresses")
+            if "connectionResult?.publicKey || provider.publicKey" not in text:
+                errors.append(f"{name}: provider.connect() account return fallback missing")
+            if '<script src=' in text:
+                errors.append(f"{name}: do not load remote scripts into signing page")
         if name == "wallet.html":
             if not all(x in text for x in ("getBalance", "getTokenAccountsByOwner", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")):
                 errors.append("wallet.html: public read-only balance verification missing")
