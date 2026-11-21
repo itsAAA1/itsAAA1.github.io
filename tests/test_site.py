@@ -101,6 +101,17 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('a:focus-visible', raw)
         self.assertIn('prefers-reduced-motion:reduce', raw)
 
+    def test_unverified_x_is_not_a_community_join_destination(self):
+        homepage = self.pages["index.html"][0]
+        self.assertNotRegex(
+            homepage,
+            r'<a\\s+href="https://x\\.com/voltzillasol1"[^>]*class="community-card twitter"',
+            "An unverified account must not be the join-community CTA",
+        )
+        self.assertIn('<a href="status.html" class="community-card twitter"', homepage)
+        self.assertIn('<h3>حالة حساب X</h3>', homepage)
+        self.assertNotIn('>X المبلّغ عنه (غير محسوم)</a>', homepage)
+
     def test_metadata_and_historical_whitepaper(self):
         homepage = self.pages["index.html"][0]
         paper = self.pages["whitepaper.html"][0]
