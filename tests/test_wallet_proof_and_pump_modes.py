@@ -53,7 +53,7 @@ class WalletProof(unittest.TestCase):
         self.assertIn("Cashback", html)
         self.assertIn("غير مُفعّل", html)
         self.assertIn('href="verify-wallet.html"', html)
-        self.assertIn("لم يُتحقق", html)
+        self.assertIn("تم إثبات توقيع محفظة GGSqp", html)
 
 
 if __name__ == "__main__":
