@@ -11,7 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html", "proof.html")
-OFFICIAL_X = "https://x.com/voltzillasol1"
+# X account the owner stated on 5 Nov 2026. Not proven official: @VoltZillaSOL is in the GDY metadata.
+OWNER_STATED_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 FORBIDDEN_SOCIAL = ("t.me/", "telegram.me/", "discord.gg/", "discord.com/invite", "twitter.com/", "instagram.com/", "youtube.com/", "facebook.com/")
@@ -35,6 +36,10 @@ FORBIDDEN_TEXT = [
     "إطلاق GDY في مايو 2026",
     "65,000 TPS",
     "HOLD STRONG",
+    # The official X account is undecided; no page may call either account official.
+    "الحساب المعتمد",
+    "حساب X المعتمد",
+    "حساب X الرسمي هو",
 ]
 FORBIDDEN_REGEX = [
     (r"ضريبة (?:الشراء|البيع|المعاملات)</td><td>\s*0\s*%", "zero-tax table value"),
@@ -42,7 +47,7 @@ FORBIDDEN_REGEX = [
     (r"إجمالي العرض</td><td>\s*[\d,]{6,}", "unverified supply figure"),
 ]
 REQUIRED_TEXT = {
-    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "لم يُقدَّم بعد"],
+    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "@VoltZillaSOL", "لم يُحسم", "لم يُقدَّم بعد"],
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
     "status.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
     "whitepaper-current.html": [PRIMARY_MINT, "Token-2022", "4 أبريل 2026", "مخاطر", "لم تُقدَّم بعد"],
@@ -83,13 +88,13 @@ def main():
         p.feed(text)
         if p.opens != p.closes:
             errors.append(f"{name}: unbalanced <a> tags ({p.opens}/{p.closes})")
-        if OFFICIAL_X not in p.hrefs:
+        if OWNER_STATED_X not in p.hrefs:
             errors.append(f"{name}: missing owner-confirmed X link")
         for href in p.hrefs:
             if href.startswith("http"):
                 if any(s in href for s in FORBIDDEN_SOCIAL):
                     errors.append(f"{name}: unconfirmed social link {href}")
-                if "x.com/" in href and href.rstrip("/") != OFFICIAL_X:
+                if "x.com/" in href and href.rstrip("/") != OWNER_STATED_X:
                     errors.append(f"{name}: unexpected X link {href}")
                 if "pump.fun/coin/" in href and href.rstrip("/") != PUMPFUN_COIN:
                     errors.append(f"{name}: unrelated Pump.fun token contract link {href}")
