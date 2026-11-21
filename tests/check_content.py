@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html")
+PAGES = ("index.html", "whitepaper.html", "status.html", "whitepaper-current.html", "faq.html", "support.html", "legal.html", "market.html", "wallet.html", "roadmap.html", "verify-wallet.html", "verify-spl-wallet.html", "proof.html")
 OFFICIAL_X = "https://x.com/voltzillasol1"
 PUMPFUN_COIN = "https://pump.fun/coin/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
 PRIMARY_MINT = "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump"
@@ -49,10 +49,11 @@ REQUIRED_TEXT = {
     "faq.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا توجد موافقة"],
     "support.html": ["github.com/itsAAA1/VoltZilla/issues/new", "رسالة واضحة غير مالية"],
     "legal.html": ["وزارة المالية", "2018", "2019", "لم يُنجز رأي قانوني مستقل"],
-    "market.html": [PRIMARY_MINT, "DEX Screener", "حجم 24 ساعة", "غير مضمون الحداثة"],
+    "market.html": [PRIMARY_MINT, "DEX Screener", "حجم 24 ساعة", "غير مضمون الحداثة", "geckoterminal.com/solana/pools/6PpZaXsSnXCwm37W1PkMtmG1kCLjYNXk95eLoHMsFXBk?embed=1"],
     "wallet.html": [PRIMARY_MINT, "getTokenAccountsByOwner", "0.395563648", "7,005,921.840554"],
     "roadmap.html": ["المرحلة 1", "إثبات", "السيولة", "MVX مشروع مستقل"],
     "verify-wallet.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD", "crypto.subtle.verify"],
+    "proof.html": ["28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4", "vXZ+kxA5WCr9lPS/VZzvUBMctxE1zP+rAcIkjBVpwY5K7tt3W6rzBhV/+bahSaZPxjfdph/CTLtsPNmIvquODQ==", "crypto.subtle.verify", "ليس معاملة", "لم يُتحقق بعد"],
     "verify-spl-wallet.html": ["DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9", "28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4", "crypto.subtle.verify"],
 }
 # The previously published address is flagged as unverified; it may only appear in the whitepaper with that label.

@@ -13,7 +13,7 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font:16px/1.8 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0}
 a{color:var(--cyan);text-underline-offset:4px}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .skip-link{position:absolute;top:-100px;right:16px;background:var(--accent);color:#111;padding:6px 12px;border-radius:8px}.skip-link:focus{top:8px}
-header{border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+header{border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:8px 20px;flex-wrap:wrap}
 header>a{text-decoration:none;font-weight:800;color:var(--text);display:flex;gap:10px;align-items:center}header img{border-radius:50%}
 main{max-width:1020px;margin:0 auto;padding:38px 20px 60px}
 h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--accent);margin:0 0 12px}h2{font-size:1.35rem;margin:0 0 12px}
@@ -31,9 +31,9 @@ ul{padding-inline-start:24px;margin:10px 0}li{margin:6px 0}footer{border-top:1px
 <header><a href="index.html"><img src="logo.png" width="42" height="42" alt="شعار VoltZilla"> VoltZilla / VZLA</a><a href="whitepaper-current.html">الورقة البيضاء الحالية</a> · <a href="faq.html">الأسئلة</a> · <a href="support.html">الدعم</a> · <a href="legal.html">القانون والمخاطر</a></header>
 <main id="main-content">
 <h1>حالة VoltZilla على Solana</h1>
-<p>آخر تدقيق فني: <strong>20 نوفمبر 2026</strong>. رصد بيانات السلسلة: <strong>19 نوفمبر 2026 الساعة 22:35:58 بتوقيت UTC</strong>. هذه لقطات تحقق وليست بيانات لحظية أو وعدًا بالسيولة.</p>
+<p>آخر تدقيق فني: <strong>21 نوفمبر 2026</strong>. رصد بيانات السلسلة: <strong>19 نوفمبر 2026 الساعة 22:35:58 بتوقيت UTC</strong>. هذه لقطات تحقق وليست بيانات لحظية أو وعدًا بالسيولة.</p>
 <div class="summary" role="status"><strong>تم توثيق وجود عقد Pump.fun مرتبط بمحفظة منشئ المشروع.</strong>
-<p>العقد الذي أنشأته محفظة <code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code> هو أقوى مرجع تقني للمشروع. ما زال إثبات سيطرة المستخدم الحالية بالمفتاح، وحسم حساب X الرسمي، ومتطلبات الإدراج المستقل غير مكتملة. <strong>لا تشترِ أو تحوّل أموالًا اعتمادًا على الاسم أو السعر وحده.</strong></p></div>
+<p>العقد الذي أنشأته محفظة <code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code> هو أقوى مرجع تقني للمشروع. <strong>تم إثبات التحكم في محفظة 28fU8 بتوقيع يوم 21 نوفمبر 2026</strong> (<a href="proof.html">السجل الموقّع</a>). لم يُتحقق بعد بتوقيع من محفظة GGSqp منشئة هذا العقد، وحسم حساب X الرسمي ومتطلبات الإدراج المستقل غير مكتملة. <strong>لا تشترِ أو تحوّل أموالًا اعتمادًا على الاسم أو السعر وحده.</strong></p></div>
 <section aria-labelledby="mainmint"><h2 id="mainmint">عقد Pump.fun المرتبط بعنوان محفظة المنشئ على السلسلة</h2>
 <article class="card" style="border-color:#b69543;">
 <span class="state">مرشح المشروع الرئيسي — منشئ العقد مطابق</span>
@@ -53,15 +53,15 @@ ul{padding-inline-start:24px;margin:10px 0}li{margin:6px 0}footer{border-top:1px
 </article></section>
 <section aria-labelledby="historic-heading"><h2 id="historic-heading" style="margin-top:28px">ثلاثة عقود أخرى تحمل VZLA — لا تخلطها بالعقد السابق</h2>
 <div class="grid">
-<article class="card"><span class="state">عقد SPL منفصل</span><h2>عنوان المليون القديم</h2><code>DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9</code><p>معروض سابق قدره 1,000,000 VZLA، 9 خانات عشرية، وسلطة سك المزيد مفعّلة عند الفحص. لم تُثبت صلته بمحفظة Pump.fun المنشئة لعقد GDY.</p>
-<a href="https://solscan.io/token/DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9" target="_blank" rel="noopener noreferrer">بيانات العقد المنفصل</a> · <a href="verify-spl-wallet.html">توقيع إثبات محفظة 28f قبل أي قرار بمعروض 7 ملايين</a></article>
+<article class="card"><span class="state">عقد SPL منفصل</span><h2>عنوان المليون القديم</h2><code>DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9</code><p>معروض سابق قدره 1,000,000 VZLA، 9 خانات عشرية، وسلطة سك المزيد مفعّلة عند الفحص. لم تُثبت صلته بمحفظة Pump.fun المنشئة لعقد GDY. <strong>محفظة سلطة السك 28fU8 موقّعة ومتحقق منها يوم 21 نوفمبر 2026.</strong></p>
+<a href="https://solscan.io/token/DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9" target="_blank" rel="noopener noreferrer">بيانات العقد المنفصل</a> · <a href="proof.html">سجل إثبات 28fU8 الموقّع</a></article>
 <article class="card"><span class="state">توكن تاريخي مختلف</span><h2>توكن Pump.fun من 2024</h2><code>JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump</code><p><strong>لم تثبت صلته بمالك المشروع.</strong> منشئ هذا التوكن وعنوانه مختلفان؛ لا تدمج معروضه أو بياناته مع عقد GDY.</p>
 <a href="https://solscan.io/token/JBaHDseUdFEVbAik7rojwC8ZZ8EjyBi1qQPoK9tLpump" target="_blank" rel="noopener noreferrer">بيانات العقد التاريخي</a></article>
 <article class="card"><span class="state">عقد Raydium LaunchLab منفصل — تم فحصه</span>
 <h2>توكن أنشأه 28fU8 يوم 15 مايو 2026</h2>
 <code>3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray</code>
 <p>أكد فحص Helius عبر Nova في 20 نوفمبر 2026 وجود عقد Solana SPL مستقل، المعروض 1,000,000,000 والكسور 6؛ سلطتا السك والتجميد ملغاتان. بيانات فهرس Solana Tracker تنسب الإنشاء إلى <code>28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4</code> وتعرض منحنى إطلاق Raydium غير مكتمل؛ الأسعار/السيولة المفهرسة غير مضمونة الحداثة ولا تثبت صفقة قابلة للتنفيذ.</p>
-<p><strong>لم يُتحقق من سيطرة صاحب المشروع الحالية على هذا الحساب بتوقيع.</strong> لا تدمج هذا التوكن مع عقد GDY من Pump.fun، ولا تستبدل أحدهما تلقائيًا باسم «العقد الرسمي».</p>
+<p><strong>محفظة المنشئ 28fU8 موقّعة ومتحقق منها يوم 21 نوفمبر 2026</strong> (<a href="proof.html">السجل</a>). هذا لا يجعله العقد الرسمي بدل GDY. <a href="https://www.geckoterminal.com/solana/pools/J1nse1K58AcjDEtCdkL7nFByUNwjGuTkupxiKtwuxXAz" target="_blank" rel="noopener noreferrer">رسمه البياني في GeckoTerminal</a>.</p><p>لا تدمج هذا التوكن مع عقد GDY من Pump.fun، ولا تستبدل أحدهما تلقائيًا باسم «العقد الرسمي».</p>
 <a href="https://solscan.io/token/3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray" target="_blank" rel="noopener noreferrer">عقد Raydium المستقل في Solscan</a></article></div></section>
 <section aria-labelledby="modes"><div class="card"><h2 id="modes">أوضاع Pump.fun: ما يعمل وما انتهى</h2>
 <p><strong>Mayhem:</strong> ظهر أنه استُخدم تاريخيًا ثم انتهى. لا يُعاد تشغيل نافذة إطلاقه بكود الموقع أو GitHub.</p>
@@ -72,7 +72,7 @@ ul{padding-inline-start:24px;margin:10px 0}li{margin:6px 0}footer{border-top:1px
 </div></section>
 <section aria-labelledby="readiness"><div class="card"><h2 id="readiness">الموجود والناقص</h2>
 <p>موجود: عملة Pump.fun منشأة ومعاملة إنشائها، موقع مجاني، فحوص تقنية واختبارات GitHub، والبيانات الأصلية للعقد.</p>
-<p>معلّق: توقيع إثبات التحكم في المحفظة، حسم حساب X، شهادة مراجعة أمنية/قانونية مستقلة إن لزمت، نضج التداول والسيولة، وقبول CoinGecko وCoinMarketCap. <strong>لم يُقدَّم أي طلب إدراج بعد.</strong></p>
+<p>منجز يوم 21 نوفمبر 2026: <a href="proof.html">توقيع إثبات محفظة 28fU8</a>، و<a href="market.html">رسم بياني حي لعقد GDY</a> عبر GeckoTerminal.</p><p>معلّق: توقيع إثبات محفظة GGSqp، حسم حساب X، شهادة مراجعة أمنية/قانونية مستقلة إن لزمت، نضج التداول والسيولة، وقبول CoinGecko وCoinMarketCap. <strong>لم يُقدَّم أي طلب إدراج بعد.</strong></p>
 <p><a href="verify-wallet.html">أداة إثبات التحكم بمحفظة Pump.fun برسالة موقّعة آمنة</a> (تعمل فقط بعد فتح صاحب المحفظة للصفحة وتوقيعها؛ لا تدفع رسومًا). الورقة البيضاء التقنية الحالية: <a href="whitepaper-current.html">اقرأ النسخة المحدّثة</a>. <a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer">حساب X المبلغ عنه سابقًا</a> (تحتاج مطابقة بالميتاداتا).</p>
 </div></section>
 </main>

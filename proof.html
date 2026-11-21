@@ -1,0 +1,78 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VoltZilla VZLA | إثباتات المحافظ الموقّعة</title><meta name="description" content="سجل علني لإثبات التحكم في محافظ مشروع VoltZilla برسائل موقّعة Ed25519، مع تحقق مباشر داخل المتصفح">
+<link rel="canonical" href="https://itsaaa1.github.io/proof.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>:root{color-scheme:dark;--bg:#080c17;--card:#151d30;--line:#334057;--gold:#ffda5b;--a:#8be4f3;--ok:#7be0a4;--bad:#ff8f8f}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f5f7ff;font:16px/1.75 system-ui,sans-serif}header,main,footer{max-width:1000px;margin:auto;padding:20px}a{color:var(--a)}h1,h2{color:var(--gold)}h1{font-size:clamp(1.6rem,5vw,2.5rem)}.card{padding:20px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin:18px 0}.card.ok{border-color:#3f8f63}.state{display:inline-block;padding:2px 12px;border-radius:999px;font-weight:800;font-size:.9rem}.state.ok{background:#173d2a;color:var(--ok)}.state.wait{background:#3a3220;color:var(--gold)}code,.key{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;background:#0b1222;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:.82rem;line-height:1.6}dl{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:6px 14px}dt{color:#cdd5e5}dd{margin:0}button{background:var(--gold);color:#111;border:0;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--a);outline-offset:3px}#result{font-weight:800;margin-top:12px}#result.ok{color:var(--ok)}#result.bad{color:var(--bad)}.meta{color:#cdd5e5}@media(max-width:560px){dl{grid-template-columns:1fr}}</style></head>
+<body><header><a href="index.html">⚡ VoltZilla</a> · <a href="status.html">العقود الأربعة</a> · <a href="market.html">الرسم البياني والسعر</a> · <a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer">X</a></header>
+<main id="main-content">
+<h1>إثباتات المحافظ الموقّعة</h1>
+<p>كل إثبات هنا رسالة نصية وقّعها صاحب المحفظة من تطبيق المحفظة نفسه (Ed25519). التوقيع يثبت امتلاك المفتاح الخاص للعنوان العام وقت التوقيع فقط. <strong>ليس معاملة، ولا ينقل أموالًا، ولا يسك عملات، ولا يختار العقد الرسمي.</strong></p>
+
+<section class="card ok" aria-labelledby="p1"><span class="state ok">✅ موقّع ومتحقق</span>
+<h2 id="p1">محفظة 28fU8 — سلطة سك توكن المليون ومنشئ توكن Raydium</h2>
+<dl>
+<dt>المحفظة</dt><dd><code>28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4</code></dd>
+<dt>تطبيق التوقيع</dt><dd>Solflare</dd>
+<dt>وقت التوقيع</dt><dd>21 نوفمبر 2026، 10:22:59 UTC (1:22 م بتوقيت السعودية)</dd>
+<dt>سلطة السك لـ</dt><dd><code>DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9</code></dd>
+<dt>منشئ</dt><dd><code>3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray</code> (<a href="https://www.geckoterminal.com/solana/pools/J1nse1K58AcjDEtCdkL7nFByUNwjGuTkupxiKtwuxXAz" target="_blank" rel="noopener noreferrer">رسمه البياني</a>)</dd>
+<dt>بصمة الرسالة SHA-256</dt><dd><code>11943f831e5e28fa63f1e7d39da6fb584cdc6d5251bacb760d01d337d4a34e9c</code></dd>
+</dl>
+<h3>نص الرسالة الموقّعة حرفيًا مع التوقيع</h3>
+<pre id="record"></pre>
+<p><button id="verify" type="button">تحقق من التوقيع الآن في متصفحك</button></p>
+<p id="result" role="status" aria-live="polite"></p>
+<p class="meta">التحقق يجري داخل متصفحك فقط، ولا يرسل شيئًا لأي خادم. البيانات الخام: <a href="proofs/28fU8-2026-11-21.json">ملف JSON</a> · تحقق مستقل بدون إنترنت: <a href="https://github.com/itsAAA1/VoltZilla/tree/main/proofs" target="_blank" rel="noopener noreferrer">السجل والسكربت في GitHub</a>.</p>
+</section>
+
+<section class="card" aria-labelledby="p2"><span class="state wait">⏳ لم يُتحقق بعد</span>
+<h2 id="p2">محفظة GGSqp — منشئ عقد Pump.fun</h2>
+<p><code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code> أنشأت العقد <code>GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump</code> يوم 4 أبريل 2026. المحفظة داخل حساب Pump.fun، ولم يصدر لها توقيع إثبات حتى الآن. <a href="verify-wallet.html">صفحة توقيعها</a>.</p>
+</section>
+</main>
+<footer class="meta">VoltZilla (VZLA) — سجل إثبات مؤرخ، وليس وعدًا بربح أو إدراج أو سيولة. <a href="status.html">حالة التحقق</a></footer>
+<script>
+"use strict";
+const WALLET = "28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4";
+const LINES = [
+  "VoltZilla SPL mint-authority wallet control proof",
+  "Site: https://itsaaa1.github.io",
+  "Network: Solana mainnet-beta",
+  "Token: DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9",
+  "Signer: 28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4",
+  "Expected project wallet: 28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4",
+  "Matches expected wallet: true",
+  "Purpose: Proof of wallet control only; NOT a transaction or spending authorization",
+  "Nonce: 182fe74c-cbe7-428e-805d-2fe46de8a899",
+  "Issued UTC: 2026-11-21T10:22:59.988Z",
+  "Expires UTC: 2026-11-21T10:27:59.988Z"
+];
+const SIG64 = "vXZ+kxA5WCr9lPS/VZzvUBMctxE1zP+rAcIkjBVpwY5K7tt3W6rzBhV/+bahSaZPxjfdph/CTLtsPNmIvquODQ==";
+const MESSAGE = LINES.join("\n");
+document.getElementById("record").textContent = MESSAGE + "\nSignature (base64): " + SIG64;
+function decodeBase58(s) {
+  const A = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  let n = 0n;
+  for (const c of s) { const i = A.indexOf(c); if (i < 0) throw new Error("base58"); n = n * 58n + BigInt(i); }
+  const out = [];
+  while (n > 0n) { out.unshift(Number(n & 255n)); n >>= 8n; }
+  for (const c of s) { if (c === "1") out.unshift(0); else break; }
+  return new Uint8Array(out);
+}
+const result = document.getElementById("result");
+document.getElementById("verify").addEventListener("click", async () => {
+  result.className = ""; result.textContent = "جارٍ التحقق…";
+  try {
+    if (!window.crypto?.subtle) throw new Error("unsupported");
+    const key = await crypto.subtle.importKey("raw", decodeBase58(WALLET), {name: "Ed25519"}, false, ["verify"]);
+    const sig = Uint8Array.from(atob(SIG64), c => c.charCodeAt(0));
+    const ok = await crypto.subtle.verify("Ed25519", key, sig, new TextEncoder().encode(MESSAGE));
+    result.className = ok ? "ok" : "bad";
+    result.textContent = ok ? "✅ التوقيع صحيح: المفتاح الخاص للمحفظة 28fU8 وقّع هذا النص حرفيًا." : "❌ التوقيع غير مطابق.";
+  } catch (e) {
+    result.className = "bad";
+    result.textContent = "متصفحك لا يدعم التحقق Ed25519. استخدم سكربت GitHub أعلاه للتحقق بدون إنترنت.";
+  }
+});
+</script>
+</body></html>

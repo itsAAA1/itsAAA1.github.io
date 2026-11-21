@@ -1,0 +1,43 @@
+{
+  "schema": "voltzilla-wallet-control-proof/1",
+  "scheme": "solana-signMessage-ed25519-utf8",
+  "wallet": "28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4",
+  "wallet_app": "Solflare (iPhone in-app browser)",
+  "roles": {
+    "mint_authority_of": "DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9",
+    "deployer_of": "3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray"
+  },
+  "issued_utc": "2026-11-21T10:22:59.988Z",
+  "expires_utc": "2026-11-21T10:27:59.988Z",
+  "nonce": "182fe74c-cbe7-428e-805d-2fe46de8a899",
+  "message_lines": [
+    "VoltZilla SPL mint-authority wallet control proof",
+    "Site: https://itsaaa1.github.io",
+    "Network: Solana mainnet-beta",
+    "Token: DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9",
+    "Signer: 28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4",
+    "Expected project wallet: 28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4",
+    "Matches expected wallet: true",
+    "Purpose: Proof of wallet control only; NOT a transaction or spending authorization",
+    "Nonce: 182fe74c-cbe7-428e-805d-2fe46de8a899",
+    "Issued UTC: 2026-11-21T10:22:59.988Z",
+    "Expires UTC: 2026-11-21T10:27:59.988Z"
+  ],
+  "message_sha256": "11943f831e5e28fa63f1e7d39da6fb584cdc6d5251bacb760d01d337d4a34e9c",
+  "signature_base64": "vXZ+kxA5WCr9lPS/VZzvUBMctxE1zP+rAcIkjBVpwY5K7tt3W6rzBhV/+bahSaZPxjfdph/CTLtsPNmIvquODQ==",
+  "verification": {
+    "result": true,
+    "checked_by": [
+      "browser WebCrypto Ed25519 on the signing page",
+      "Node.js crypto Ed25519 (2026-11-21)",
+      "scripts/verify_wallet_proof.py (pure-Python RFC 8032)"
+    ]
+  },
+  "proves": "Whoever signed held the private key of 28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4 at 2026-11-21T10:22:59Z.",
+  "does_not_prove": [
+    "control of GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD (creator of GDYcem...pump)",
+    "any transaction, transfer, mint or spending authorization",
+    "selection of an official mint",
+    "legal identity of a person"
+  ]
+}
