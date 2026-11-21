@@ -112,6 +112,18 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('<h3>حالة حساب X</h3>', homepage)
         self.assertNotIn('>X المبلّغ عنه (غير محسوم)</a>', homepage)
 
+    def test_ggsqp_proof_status_and_signing_method_agree(self):
+        status = self.pages["status.html"][0]
+        proof = (ROOT / "proof.html").read_text(encoding="utf-8")
+        proof_json = (ROOT / "proofs/GGSqp-2026-11-21.json").read_text(encoding="utf-8")
+        self.assertIn('"wallet": "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD"', proof_json)
+        self.assertNotIn("لم يُتحقق بعد بتوقيع من محفظة GGSqp", status)
+        self.assertNotIn("معلّق: توقيع إثبات محفظة GGSqp", status)
+        self.assertIn("تم إثبات توقيع محفظة GGSqp", status)
+        self.assertNotIn("كل إثبات هنا رسالة نصية وقّعها صاحب المحفظة من تطبيق المحفظة نفسه", proof)
+        self.assertIn("مفتاح مُصدَّر", proof)
+        self.assertNotIn('href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer">X</a>', proof)
+
     def test_metadata_and_historical_whitepaper(self):
         homepage = self.pages["index.html"][0]
         paper = self.pages["whitepaper.html"][0]
