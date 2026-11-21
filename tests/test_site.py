@@ -102,16 +102,13 @@ class SiteIntegrity(unittest.TestCase):
         self.assertIn('a:focus-visible', raw)
         self.assertIn('prefers-reduced-motion:reduce', raw)
 
-    def test_unverified_x_is_not_a_community_join_destination(self):
+    def test_official_x_is_the_community_destination(self):
         homepage = self.pages["index.html"][0]
-        self.assertNotRegex(
-            homepage,
-            r'<a\\s+href="https://x\\.com/voltzillasol1"[^>]*class="community-card twitter"',
-            "An unverified account must not be the join-community CTA",
-        )
-        self.assertIn('<a href="status.html" class="community-card twitter"', homepage)
-        self.assertIn('<h3>حالة حساب X</h3>', homepage)
-        self.assertNotIn('>X المبلّغ عنه (غير محسوم)</a>', homepage)
+        # Owner confirmed @voltzillasol1 as the official X account on 21 Nov 2026; @VoltZillaSOL is closed.
+        self.assertIn('<a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer" class="community-card twitter"', homepage)
+        self.assertIn("حساب X الرسمي للمشروع", homepage)
+        self.assertNotRegex(homepage, r'href="https://x\.com/VoltZillaSOL"', "The closed account must not be linked")
+        self.assertNotIn("لم يُحسم بعد", homepage)
 
     def test_published_ggsqp_proof_describes_offline_signing(self):
         proof = (ROOT / "proof.html").read_text(encoding="utf-8")
