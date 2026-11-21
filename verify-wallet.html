@@ -37,6 +37,8 @@ textarea{display:block;width:100%;min-height:160px;background:#0b1023;border:1px
 <p><a id="phantom-open" href="https://phantom.app/ul/browse/https%3A%2F%2Fitsaaa1.github.io%2Fverify-wallet.html?ref=https%3A%2F%2Fitsaaa1.github.io" rel="noopener noreferrer">📱 افتح صفحة الإثبات داخل تطبيق Phantom</a></p>
 <p class="muted">اختر حساب Solana الذي يطابق العنوان أعلاه حرفيًا. إذا كان مختلفًا، بدّل الحساب من قائمة Phantom داخل متصفح المحفظة.</p>
 <button id="sign" type="button">ربط Phantom وتوقيع رسالة إثبات</button>
+<p class="muted"><strong>إذا حسابك لا يطابق العنوان أعلاه:</strong> جرّب الزر التالي. سيختبر توقيع محفظتك الحالية فقط دون اعتبارها محفظة إصدار أو إنشاء VoltZilla. لا ينقل أموالًا ولا ينشر إثباتًا.</p>
+<button id="diagnose" type="button">اختبار توقيع الحساب الحالي (ليس إثبات ملكية VZLA)</button>
 <p id="status" role="status" aria-live="polite">لم يُوقّع شيء بعد. لا توجد معاملة معلّقة.</p>
 </div>
 <div class="card">
@@ -55,6 +57,7 @@ const expectedWallet = "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD";
 const statusEl = document.getElementById("status");
 const proofEl = document.getElementById("proof");
 const signBtn = document.getElementById("sign");
+const diagnosticBtn = document.getElementById("diagnose");
 const copyBtn = document.getElementById("copy");
 const phantomLink = document.getElementById("phantom-open");
 // Phantom's official Solana wallet-adapter mobile flow: open the same verified page inside Phantom.
@@ -75,7 +78,7 @@ function decodeBase58(text) {
   for (const char of text) { if (char !== "1") break; zeros++; }
   return Uint8Array.from([...Array(zeros).fill(0), ...bytes.reverse()]);
 }
-async function signMessage() {
+async function signMessage(diagnosticOnly = false) {
   proofEl.value = "";
   copyBtn.disabled = true;
   const provider = window.phantom?.solana || window.solana;
@@ -86,12 +89,14 @@ async function signMessage() {
   }
   if (!window.crypto?.subtle) { setStatus("المتصفح لا يدعم التحقق الآمن Ed25519.", "error"); return; }
   signBtn.disabled = true;
+  diagnosticBtn.disabled = true;
   try {
     const connectionResult = await provider.connect();
     const publicKey = connectionResult?.publicKey || provider.publicKey;
     if (!publicKey || typeof publicKey.toBase58 !== "function") throw new Error("Phantom لم يرجع عنوان محفظة Solana بعد الاتصال.");
     const signer = publicKey.toBase58();
-    if (signer !== expectedWallet) throw new Error("المحفظة لا تطابق عنوان العقد. الحساب المتصل: " + signer + " ؛ المحفظة المطلوبة: " + expectedWallet + " . افتح قائمة الحسابات داخل Phantom، واختر المحفظة الصحيحة.");
+    const matchesExpectedWallet = signer === expectedWallet;
+    if (!diagnosticOnly && !matchesExpectedWallet) throw new Error("المحفظة لا تطابق عنوان العقد. الحساب المتصل: " + signer + " ؛ المحفظة المطلوبة: " + expectedWallet + " . افتح قائمة الحسابات داخل Phantom، واختر المحفظة الصحيحة أو استخدم زر التشخيص لاختبار حسابك الحالي فقط.");
     const issued = new Date();
     const expires = new Date(issued.getTime() + 5 * 60 * 1000);
     const challenge = [
@@ -99,8 +104,10 @@ async function signMessage() {
       "Site: https://itsaaa1.github.io",
       "Network: Solana mainnet-beta",
       "Token: " + expectedMint,
-      "Signer: " + expectedWallet,
-      "Purpose: Proof of wallet control only; NOT a transaction or spending authorization",
+      "Signer: " + signer,
+      "Expected project wallet: " + expectedWallet,
+      "Matches expected wallet: " + matchesExpectedWallet,
+      "Purpose: " + (diagnosticOnly ? "Technical signing diagnostic only; NOT VoltZilla ownership proof or spending authorization" : "Proof of wallet control only; NOT a transaction or spending authorization"),
       "Nonce: " + crypto.randomUUID(),
       "Issued UTC: " + issued.toISOString(),
       "Expires UTC: " + expires.toISOString()
@@ -114,14 +121,21 @@ async function signMessage() {
     const verified = await crypto.subtle.verify("Ed25519", verifyKey, signed.signature, bytes);
     if (!verified) throw new Error("التوقيع غير مطابق للرسالة والمحفظة.");
     const signature64 = btoa(String.fromCharCode(...signed.signature));
-    proofEl.value = challenge + "\nSignature (base64): " + signature64 + "\nVerified locally: true";
-    copyBtn.disabled = false;
-    setStatus("نجح التوقيع والتحقق محليًا من محفظة المنشئ. انسخ السجل إذا أردت إثباتًا علنيًا.", "ok");
+    if (diagnosticOnly) {
+      proofEl.value = "";
+      copyBtn.disabled = true;
+      setStatus("نجح اختبار توقيع Phantom والتحقق من الحساب: " + signer + "\nيطابق محفظة المشروع المطلوبة؟ " + (matchesExpectedWallet ? "نعم" : "لا") + "\nهذا اختبار تقني فقط؛ لم يُنشأ إثبات ملكية أو معاملة مالية.", "ok");
+    } else {
+      proofEl.value = challenge + "\nSignature (base64): " + signature64 + "\nVerified locally: true";
+      copyBtn.disabled = false;
+      setStatus("نجح التوقيع والتحقق محليًا للمحفظة المطابقة لعنوان المشروع. انسخ السجل إذا أردت إثباتًا علنيًا.", "ok");
+    }
   } catch (error) {
     setStatus("لم يُعتمد إثبات المحفظة: " + (error?.message || "تعذر الإكمال"), "error");
-  } finally { signBtn.disabled = false; }
+  } finally { signBtn.disabled = false; diagnosticBtn.disabled = false; }
 }
-signBtn.addEventListener("click", signMessage);
+signBtn.addEventListener("click", () => signMessage(false));
+diagnosticBtn.addEventListener("click", () => signMessage(true));
 copyBtn.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(proofEl.value); setStatus("نُسخ سجل التوقيع؛ يمكن نشره علنيًا دون مفاتيح سرية.", "ok"); }
   catch (_) { setStatus("النسخ الآلي لم يعمل؛ انسخ النص من الحقل مباشرة.", "error"); }
