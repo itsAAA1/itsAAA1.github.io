@@ -1,0 +1,42 @@
+{
+  "schema": "voltzilla-wallet-control-proof/1",
+  "scheme": "solana-signMessage-ed25519-utf8",
+  "wallet": "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",
+  "wallet_app": "Pump.fun mobile app wallet (logged in with wallet); private key exported by the owner from Pump.fun Settings and used only to sign this text at the owner's request",
+  "roles": {
+    "creator_of": "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",
+    "pumpfun_creator_profile": "voltzilla_vzla"
+  },
+  "issued_utc": "2026-11-21T16:37:59.000Z",
+  "expires_utc": "2026-11-21T16:42:59.000Z",
+  "nonce": "db162002-a3ca-4892-a660-ea39009e27b3",
+  "message_lines": [
+    "VoltZilla ownership proof",
+    "Site: https://itsaaa1.github.io",
+    "Network: Solana mainnet-beta",
+    "Token: GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",
+    "Signer: GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",
+    "Expected project wallet: GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",
+    "Matches expected wallet: true",
+    "Purpose: Proof of wallet control only; NOT a transaction or spending authorization",
+    "Nonce: db162002-a3ca-4892-a660-ea39009e27b3",
+    "Issued UTC: 2026-11-21T16:37:59.000Z",
+    "Expires UTC: 2026-11-21T16:42:59.000Z"
+  ],
+  "message_sha256": "553463dfecc15d66925a4d288669ad4ec5f910a409db37494241047af7da7395",
+  "signature_base64": "nO2Ih449ZqDjRheIFaWxFKCeqRDqg5FLtvQf8P22EicmYUl8ODr21P3SNolC8tTL3FQ0g+WkFCF/Wc/rYRv7Aw==",
+  "verification": {
+    "result": true,
+    "checked_by": [
+      "Python cryptography Ed25519 with the public key only (2026-11-21)",
+      "scripts/verify_wallet_proof.py (pure-Python RFC 8032)"
+    ]
+  },
+  "proves": "Whoever signed held the private key of GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD (creator of GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump) at 2026-11-21T16:37:59Z.",
+  "does_not_prove": [
+    "any transaction, transfer, mint or spending authorization",
+    "selection of an official mint",
+    "which X account is official",
+    "legal identity of a person"
+  ]
+}
