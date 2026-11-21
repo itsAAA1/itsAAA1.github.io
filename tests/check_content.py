@@ -88,7 +88,8 @@ def main():
         p.feed(text)
         if p.opens != p.closes:
             errors.append(f"{name}: unbalanced <a> tags ({p.opens}/{p.closes})")
-        if OWNER_STATED_X not in p.hrefs:
+        # A cryptographic-proof record must not be required to promote any unverified X account.
+        if OWNER_STATED_X not in p.hrefs and name != "proof.html":
             errors.append(f"{name}: missing owner-confirmed X link")
         for href in p.hrefs:
             if href.startswith("http"):
