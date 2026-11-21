@@ -110,6 +110,15 @@ class SiteIntegrity(unittest.TestCase):
         self.assertNotRegex(homepage, r'href="https://x\.com/VoltZillaSOL"', "The closed account must not be linked")
         self.assertNotIn("لم يُحسم بعد", homepage)
 
+    def test_official_x_status_is_consistent_across_site(self):
+        homepage = self.pages["index.html"][0]
+        status = self.pages["status.html"][0]
+        self.assertNotIn("لم يُحسم حساب X الرسمي", homepage)
+        self.assertIn("حساب X الرسمي مؤكد من صاحب المشروع: @voltzillasol1", homepage)
+        self.assertNotIn("حساب X الرسمي ومتطلبات الإدراج المستقل ما زالت غير محسومة", status)
+        self.assertNotIn("معلّق: حسم حساب X", status)
+        self.assertIn("معلّق: شهادة مراجعة", status)
+
     def test_published_ggsqp_proof_describes_offline_signing(self):
         proof = (ROOT / "proof.html").read_text(encoding="utf-8")
         record = json.loads((ROOT / "proofs/GGSqp-2026-11-21.json").read_text(encoding="utf-8"))
