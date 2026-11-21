@@ -33,7 +33,9 @@ textarea{display:block;width:100%;min-height:160px;background:#0b1023;border:1px
 <code>GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump</code>
 <h2>المحفظة العامة المطلوب إثباتها</h2>
 <code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code>
-<p class="muted">قد تحتاج فتح الصفحة من متصفح Phantom الداخلي على الجوال. تأكد أن حساب المحفظة المختار يطابق العنوان أعلاه حرفيًا.</p>
+<p class="muted"><strong>للآيفون:</strong> افتح الصفحة داخل تطبيق Phantom نفسه؛ الربط لا يعمل من Safari أو Chrome على الجوال. اضغط الرابط التالي ثم ارجع واضغط «ربط وتوقيع».</p>
+<p><a id="phantom-open" href="https://phantom.app/ul/browse/https%3A%2F%2Fitsaaa1.github.io%2Fverify-wallet.html?ref=https%3A%2F%2Fitsaaa1.github.io" rel="noopener noreferrer">📱 افتح صفحة الإثبات داخل تطبيق Phantom</a></p>
+<p class="muted">اختر حساب Solana الذي يطابق العنوان أعلاه حرفيًا. إذا كان مختلفًا، بدّل الحساب من قائمة Phantom داخل متصفح المحفظة.</p>
 <button id="sign" type="button">ربط Phantom وتوقيع رسالة إثبات</button>
 <p id="status" role="status" aria-live="polite">لم يُوقّع شيء بعد. لا توجد معاملة معلّقة.</p>
 </div>
@@ -54,6 +56,10 @@ const statusEl = document.getElementById("status");
 const proofEl = document.getElementById("proof");
 const signBtn = document.getElementById("sign");
 const copyBtn = document.getElementById("copy");
+const phantomLink = document.getElementById("phantom-open");
+// Phantom's official Solana wallet-adapter mobile flow: open the same verified page inside Phantom.
+phantomLink.href = "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
+if ((window.phantom?.solana || window.solana)?.isPhantom) phantomLink.hidden = true;
 function setStatus(message, state) { statusEl.textContent = message; statusEl.dataset.state = state || "info"; }
 function decodeBase58(text) {
   const abc = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -74,15 +80,18 @@ async function signMessage() {
   copyBtn.disabled = true;
   const provider = window.phantom?.solana || window.solana;
   if (!provider || !provider.isPhantom || typeof provider.signMessage !== "function") {
-    setStatus("Phantom غير متصل هنا. افتح الصفحة في متصفح Phantom المدمج أو متصفح يدعم امتداده.", "error");
+    setStatus("Phantom غير متصل بهذا المتصفح. على الآيفون اضغط رابط «افتح صفحة الإثبات داخل تطبيق Phantom» أعلاه، ثم أعد محاولة التوقيع.", "error");
+    phantomLink.hidden = false;
     return;
   }
   if (!window.crypto?.subtle) { setStatus("المتصفح لا يدعم التحقق الآمن Ed25519.", "error"); return; }
   signBtn.disabled = true;
   try {
-    const {publicKey} = await provider.connect();
+    const connectionResult = await provider.connect();
+    const publicKey = connectionResult?.publicKey || provider.publicKey;
+    if (!publicKey || typeof publicKey.toBase58 !== "function") throw new Error("Phantom لم يرجع عنوان محفظة Solana بعد الاتصال.");
     const signer = publicKey.toBase58();
-    if (signer !== expectedWallet) throw new Error("الحساب المتصل مختلف عن محفظة منشئ Pump.fun. اختر المحفظة المطابقة، ولا توقّع بحساب آخر.");
+    if (signer !== expectedWallet) throw new Error("المحفظة لا تطابق عنوان العقد. الحساب المتصل: " + signer + " ؛ المحفظة المطلوبة: " + expectedWallet + " . افتح قائمة الحسابات داخل Phantom، واختر المحفظة الصحيحة.");
     const issued = new Date();
     const expires = new Date(issued.getTime() + 5 * 60 * 1000);
     const challenge = [
