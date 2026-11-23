@@ -47,14 +47,14 @@ FORBIDDEN_REGEX = [
     (r"إجمالي العرض</td><td>\s*[\d,]{6,}", "unverified supply figure"),
 ]
 REQUIRED_TEXT = {
-    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "@VoltZillaSOL", "حساب X الرسمي للمشروع", "لم يُقدَّم بعد"],
+    "index.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "4 أبريل 2026", "لا تشترِ", "@voltzillasol1", "@VoltZillaSOL", "حساب X الذي ذكره صاحب المشروع", "لم يُقدَّم بعد"],
     "whitepaper.html": ["قيد التحقق", "لم تثبت صلته بمالك المشروع", "لم يُقدَّم أي طلب بعد", "بحسب مسودة سابقة غير معتمدة"],
     "status.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا تشترِ"],
     "whitepaper-current.html": [PRIMARY_MINT, "Token-2022", "4 أبريل 2026", "مخاطر", "لم تُقدَّم بعد"],
     "faq.html": [PRIMARY_MINT, "لم تثبت صلته بمالك المشروع", "لا توجد موافقة"],
     "support.html": ["github.com/itsAAA1/VoltZilla/issues/new", "رسالة واضحة غير مالية"],
     "legal.html": ["وزارة المالية", "2018", "2019", "لم يُنجز رأي قانوني مستقل"],
-    "market.html": [PRIMARY_MINT, "DEX Screener", "حجم 24 ساعة", "غير مضمون الحداثة", "geckoterminal.com/solana/pools/6PpZaXsSnXCwm37W1PkMtmG1kCLjYNXk95eLoHMsFXBk?embed=1"],
+    "market.html": [PRIMARY_MINT, "DEX Screener", "حجم 24 ساعة", "تحقق مستقل", "geckoterminal.com/api/v2/networks/solana/pools/6PpZaXsSnXCwm37W1PkMtmG1kCLjYNXk95eLoHMsFXBk"],
     "wallet.html": [PRIMARY_MINT, "getTokenAccountsByOwner", "0.395563648", "7,005,921.840554"],
     "roadmap.html": ["المرحلة 1", "إثبات", "السيولة", "MVX مشروع مستقل"],
     "verify-wallet.html": ["GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD", "crypto.subtle.verify"],
@@ -100,10 +100,8 @@ def main():
                 if "pump.fun/coin/" in href and href.rstrip("/") != PUMPFUN_COIN:
                     errors.append(f"{name}: unrelated Pump.fun token contract link {href}")
         if name == "market.html":
-            if 'p.baseToken.address===MINT' not in text or 'p.chainId==="solana"' not in text:
-                errors.append("market.html: price selection must match the exact mint and network")
-            if 'p.volume.h24!==null' not in text:
-                errors.append("market.html: missing-volume values must not silently display zero")
+            if 'fetch(' in text or '<iframe' in text or '$0.0000007484' in text:
+                errors.append("market.html: unverified prices or embeds must not be rendered automatically")
         if name in ("verify-wallet.html", "verify-spl-wallet.html"):
             if any(x in text for x in ("sendTransaction", "signTransaction", "exportSecretKey", "secretKey", "seedPhrase")):
                 errors.append(f"{name}: signing challenge must not have transfer or key export methods")
@@ -125,6 +123,8 @@ def main():
                 errors.append(f"{name}: diagnostic signature must label mismatch and not expose publishable proof")
             if '<script src=' in text:
                 errors.append(f"{name}: do not load remote scripts into signing page")
+            if 'autosign' in text or 'الربط يشارك عنوانك العام' not in text:
+                errors.append(f"{name}: signing must be user initiated and disclose address exposure")
         if name == "wallet.html":
             if not all(x in text for x in ("getBalance", "getTokenAccountsByOwner", "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")):
                 errors.append("wallet.html: public read-only balance verification missing")

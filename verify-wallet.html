@@ -24,10 +24,10 @@ textarea{display:block;width:100%;min-height:160px;background:#0b1023;border:1px
 </style>
 </head>
 <body>
-<header><a href="index.html">⚡ VoltZilla</a> · <a href="status.html">حالة العملة</a> · <a href="https://x.com/voltzillasol1" rel="noopener noreferrer">X الرسمي</a></header>
+<header><a href="index.html">⚡ VoltZilla</a> · <a href="status.html">حالة العملة</a> · <a href="https://x.com/voltzillasol1" rel="noopener noreferrer">حساب X المصرّح به</a></header>
 <main id="main-content">
 <h1>إثبات التحكم بمحفظة منشئ VZLA</h1>
-<p>هذه الصفحة تُنشئ تحدّيًا عشوائيًا وتطلب من محفظتك <strong>توقيع رسالة نصية فقط</strong>. لا تتطلب رسوم SOL ولا تحويلات ولا عبارة استرداد. التحقق يُجرى داخل متصفحك باستخدام Ed25519، ولا ترسل الصفحة الرسالة أو توقيعها لأي خادم.</p>
+<p>هذه الصفحة تُنشئ تحدّيًا عشوائيًا وتطلب من محفظتك <strong>توقيع رسالة نصية فقط بعد ضغط الزر</strong>. الربط يشارك عنوانك العام مع الموقع. راجع نص الرسالة داخل المحفظة ويمكنك رفض الطلب. لا تُدخل مفتاحًا خاصًا أو عبارة استرداد، ولا توافق على تحويل أو صلاحية لم تتوقعها. التحقق يُجرى داخل متصفحك باستخدام Ed25519؛ ولا تُرسل الصفحة الرسالة أو توقيعها تلقائيًا لأي خادم.</p>
 <div class="card">
 <h2>العقد الذي ترتبط به المحفظة</h2>
 <code>GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump</code>
@@ -47,7 +47,7 @@ textarea{display:block;width:100%;min-height:160px;background:#0b1023;border:1px
 <p>بعد توقيع الرسالة بنجاح، يظهر نص الإثبات والتوقيع في الحقل التالي. انسخ السجل وأضفه إلى <a href="https://github.com/itsAAA1/VoltZilla/issues/7" target="_blank" rel="noopener noreferrer">سجل إثبات المشروع GitHub #7</a>، ليتمكن الآخرون من التحقق منه. <strong>لا ننشر أي إثبات تلقائيًا.</strong></p>
 <textarea id="proof" aria-label="رسالة وتوقيع إثبات المحفظة" readonly placeholder="سيظهر السجل بعد توقيع الرسالة والتحقق منها"></textarea>
 <button id="copy" type="button" disabled>نسخ سجل الإثبات</button>
-<p class="muted">التوقيع يثبت التحكم بالمحفظة وقت إصداره فقط، وليس الهوية الحكومية أو ملكية كل التوكنات الأخرى أو التدقيق الأمني/القانوني.</p>
+<p class="muted">التوقيع يثبت رياضيًا ارتباط الرسالة بالمفتاح العام، ولا يثبت الهوية أو الحيازة الحصرية أو السيطرة الحالية. وقت الرسالة يحدده مُنشئ التحدي وليس طابعًا زمنيًا مستقلاً.</p>
 </div>
 </main>
 <footer>VoltZilla — لا تطلب هذه الصفحة مفاتيح سرية أو اعتماد شراء أو صلاحية سك/تجميد.</footer>
@@ -65,8 +65,8 @@ const phantomLink = document.getElementById("phantom-open");
 phantomLink.href = "https://phantom.app/ul/browse/" + encodeURIComponent(window.location.href) + "?ref=" + encodeURIComponent(window.location.origin);
 const solflareLink = document.getElementById("solflare-open");
 // Solflare official browse deeplink: https://solflare.com/ul/v1/browse/<url>?ref=<ref>
-const autosignUrl = window.location.origin + window.location.pathname + "?autosign=1";
-solflareLink.href = "https://solflare.com/ul/v1/browse/" + encodeURIComponent(autosignUrl) + "?ref=" + encodeURIComponent(window.location.origin);
+const walletPageUrl = window.location.origin + window.location.pathname;
+solflareLink.href = "https://solflare.com/ul/v1/browse/" + encodeURIComponent(walletPageUrl) + "?ref=" + encodeURIComponent(window.location.origin);
 if ((window.phantom?.solana || window.solana)?.isPhantom || window.solflare?.isSolflare) { phantomLink.hidden = true; solflareLink.hidden = true; }
 function setStatus(message, state) { statusEl.textContent = message; statusEl.dataset.state = state || "info"; }
 function decodeBase58(text) {
@@ -143,17 +143,6 @@ async function signMessage(diagnosticOnly = false) {
 }
 signBtn.addEventListener("click", () => signMessage(false));
 diagnosticBtn.addEventListener("click", () => signMessage(true));
-// One-tap flow: when opened inside a wallet app with ?autosign=1, start the proof automatically.
-// It only requests a text-message signature; the wallet still asks the owner to approve.
-if (new URLSearchParams(window.location.search).get("autosign") === "1") {
-  let tries = 0;
-  const startWhenReady = () => {
-    const p = (window.solflare && window.solflare.isSolflare) ? window.solflare : (window.phantom?.solana || window.solana);
-    if (p && (p.isSolflare || p.isPhantom)) { setStatus("جاري طلب توقيع رسالة الإثبات من المحفظة… وافق داخل التطبيق.", "info"); signMessage(false); return; }
-    if (++tries < 20) setTimeout(startWhenReady, 250);
-  };
-  window.addEventListener("load", () => setTimeout(startWhenReady, 300));
-}
 copyBtn.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(proofEl.value); setStatus("نُسخ سجل التوقيع؛ يمكن نشره علنيًا دون مفاتيح سرية.", "ok"); }
   catch (_) { setStatus("النسخ الآلي لم يعمل؛ انسخ النص من الحقل مباشرة.", "error"); }

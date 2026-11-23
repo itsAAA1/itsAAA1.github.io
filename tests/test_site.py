@@ -104,9 +104,9 @@ class SiteIntegrity(unittest.TestCase):
 
     def test_official_x_is_the_community_destination(self):
         homepage = self.pages["index.html"][0]
-        # Owner confirmed @voltzillasol1 as the official X account on 21 Nov 2026; @VoltZillaSOL is closed.
+        # This is owner-reported, not independent verification of account control.
         self.assertIn('<a href="https://x.com/voltzillasol1" target="_blank" rel="noopener noreferrer" class="community-card twitter"', homepage)
-        self.assertIn("حساب X الرسمي للمشروع", homepage)
+        self.assertIn("حساب X الذي ذكره صاحب المشروع", homepage)
         self.assertNotRegex(homepage, r'href="https://x\.com/VoltZillaSOL"', "The closed account must not be linked")
         self.assertNotIn("لم يُحسم بعد", homepage)
 
@@ -114,7 +114,7 @@ class SiteIntegrity(unittest.TestCase):
         homepage = self.pages["index.html"][0]
         status = self.pages["status.html"][0]
         self.assertNotIn("لم يُحسم حساب X الرسمي", homepage)
-        self.assertIn("حساب X الرسمي مؤكد من صاحب المشروع: @voltzillasol1", homepage)
+        self.assertIn("لم يُتحقق استقلاليًا من السيطرة", homepage)
         self.assertNotIn("حساب X الرسمي ومتطلبات الإدراج المستقل ما زالت غير محسومة", status)
         self.assertNotIn("معلّق: حسم حساب X", status)
         self.assertIn("معلّق: شهادة مراجعة", status)
@@ -126,6 +126,8 @@ class SiteIntegrity(unittest.TestCase):
         self.assertNotIn('href="https://x.com/voltzillasol1"', proof)
         self.assertIn("حالة حساب X", proof)
         self.assertIn("GGSqp فأُنشئ محليًا", proof)
+        self.assertIn("التحديان منتهيان", proof)
+        self.assertIn("وليست طابعًا زمنيًا مستقلًا", proof)
         self.assertEqual(record["signing_method"], "offline-ed25519")
         self.assertEqual(record["wallet"], "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD")
 

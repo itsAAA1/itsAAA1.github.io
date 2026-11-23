@@ -44,6 +44,10 @@ class WalletProof(unittest.TestCase):
                 self.assertNotIn("sendTransaction(", html)
                 self.assertNotIn("signTransaction(", html)
                 self.assertNotIn("secretKey", html)
+                self.assertNotIn("autosign", html)
+                self.assertIn("الربط يشارك عنوانك العام", html)
+                self.assertIn('signBtn.addEventListener("click", () => signMessage(false))', html)
+                self.assertIn('diagnosticBtn.addEventListener("click", () => signMessage(true))', html)
 
     def test_other_mints_and_inactive_modes_are_not_sold_as_active(self):
         html = (ROOT / "status.html").read_text(encoding="utf-8")
@@ -53,7 +57,8 @@ class WalletProof(unittest.TestCase):
         self.assertIn("Cashback", html)
         self.assertIn("غير مُفعّل", html)
         self.assertIn('href="verify-wallet.html"', html)
-        self.assertIn("تم التحقق رياضيًا من توقيع محفظة GGSqp", html)
+        self.assertIn("وتحقق توقيع رسالة GGSqp", html)
+        self.assertIn("وقت الرسالة ليس طابعًا زمنيًا مستقلًا", html)
 
 
 if __name__ == "__main__":

@@ -6,16 +6,16 @@
 <body><header><a href="index.html">⚡ VoltZilla</a> · <a href="status.html">العقود الأربعة</a> · <a href="market.html">الرسم البياني والسعر</a> · <a href="status.html">حالة حساب X</a></header>
 <main id="main-content">
 <h1>إثباتات المحافظ الموقّعة</h1>
-<p>كل إثبات هنا رسالة نصية موقّعة بخوارزمية Ed25519. إثبات 28fU8 وُقّع داخل Solflare، أما إثبات GGSqp فأُنشئ محليًا بمفتاح قدّمه صاحب الطلب، وليس داخل تطبيق Pump.fun. التوقيع يتحقق من المفتاح والرسالة، ولا يثبت هوية الشخص أو حصرية حيازة المفتاح. <strong>ليس معاملة، ولا ينقل أموالًا، ولا يسك عملات، ولا يختار العقد الرسمي.</strong></p>
+<p>كل إثبات هنا رسالة نصية موقّعة بخوارزمية Ed25519. إثبات 28fU8 وُقّع داخل Solflare، أما إثبات GGSqp فأُنشئ محليًا بمفتاح قدّمه صاحب الطلب، وليس داخل تطبيق Pump.fun. التوقيع يتحقق من المفتاح والرسالة، ولا يثبت الهوية أو حصرية الحيازة أو التحكم الحالي. التحديان منتهيان، والأوقات مذكورة داخل الرسائل وليست طابعًا زمنيًا مستقلًا. <strong>ليس معاملة، ولا ينقل أموالًا، ولا يسك عملات، ولا يختار العقد الرسمي.</strong></p>
 
 <section class="card ok" aria-labelledby="p1"><span class="state ok">✅ موقّع ومتحقق</span>
 <h2 id="p1">محفظة 28fU8 — سلطة سك توكن المليون ومنشئ توكن Raydium</h2>
 <dl>
 <dt>المحفظة</dt><dd><code>28fU8SDMKLXe8hqmdy9dxYNHeddm7xQRzkxK16JLUpi4</code></dd>
 <dt>تطبيق التوقيع</dt><dd>Solflare</dd>
-<dt>وقت التوقيع</dt><dd>21 نوفمبر 2026، 10:22:59 UTC (1:22 م بتوقيت السعودية)</dd>
+<dt>الوقت المدوّن في الرسالة</dt><dd>21 نوفمبر 2026، 10:22:59 UTC (1:22 م بتوقيت السعودية)؛ التحدي انتهى 10:27:59 UTC</dd>
 <dt>سلطة السك لـ</dt><dd><code>DHxStA9nRq6DdhBKT89s38fpxD9wE7MtyMn9HMuWeyN9</code></dd>
-<dt>منشئ</dt><dd><code>3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray</code> (<a href="https://www.geckoterminal.com/solana/pools/J1nse1K58AcjDEtCdkL7nFByUNwjGuTkupxiKtwuxXAz" target="_blank" rel="noopener noreferrer">رسمه البياني</a>)</dd>
+<dt>منشئ</dt><dd><code>3cPWF3eKjcq4Y8d2oVXDRaN8ipKBHuyK1uYWY4GT7ray</code> (<a href="https://api.geckoterminal.com/api/v2/networks/solana/pools/J1nse1K58AcjDEtCdkL7nFByUNwjGuTkupxiKtwuxXAz" target="_blank" rel="noopener noreferrer">سجل مجمعه؛ الرسم غير متاح في فحصنا</a>)</dd>
 <dt>بصمة الرسالة SHA-256</dt><dd><code>11943f831e5e28fa63f1e7d39da6fb584cdc6d5251bacb760d01d337d4a34e9c</code></dd>
 </dl>
 <h3>نص الرسالة الموقّعة حرفيًا مع التوقيع</h3>
@@ -31,7 +31,7 @@
 <dt>المحفظة</dt><dd><code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code></dd>
 <dt>منشئ</dt><dd><code>GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump</code> (4 أبريل 2026)</dd>
 <dt>طريقة التوقيع</dt><dd>توقيع Ed25519 محلي باستخدام مفتاح قدّمه صاحب الطلب؛ لا توجد موافقة توقيع داخل واجهة Pump.fun</dd>
-<dt>وقت التوقيع</dt><dd>21 نوفمبر 2026، 16:37:59 UTC (7:37 م بتوقيت السعودية)</dd>
+<dt>الوقت المدوّن في الرسالة</dt><dd>21 نوفمبر 2026، 16:37:59 UTC (7:37 م بتوقيت السعودية)؛ التحدي انتهى 16:42:59 UTC</dd>
 <dt>بصمة الرسالة SHA-256</dt><dd><code>553463dfecc15d66925a4d288669ad4ec5f910a409db37494241047af7da7395</code></dd>
 </dl>
 <h3>نص الرسالة الموقّعة حرفيًا مع التوقيع</h3>
@@ -79,7 +79,7 @@ document.getElementById("verify").addEventListener("click", async () => {
     const sig = Uint8Array.from(atob(SIG64), c => c.charCodeAt(0));
     const ok = await crypto.subtle.verify("Ed25519", key, sig, new TextEncoder().encode(MESSAGE));
     result.className = ok ? "ok" : "bad";
-    result.textContent = ok ? "✅ التوقيع صحيح: المفتاح الخاص للمحفظة 28fU8 وقّع هذا النص حرفيًا." : "❌ التوقيع غير مطابق.";
+    result.textContent = ok ? "✅ التوقيع صحيح رياضيًا للنص والمفتاح العام 28fU8؛ التحدي منتهٍ، ولا يثبت الهوية أو السيطرة الحالية أو الحصرية." : "❌ التوقيع غير مطابق.";
   } catch (e) {
     result.className = "bad";
     result.textContent = "متصفحك لا يدعم التحقق Ed25519. استخدم سكربت GitHub أعلاه للتحقق بدون إنترنت.";
@@ -98,7 +98,7 @@ document.getElementById("verify2").addEventListener("click", async () => {
     const sig = Uint8Array.from(atob(PROOF2.sig), c => c.charCodeAt(0));
     const ok = await crypto.subtle.verify("Ed25519", key, sig, new TextEncoder().encode(MESSAGE2));
     result2.className = ok ? "ok" : "bad";
-    result2.textContent = ok ? "✅ التوقيع صحيح: المفتاح الخاص للمحفظة GGSqp وقّع هذا النص حرفيًا." : "❌ التوقيع غير مطابق.";
+    result2.textContent = ok ? "✅ التوقيع صحيح رياضيًا للنص والمفتاح العام GGSqp؛ التحدي منتهٍ، ولا يثبت الهوية أو السيطرة الحالية أو الحصرية." : "❌ التوقيع غير مطابق.";
   } catch (e) {
     result2.className = "bad";
     result2.textContent = "متصفحك لا يدعم التحقق Ed25519. استخدم سكربت GitHub للتحقق بدون إنترنت.";
