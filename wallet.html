@@ -4,12 +4,13 @@
 <code>GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD</code><div class="cards">
 <div class="card"><div class="label">SOL</div><div class="value" id="sol">0.395563648</div></div><div class="card"><div class="label">VZLA من عقد GDYcem</div><div class="value" id="vzla">7,005,921.840554</div></div><div class="card"><div class="label">القيمة بالدولار</div><div class="value">—</div><p class="sub">لا تُعرض دون تحقق مستقل من السعر</p></div></div>
 <p id="balance-status" class="sub" role="status" aria-live="polite">لقطة مفهرسة عبر Nova/Solana Tracker بتاريخ 20 نوفمبر 2026 07:31 UTC. لا تعتبرها رصيدًا حيًا.</p>
-<button id="refresh" type="button">تحديث مباشر من Solana RPC</button><p class="warning"><strong>تنبيه:</strong> هذا عارض قراءة عامة وليس محفظة مالية؛ لا توجد وظائف إرسال أو إيداع أو طلب كلمات استرداد. قد تمنع حدود RPC التحديث المباشر؛ عند الفشل تبقى اللقطة المؤرخة كما هي. أسعار USD لا تُحسب من أرصدة RPC وحدها.</p>
+<button id="refresh" type="button">تحديث مباشر من Solana RPC</button><p class="warning"><strong>تنبيه:</strong> هذا عارض قراءة عامة وليس محفظة مالية؛ لا توجد وظائف إرسال أو إيداع أو طلب كلمات استرداد. قد تمنع حدود RPC التحديث المباشر؛ عند الفشل تبقى آخر بيانات مع وقتها ومصدرها، ولا تُعد تحديثًا جديدًا. أسعار USD لا تُحسب من أرصدة RPC وحدها.</p>
 <p><a href="https://solscan.io/account/GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD" rel="noopener noreferrer">افتح المحفظة في Solscan</a> · <a href="https://solscan.io/token/GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump" rel="noopener noreferrer">تحقق من عنوان التوكن</a></p></main>
 <footer>تحديث الأرصدة بالقراءة فقط؛ لا مفاتيح، ولا معاملات، ولا تحويلات.</footer>
 <script>"use strict";
-const wallet="GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",mint="GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",node="https://api.mainnet-beta.solana.com";
+const wallet="GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",mint="GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",node="https://solana.api.pocket.network";
 const status=document.getElementById("balance-status");
+let lastReading=status.textContent;
 async function rpc(method,params,signal){const r=await fetch(node,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method,params}),signal});if(!r.ok)throw new Error("RPC HTTP "+r.status);const j=await r.json();if(j.error)throw new Error("RPC response error");return j.result}
 async function refresh(){status.textContent="جارٍ الاستعلام من Solana RPC…";const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),12000);
 try{
@@ -18,8 +19,9 @@ const lamports=results[0]?.value, accounts=results[1]?.value;if(typeof lamports!
 const balance=accounts.reduce((total,acc)=>{const v=acc?.account?.data?.parsed?.info?.tokenAmount?.uiAmountString;const n=Number(v);if(!Number.isFinite(n)||n<0)throw new Error("Invalid token amount");return total+n;},0);
 document.getElementById("sol").textContent=(lamports/1e9).toLocaleString("en-US",{maximumFractionDigits:9});
 document.getElementById("vzla").textContent=balance.toLocaleString("en-US",{maximumFractionDigits:6});
-status.textContent="الأرصدة أعيدت من Solana RPC بتاريخ "+new Date().toLocaleString("ar-SA")+"؛ لا تُحسب قيمة الدولار من الأرصدة وحدها.";
-}catch(e){status.textContent="لم ينجح تحديث RPC من المتصفح؛ الأرصدة الظاهرة هي آخر لقطة مؤرخة وليست تحديثًا جديدًا.";}
+lastReading="آخر قراءة ناجحة من Solana RPC ("+node+")؛ وقت الاستلام حسب ساعة جهازك: \u2066"+new Date().toISOString()+"\u2069. لا تُحسب قيمة الدولار من الأرصدة وحدها.";
+status.textContent=lastReading;
+}catch(e){status.textContent="لم ينجح تحديث RPC من المتصفح؛ الأرصدة الظاهرة لم تتجدد. "+lastReading;}
 finally{clearTimeout(timer)}
 }
 document.getElementById("refresh").addEventListener("click",refresh);

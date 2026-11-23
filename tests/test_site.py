@@ -119,6 +119,13 @@ class SiteIntegrity(unittest.TestCase):
         self.assertNotIn("معلّق: حسم حساب X", status)
         self.assertIn("معلّق: شهادة مراجعة", status)
 
+    def test_historical_whitepaper_x_is_owner_reported_not_independently_verified(self):
+        paper = self.pages["whitepaper.html"][0]
+        self.assertIn("حساب X الذي ذكره صاحب المشروع", paper)
+        self.assertIn("لم يُتحقق استقلاليًا من السيطرة عليه", paper)
+        self.assertIn('href="https://x.com/voltzillasol1"', paper)
+        self.assertNotIn("حساب X المؤكد", paper)
+
     def test_published_ggsqp_proof_describes_offline_signing(self):
         proof = (ROOT / "proof.html").read_text(encoding="utf-8")
         record = json.loads((ROOT / "proofs/GGSqp-2026-11-21.json").read_text(encoding="utf-8"))
