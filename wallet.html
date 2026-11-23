@@ -11,9 +11,16 @@
 const wallet="GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD",mint="GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump",node="https://solana.api.pocket.network";
 const status=document.getElementById("balance-status");
 let lastReading=status.textContent;
+const refreshButton=document.getElementById("refresh");
+let refreshing=false;
 async function rpc(method,params,signal){const r=await fetch(node,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method,params}),signal});if(!r.ok)throw new Error("RPC HTTP "+r.status);const j=await r.json();if(j.error)throw new Error("RPC response error");return j.result}
-async function refresh(){status.textContent="جارٍ الاستعلام من Solana RPC…";const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),12000);
+async function refresh(){
+if(refreshing)return;
+refreshing=true;refreshButton.disabled=true;
+let ctl,timer;
 try{
+ctl=new AbortController();
+status.textContent="جارٍ الاستعلام من Solana RPC…";timer=setTimeout(()=>ctl.abort(),12000);
 const results=await Promise.all([rpc("getBalance",[wallet,{commitment:"confirmed"}],ctl.signal),rpc("getTokenAccountsByOwner",[wallet,{mint},{encoding:"jsonParsed",commitment:"confirmed"}],ctl.signal)]);
 const lamports=results[0]?.value, accounts=results[1]?.value;if(typeof lamports!=="number"||!Array.isArray(accounts))throw new Error("Malformed RPC response");
 const balance=accounts.reduce((total,acc)=>{const v=acc?.account?.data?.parsed?.info?.tokenAmount?.uiAmountString;const n=Number(v);if(!Number.isFinite(n)||n<0)throw new Error("Invalid token amount");return total+n;},0);
@@ -22,7 +29,7 @@ document.getElementById("vzla").textContent=balance.toLocaleString("en-US",{maxi
 lastReading="آخر قراءة ناجحة من Solana RPC ("+node+")؛ وقت الاستلام حسب ساعة جهازك: \u2066"+new Date().toISOString()+"\u2069. لا تُحسب قيمة الدولار من الأرصدة وحدها.";
 status.textContent=lastReading;
 }catch(e){status.textContent="لم ينجح تحديث RPC من المتصفح؛ الأرصدة الظاهرة لم تتجدد. "+lastReading;}
-finally{clearTimeout(timer)}
+finally{clearTimeout(timer);if(ctl)ctl.abort();refreshing=false;refreshButton.disabled=false}
 }
-document.getElementById("refresh").addEventListener("click",refresh);
+refreshButton.addEventListener("click",refresh);
 </script></body></html>

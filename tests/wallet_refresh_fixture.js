@@ -9,15 +9,25 @@ const vm = require("node:vm");
 const html = fs.readFileSync(path.join(__dirname, "..", "wallet.html"), "utf8");
 const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const text = id => html.match(new RegExp(`id="${id}"[^>]*>([^<]*)<`))[1];
-let now = "2026-01-02T03:04:05.000Z", mode = "success", calls = [];
+let now = "2026-01-02T03:04:05.000Z", mode = "success", calls = [], held = [], timerCallback;
 const elements = Object.fromEntries(["sol", "vzla", "balance-status"].map(id => [id, {textContent: text(id)}]));
 const initial = {sol: elements.sol.textContent, vzla: elements.vzla.textContent, status: elements["balance-status"].textContent};
 let click;
-elements.refresh = {addEventListener: (event, handler) => { assert.equal(event, "click"); click = handler; }};
+elements.refresh = {
+  disabled: false,
+  addEventListener: (event, handler) => { assert.equal(event, "click"); click = handler; },
+  click: () => { if (!elements.refresh.disabled) return click(); }
+};
 class FakeDate extends Date { constructor(...args) { super(...(args.length ? args : [now])); } }
+const response = (method, sol = 12345678900, token = "42.5") => {
+  const result = method === "getBalance" ? {value: sol} : {value: [{account: {data: {parsed: {info: {tokenAmount: {uiAmountString: token}}}}}}]};
+  return {ok: true, json: async () => ({result})};
+};
 const sandbox = {
   document: {getElementById: id => {assert.ok(elements[id], id); return elements[id];}},
-  Date: FakeDate, AbortController, setTimeout: () => 1, clearTimeout: () => {},
+  Date: FakeDate, AbortController,
+  setTimeout: fn => {timerCallback = fn; return 1;},
+  clearTimeout: () => {timerCallback = undefined;},
   fetch: async (url, options) => {
     const body = JSON.parse(options.body);
     assert.equal(url, "https://solana.api.pocket.network");
@@ -28,19 +38,32 @@ const sandbox = {
     assert.equal(body.params[0], "GGSqpEPw3WDvfqJRj6frvrTz1C2wcUz28Sgfdg2NNJiD");
     if (body.method === "getTokenAccountsByOwner") assert.equal(body.params[1].mint, "GDYcemcZozG9ijhEZioRLRgNMtoxh1BBuV7nvdf1pump");
     calls.push(body.method);
+    if (mode === "hold" || mode === "timeout" || (mode === "stuck-sibling" && body.method === "getBalance")) {
+      return new Promise((resolve, reject) => {
+        const entry = {method: body.method, resolve, signal: options.signal, aborted: false};
+        held.push(entry);
+        options.signal.addEventListener("abort", () => {entry.aborted = true; reject(new Error("TEST_ABORT"));}, {once: true});
+      });
+    }
     if (mode === "network") throw new Error("TEST_OFFLINE");
-    if (mode === "http" || (mode === "partial" && body.method === "getTokenAccountsByOwner")) return {ok: false, status: 503};
+    if (mode === "http" || mode === "stuck-sibling" || (mode === "partial" && body.method === "getTokenAccountsByOwner")) return {ok: false, status: 503};
     if (mode === "rpc-error") return {ok: true, json: async () => ({error: {code: -1}})};
     if (mode === "malformed") return {ok: true, json: async () => ({result: {value: null}})};
-    const sol = mode === "success2" ? 2000000000 : 12345678900;
-    const token = mode === "success2" ? "77.25" : "42.5";
-    const result = body.method === "getBalance" ? {value: sol} : {value: [{account: {data: {parsed: {info: {tokenAmount: {uiAmountString: token}}}}}}]};
-    return {ok: true, json: async () => ({result})};
+    return mode === "success2" ? response(body.method, 2000000000, "77.25") : response(body.method);
   }
 };
 vm.runInNewContext(script, sandbox, {timeout: 2000});
 const state = () => ({sol: elements.sol.textContent, vzla: elements.vzla.textContent, status: elements["balance-status"].textContent});
-const run = async value => { mode = value; calls = []; await click(); assert.deepEqual(calls.sort(), ["getBalance", "getTokenAccountsByOwner"].sort()); return state(); };
+const run = async value => {
+  mode = value; calls = [];
+  assert.equal(elements.refresh.disabled, false);
+  const work = click();
+  assert.equal(elements.refresh.disabled, true, "button must be disabled during every request");
+  await work;
+  assert.equal(elements.refresh.disabled, false, "button must be re-enabled after every outcome");
+  assert.deepEqual(calls.sort(), ["getBalance", "getTokenAccountsByOwner"].sort());
+  return state();
+};
 const hasFailure = data => assert.match(data.status, /لم ينجح تحديث RPC من المتصفح؛ الأرصدة الظاهرة لم تتجدد/);
 const hasSuccessSourceAndTime = (data, timestamp) => {
   assert.match(data.status, /آخر قراءة ناجحة من Solana RPC/);
@@ -82,6 +105,50 @@ const hasSuccessSourceAndTime = (data, timestamp) => {
     assert.equal(next.sol, "2"); assert.equal(next.vzla, "77.25"); hasSuccessSourceAndTime(next, now);
     assert.ok(!next.status.includes(first.status)); assert.ok(!next.status.includes("لم ينجح"));
     const failure = await run("http"); assert.ok(failure.status.endsWith(next.status));
+  } else if (scenario === "concurrent-guard") {
+    mode = "hold"; calls = []; held = [];
+    const first = click();
+    assert.equal(elements.refresh.disabled, true);
+    assert.equal(held.length, 2);
+    elements.refresh.click(); // Simulated DOM click cannot activate a disabled button.
+    await click(); // Even a direct handler call cannot bypass the guard.
+    await vm.runInNewContext("refresh()", sandbox); // Nor can a direct programmatic call.
+    assert.equal(calls.length, 2);
+    held.find(item => item.method === "getTokenAccountsByOwner").resolve(response("getTokenAccountsByOwner"));
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(elements.refresh.disabled, true);
+    assert.equal(state().sol, initial.sol); assert.equal(state().vzla, initial.vzla);
+    held.find(item => item.method === "getBalance").resolve(response("getBalance"));
+    await first;
+    assert.equal(elements.refresh.disabled, false);
+    assert.equal(state().sol, "12.3456789"); assert.equal(state().vzla, "42.5");
+    const next = await run("success2"); assert.equal(next.sol, "2"); assert.equal(next.vzla, "77.25");
+  } else if (scenario === "button-finally") {
+    for (const value of ["success", "http", "network", "partial", "rpc-error", "malformed", "success2"]) await run(value);
+    assert.equal(state().sol, "2"); assert.equal(state().vzla, "77.25");
+  } else if (scenario === "partial-aborts-sibling") {
+    const before = await run("success");
+    mode = "stuck-sibling"; calls = []; held = [];
+    const first = click(); assert.equal(elements.refresh.disabled, true);
+    await first;
+    assert.equal(elements.refresh.disabled, false); assert.equal(held.length, 1);
+    assert.equal(held[0].aborted, true, "remaining in-flight RPC must be aborted");
+    const failed = state(); hasFailure(failed);
+    assert.equal(failed.sol, before.sol); assert.equal(failed.vzla, before.vzla);
+    assert.ok(failed.status.endsWith(before.status));
+    const recovered = await run("success2"); assert.equal(recovered.sol, "2"); assert.equal(recovered.vzla, "77.25");
+  } else if (scenario === "timeout-recovery") {
+    const before = await run("success");
+    mode = "timeout"; calls = []; held = [];
+    const first = click(); assert.equal(elements.refresh.disabled, true);
+    assert.equal(typeof timerCallback, "function"); timerCallback();
+    await first;
+    assert.equal(elements.refresh.disabled, false); assert.equal(held.length, 2);
+    assert.ok(held.every(item => item.aborted));
+    const failed = state(); hasFailure(failed);
+    assert.equal(failed.sol, before.sol); assert.equal(failed.vzla, before.vzla);
+    assert.ok(failed.status.endsWith(before.status));
+    const recovered = await run("success2"); assert.equal(recovered.sol, "2"); assert.equal(recovered.vzla, "77.25");
   } else { throw new Error("Unknown scenario: " + scenario); }
   console.log("PASS", scenario, "(fake RPC only)");
 })().catch(e => { console.error(e); process.exitCode = 1; });
